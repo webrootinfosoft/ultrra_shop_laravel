@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getNameAttribute()
+    {
+        return $this->firstname.' '.$this->lastname;
+    }
+
+    public function getJointNameAttribute()
+    {
+        return $this->joint_firstname.' '.$this->joint_lastname;
+    }
 }

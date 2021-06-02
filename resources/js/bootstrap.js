@@ -15,6 +15,9 @@ try {
     require('slick-carousel');
     window.anime = require('animejs/lib/anime');
     window.Cookies = require('js-cookie');
+    require('jquery-validation');
+    window.Swal = require('sweetalert2');
+    window.Payment = require('payment');
 } catch (e) {}
 
 /**

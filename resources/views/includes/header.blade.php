@@ -57,15 +57,18 @@
                                 @if(!auth()->check())
                                     <a href="https://office.ultrra.com/signin" target="_blank" class="text-brown">Login</a>
                                 @else
-                                    <a href="javascript:void(0)" class="text-brown">Logout</a>
+                                    <a href="javascript:void(0)" class="text-brown" onclick="$('#logout-form').submit();">Logout</a>
+                                    <form id="logout-form" action="{{url('logout')}}" class="d-none">
+                                        <button type="submit"></button>
+                                    </form>
                                 @endif
                             </li>
                             {{--@if($show_enroll)--}}
                             <li class="menu-item">
                                 @if(!auth()->check())
-                                    <a href="{{url('/enrollment')}}" class="text-brown">Enroll</a>
+                                    <a href="{{url('/www/enrollment')}}" class="text-brown">Enroll</a>
                                 @elseif(!auth()->user()->address)
-                                    <a href="{{url('/create-account?usertype='.auth()->user()->usertype)}}" class="text-brown">Enroll</a>
+                                    <a href="{{url('/www/create-account?usertype='.auth()->user()->usertype)}}" class="text-brown">Enroll</a>
                                 @endif
                             </li>
                             {{--@endif--}}
@@ -74,13 +77,13 @@
                             </li>
                             <li class="menu-item">
                                 @if(!auth()->user())
-                                    <a href="{{url('/signup?usertype=rc')}}" class="text-brown">Shop</a>
+                                    <a href="{{url('/www/signup?usertype=rc')}}" class="text-brown">Shop</a>
                                 @else
-                                    <a href="{{url('/cart')}}" class="text-brown">Shop</a>
+                                    <a href="{{url('/www/cart')}}" class="text-brown">Shop</a>
                                 @endif
                             </li>
                             <li class="menu-item cart-box">
-                                <a href="{{url('/cart')}}" class="cart-btn text-brown" style="font-size: 20px !important; max-height: 47px">
+                                <a href="javascript:void(0)" class="cart-btn text-brown" style="font-size: 20px !important; max-height: 47px" onclick="cartIcon()">
                                     <i class="fal fa-shopping-bag fw-500"></i>
                                     <span class="cart-value">0</span>
                                 </a>
@@ -134,37 +137,37 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{url('/about')}}">
+                        <a href="{{url('/www/about')}}">
                             <span class="text-first text-left">About Us</span>
                             <span class="text-second text-left">Our Story</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{url('/opportunity')}}">
+                        <a href="{{url('/www/opportunity')}}">
                             <span class="text-first text-left">Opportunity</span>
                             <span class="text-second text-left">Work from home</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{url('/testimonial')}}">
+                        <a href="{{url('/www/testimonial')}}">
                             <span class="text-first text-left">Testimonials</span>
                             <span class="text-second text-left">Real People, Real Results</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{url('/research')}}">
+                        <a href="{{url('/www/research')}}">
                             <span class="text-first text-left">Research</span>
                             <span class="text-second text-left" style="white-space: normal">East Meets West</span>
                         </a>
                     </li>
                     <li>
                         @if(!auth()->user())
-                            <a href="{{url('/signup?usertype=rc')}}" class="text-brown">
+                            <a href="{{url('/www/signup?usertype=rc')}}" class="text-brown">
                                 <span class="text-first text-left">Shop</span>
                                 <span class="text-second text-left">Try Ultrra Products</span>
                             </a>
                         @else
-                            <a href="{{url('cart')}}" class="text-brown">
+                            <a href="{{url('/www/cart')}}" class="text-brown">
                                 <span class="text-first text-left">Shop</span>
                                 <span class="text-second text-left">Try Ultrra Products</span>
                             </a>
@@ -173,7 +176,7 @@
                 </ul>
                 <ul class="custom-flex menu-apply">
                     <li>
-                        <a href="{{url('/contact')}}">
+                        <a href="{{url('/www/contact')}}">
                             <span class="text">Contact</span>
                             <span class="arrow">
                                 <span>
@@ -198,7 +201,7 @@
                 <p class="nav-title text-custom-white">Category</p>
                 <ul class="custom menu-list">
                     <li>
-                        <a href="{{url('/nutritional')}}">
+                        <a href="{{url('/www/nutritional')}}">
                             <span class="text text-left">Nutritionals</span>
                             <span class="arrow">
                                 <span>
@@ -211,7 +214,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="{{url('/beverage')}}">
+                        <a href="{{url('/www/beverage')}}">
                             <span class="text text-left">Beverages</span>
                             <span class="arrow">
                                 <span>
@@ -224,7 +227,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="{{url('/rare-oil/15')}}">
+                        <a href="{{url('/www/rare-oil/15')}}">
                             <span class="text text-left">Rare Oils Blends</span>
                             <span class="arrow">
                                 <span>
@@ -237,7 +240,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="{{url('/rare-oil/14')}}">
+                        <a href="{{url('/www/rare-oil/14')}}">
                             <span class="text text-left">Rare Oils Singles</span>
                             <span class="arrow">
                                 <span>
@@ -250,7 +253,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="{{url('/element')}}">
+                        <a href="{{url('/www/element')}}">
                             <span class="text text-left">Elements</span>
                             <span class="arrow">
                                 <span>
@@ -292,7 +295,33 @@
 </nav>
 @push('js')
     <script>
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        let username = params.get('username');
+        let suffix = '';
+        let cart = JSON.parse(localStorage.getItem('cart'));
+
+        if (username !== null && localStorage.getItem('user') === null && localStorage.getItem('access_token') === null)
+        {
+            suffix = '?username=' + username;
+        }
+
+        window.addEventListener('load', function() {
+            $('a').each(function (index, element) {
+                let href = $(element).attr('href');
+                $(element).attr('href', href + suffix);
+            });
+
+            if (cart !== null)
+            {
+                axios.get('/cart/' + cart.id).then((response) => {
+                    $('.cart-value').text(response.data.data.products.length);
+                });
+            }
+        });
+
         window.addEventListener('scroll', handleScroll, true);
+
         function dropdown()
         {
             console.log($('#language-1-drop'))
@@ -367,6 +396,19 @@
                         document.querySelector('.back-top').style.display = 'none'
                     }
                 }
+            }
+        }
+
+        function cartIcon()
+        {
+            let current_route = '{{url()->current()}}';
+            if (current_route.includes('/products'))
+            {
+                $('#cart-sidebar').show();
+            }
+            else
+            {
+                window.location.href = ('/www/products'+search);
             }
         }
     </script>

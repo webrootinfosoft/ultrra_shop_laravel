@@ -1,36 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <form onSubmit={this.handleSubmit}>
-        <div class="container-fluid">
+    <form id="create-account-form" method="post">
+        <div class="container-fluid text-center">
             <div class="col-md-10 offset-md-1">
                 <div class="stepwizard text-center">
                     <div class="stepwizard-row">
-                        <div class="stepwizard-step stepactive">
-                            <button class="btn btn-circle btn-primary" type="button">1</button>
-                            <p><Trans>{t("cart:Account Information")}</Trans></p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <button class="btn btn-circle btn-light" type="button">2</button>
-                            <p><Trans>{t("cart:Select Products")}</Trans></p>
-                        </div>
-                        {/*<div class="stepwizard-step">*/}
-                            {/*    <button class="btn btn-circle btn-light" type="button">3</button>*/}
-                            {/*    <p>Select Autoship</p>*/}
-                            {/*</div>*/}
-                        <div class="stepwizard-step">
-                            <button class="btn btn-circle btn-light" type="button">3</button>
-                            <p><Trans>{t("cart:Shipping Details")}</Trans></p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <button class="btn btn-circle btn-light" type="button">4</button>
-                            <p><Trans>{t("cart:Payment Method")}</Trans></p>
-                        </div>
-                        <div class="stepwizard-step">
-                            <button class="btn btn-circle btn-light" type="button">5</button>
-                            <p><Trans>{t("cart:Review")}</Trans></p>
-                        </div>
-                        <hr class="steps-hr"/>
+                        @include('includes.cart-stepper')
                     </div>
                 </div>
                 <br/>
@@ -40,38 +16,31 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="row">
                         <div class="col">
-                            <h2 style={{color: '#0090cd', marginBottom: '0px', fontFamily: 'apex-sans-bold'}}>
-                                <span style={{fontWeight: 'normal', fontFamily: 'apex-sans-light'}}><Trans>{t("cart:WELCOME")}</Trans></span> {this.state.user_data.name}
+                            <h2 style="color: #0090cd; margin-bottom: 0; font-family: apex-sans-bold">
+                                <span style="font-weight: normal; font-family: apex-sans-light">WELCOME</span> <span id="welcome-name"></span>
                             </h2>
-                            <img src={this.state.user_data.profilePicURL} width="256" height="256"/>
                         </div>
                     </div>
                     <div class="row align-items-center">
                         <div class="col">
                             <div id="country-language" class="text-left">
-                                <h2 class="subpage text-center"><Trans>{t("cart:COUNTRY AND LANGUAGE INFORMATION")}</Trans></h2>
-                                <div style={{paddingBottom: '30px'}}>
-                                    <p style={{fontSize: '15px', fontWeight: 500, color: '#555'}}><Trans>{t("cart:Please select a country and a language for the new team member or customer that will be enrolled")}</Trans>.</p>
+                                <h2 class="subpage text-center">COUNTRY AND LANGUAGE INFORMATION</h2>
+                                <div style="padding-bottom: 30px">
+                                    <p style="font-size: 15px; font-weight: 500; color: #555555">Please select a country and a language for the new team member or customer that will be enrolled.</p>
                                 </div>
                                 <div>
                                     <div class="row form-group">
-                                        <label class="text-md-right text-sm-left col-md-4 form-label" style={{color: '#3c763d'}}><Trans>{t("cart:Country")}</Trans>*</label>
+                                        <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">Country*</label>
                                         <div class="col-md-8">
-                                            <select class="form-control" ref="country" onChange={(event) => {this.changeCountry(event)}}>
-                                            {
-                                            this.state.countries.map(country => {
-                                            return (
-                                            <option value={country.id} selected={(localStorage.getItem('country') && country.id == localStorage.getItem('country')) || country.id == 233}>{country.name}</option>
-                                            )
-                                            })
-                                            }
+                                            <select class="form-control" id="country" onchange="changeCountry(this)">
+                                                
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label class="text-md-right text-sm-left col-md-4 form-label" style={{color: '#3c763d'}}>Preferred Language*</label>
+                                        <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">Preferred Language*</label>
                                         <div class="col-md-8">
-                                            <select class="form-control" ref="language">
+                                            <select class="form-control" id="language">
                                                 <option value="en">English (en)</option>
                                                 <option value="es">Espanol (es)</option>
                                             </select>
@@ -84,19 +53,19 @@
                     <div class="row">
                         <div class="col">
                             <div id="account-type" class="text-left">
-                                <h2 class="subpage text-center"><Trans>{t("cart:SELECT AN ACCOUNT TYPE")}</Trans></h2>
+                                <h2 class="subpage text-center">SELECT AN ACCOUNT TYPE</h2>
                                 <div class="text-center">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="inlineCheckbox1" value="rc" ref="user[usertype]" name="user_type" checked={this.state.accountType === 'rc'} onChange={this.handleOptionChange} />
-                                        <label class="form-check-label" htmlFor="inlineCheckbox1">Retail Customer</label>
+                                        <input class="form-check-input" type="radio" id="inlineCheckbox1" value="rc" name="user[usertype]" />
+                                        <label class="form-check-label" for="inlineCheckbox1">Retail Customer</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="pc" ref="user[usertype]" name="user_type" checked={this.state.accountType === 'pc'} onChange={this.handleOptionChange} />
-                                        <label class="form-check-label" htmlFor="inlineCheckbox2">Preferred Customer</label>
+                                        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="pc" name="user[usertype]" />
+                                        <label class="form-check-label" for="inlineCheckbox2">Preferred Customer</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="inlineCheckbox3" value="dc" ref="user[usertype]" name="user_type" checked={this.state.accountType === 'dc'} onChange={this.handleOptionChange} />
-                                        <label class="form-check-label" htmlFor="inlineCheckbox3">Distributor</label>
+                                        <input class="form-check-input" type="radio" id="inlineCheckbox3" value="dc" name="user[usertype]" />
+                                        <label class="form-check-label" for="inlineCheckbox3">Distributor</label>
                                     </div>
                                 </div>
                             </div>
@@ -105,269 +74,211 @@
                     <div class="row">
                         <div class="col">
                             <div id="sponsor-select" class="text-left">
-                                <h2 class="subpage text-center"><b><Trans>{t("cart:PERSONAL SPONSOR INFORMATION")}</Trans></b></h2>
+                                <h2 class="subpage text-center"><b>PERSONAL SPONSOR INFORMATION</b></h2>
                                 <div>
                                     <div class="row form-group">
-                                        <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Sponsor Username")}</Trans></label>
+                                        <label class="text-md-right text-sm-left col-md-4 form-label">Sponsor Username</label>
                                         <div class="col-md-6 col-9">
-                                            <input class="form-control" type="text" ref="user[sponsor_id]" defaultValue={this.state.sponsor_id} disabled={this.state.placement_business_center_id === 1} onKeyUp={(event) => {this.sponsorIdKeyUp(event)}}/>
+                                            <input class="form-control" type="text" name="user[sponsor_id]" onkeyup="sponsorIdKeyUp(this)"/>
                                         </div>
                                         <div class="col-md-2 col-3">
-                                            <button id="sponsor-search-button" type="button" class="btn btn-primary float-right float-md-none" disabled={this.state.sponsor_id === '' || this.state.placement_business_center_id === 1} onClick={this.verifySponsor}><i class="fa fa-search"></i></button>
+                                            <button id="sponsor-search-button" type="button" class="btn btn-primary float-right float-md-none" disabled onclick="verifySponsor()"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <b><i><Trans>{t("cart:Don't Have a Sponsor?")}</Trans></i></b>
+                                    <b><i>Don't Have a Sponsor?</i></b>
                                     <br/>
-                                    <p><Trans>{t("cart:Please contact the person who referred you to Ultrra for this information?")}</Trans>.</p>
+                                    <p>Please contact the person who referred you to Ultrra for this information?.</p>
                                 </div>
-                                {
-                                !this.state.continue_button_disabled && this.state.sponsor !== null ?
-                                <div class="text-center">
-                                    <h5><img src={this.imageExists('https://admin.ultrra.com/user_images/'+this.state.sponsor.image) ? 'https://admin.ultrra.com/user_images/'+this.state.sponsor.image : 'https://admin.ultrra.com/avatar-big.png'} alt="user-image" style={{width: '100px'}}/><br class="d-md-none"/>{this.state.sponsor.username}, {this.state.sponsor.name}</h5>
-                                </div> :
-                                <div></div>
-                                }
+                                <div id="selected-sponsor" style="display: none;">
+                                    <div class="text-center">
+                                        <h5><img src="" alt="user-image" style="width: 100px"/><br class="d-md-none"/><span></span></h5>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    {
-                    !this.state.continue_button_disabled ?
-                    <div>
-                        {
-                        this.state.accountType !== null && this.state.accountType !== 'rc' ?
-                        <div class="row">
+                    <div id="main-form" style="display: none;">
+                        <div id="placement-sponsor-information" class="row">
                             <div class="col">
-                                <div id="placement-sponsor-information" class="text-left">
-                                    <h2 class="subpage text-center"><b><Trans>{t("cart:PLACEMENT SPONSOR INFORMATION")}</Trans></b></h2>
-                                    <div style={{paddingBottom: '30px'}}>
-                                        <p><Trans>{t("cart:If you wish to select your position, click Manual and enter your placement ID number and proceed to select tracking center location Otherwise choose Automatic and Ultrra's system will make the assignment")}</Trans></p>
+                                <div class="text-left">
+                                    <h2 class="subpage text-center"><b>PLACEMENT SPONSOR INFORMATION</b></h2>
+                                    <div style="padding-bottom: 30px">
+                                        <p>If you wish to select your position, click Manual and enter your placement ID number and proceed to select tracking center location Otherwise choose Automatic and Ultrra's system will make the assignment</p>
                                     </div>
                                     <div class="text-center">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" id="Checkbox1" value="automatic" ref="placement_type" name="placement_type" disabled={this.state.placement_business_center_id !== 0} defaultChecked={this.state.placementType == 'automatic'} onChange={this.handleOptionChange2} />
-                                            <label class="form-check-label" htmlFor="Checkbox1"><Trans>{t("cart:Automatic")}</Trans></label>
+                                            <input class="form-check-input" type="radio" id="Checkbox1" value="automatic" name="placement_type" checked onchange="handleOptionChange2(this)" />
+                                            <label class="form-check-label" for="Checkbox1">Automatic</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" id="Checkbox2" value="manual" ref="placement_type" name="placement_type" disabled={this.state.placement_business_center_id !== 0} defaultChecked={this.state.placementType == 'manual'} onChange={this.handleOptionChange2} />
-                                            <label class="form-check-label" htmlFor="Checkbox2"><Trans>{t("cart:Manual")}</Trans></label>
+                                            <input class="form-check-input" type="radio" id="Checkbox2" value="manual" name="placement_type" onchange="handleOptionChange2(this)" />
+                                            <label class="form-check-label" for="Checkbox2">Manual</label>
                                         </div>
                                     </div>
                                     <br/>
-                                    {
-                                    this.state.placementType == 'manual' ?
-                                    <div>
+                                    <div id="placement-details" style="display: none;">
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Placement ID")}</Trans>#</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Placement ID#</label>
                                             <div class="col-md-5 col-8">
-                                                <input type="text" ref="user[placement_search_id]" name="user[placement_search_id]" class="form-control" defaultValue={this.state.placement_search_id} disabled={this.state.placement_business_center_id !== 0} onBlur={this.onBlurInput} onKeyUp={this.onBlurInput}/>
+                                                <input type="text" name="user[placement_search_id]" class="form-control" onkeyup="placementSearchKeyUp()"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="col-md-2 col-4">
-                                                <button id="placement-search-button" type="button" class={this.state.placement_business_center_id !== 0 ? "disabled btn btn-primary" : "btn btn-primary"} disabled={this.state.placement_business_center_id !== 0} onClick={this.getPlacement}><i class="fa fa-search"></i></button>
+                                                <button id="placement-search-button" type="button" class="btn btn-primary" disabled onclick="getPlacement()"><i class="fa fa-search"></i></button>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Select Placement")}</Trans></label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Select Placement</label>
                                             <div class="col-md-8">
-                                                <select class="form-control" ref="user[placement_id]" name="user[placement_id]" disabled={this.state.placement_business_center_id !== 0} onChange={(event) => this.selectPlacement(event)} onBlur={this.onBlurInput} onKeyUp={this.onBlurInput}>
-                                                <option>Select Placement</option>
-                                                {
-                                                this.state.placements.map((placement) => {
-                                                return (<option value={JSON.stringify(placement)} selected={this.state.placement_info.id === placement.id}>{placement.business_center}</option>)
-                                                })
-                                                }
+                                                <select class="form-control" name="user[placement_id]" disabled onchange="selectPlacement()">
+
                                                 </select>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Select Placement Side")}</Trans></label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Select Placement Side</label>
                                             <div class="col-md-8">
-                                                <select class="form-control" ref="user[leg]" disabled={this.state.placement_business_center_id !== 0} onChange={(event) => {this.setState({leg: event.target.value === 'auto' ? 'Auto' : event.target.value === 'L' ? 'Left' : 'Right'})}}>
-                                                <option value="auto">Auto</option>
-                                                <option value="L" selected={this.state.leg === 'L'} disabled={this.state.placement_business_center_id !== 0}>Left</option>
-                                                <option value="R" selected={this.state.leg === 'R'} disabled={this.state.placement_business_center_id !== 0}>Right</option>
+                                                <select class="form-control" name="user[leg]" disabled onchange="selectPlacement()">
+                                                    <option value="auto">Auto</option>
+                                                    <option value="L">Left</option>
+                                                    <option value="R">Right</option>
                                                 </select>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
-                                    </div> : <div></div>
-                                    }
-                                    {
-                                    this.state.placement_info ?
-                                    <div class="text-center" style={{paddingTop: '30px'}}>
-                                        <b>{this.state.placement_info.business_center} - {this.state.leg}</b>
-                                    </div> : <div></div>
-                                    }
+                                    </div>
+                                    <div id="placement-info-business-center-leg" class="text-center" style="padding-top: 30px">
+                                        <b></b>
+                                    </div>
                                 </div>
                             </div>
-                        </div> : <div></div>
-                        }
+                        </div>
                         <div class="row">
                             <div class="col">
                                 <div id="user-information" class="text-left">
-                                    <h4 class="subpage text-center"><b><Trans>{t("cart:Account Information")}</Trans></b></h4>
+                                    <h4 class="subpage text-center"><b>Account Information</b></h4>
                                     <br/>
                                     <div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:First Name")}</Trans> *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">First Name *</label>
                                             <div class="col-md-8">
-                                                <input class="form-control" type="text" ref="user[firstname]" name="user[firstname]" defaultValue={this.state.user_data.firstname} onBlur={this.onBlurInput} onKeyUp={this.onBlurInput} required/>
+                                                <input class="form-control" type="text" name="user[firstname]" required/>
+                                                <input class="form-control" type="hidden" name="user[enrollment_type]" value="direct"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Last Name")}</Trans> *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Last Name *</label>
                                             <div class="col-md-8">
-                                                <input class="form-control" type="text" ref="user[lastname]" name="user[lastname]" defaultValue={this.state.user_data.lastname} onBlur={this.onBlurInput} onKeyUp={this.onBlurInput} required/>
+                                                <input class="form-control" type="text" name="user[lastname]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Joint")}</Trans> <Trans>{t("cart:First Name")}</Trans></label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Joint First Name</label>
                                             <div class="col-md-8">
-                                                <input class="form-control" type="text" ref="user[joint_firstname]" name="user[joint_firstname]" defaultValue={this.state.user_data.joint_firstname} onBlur={this.onBlurInput} onKeyUp={this.onBlurInput} />
+                                                <input class="form-control" type="text" name="user[joint_firstname]" />
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Joint")}</Trans> <Trans>{t("cart:Last Name")}</Trans></label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Joint Last Name</label>
                                             <div class="col-md-8">
-                                                <input class="form-control" type="text" ref="user[joint_lastname]" name="user[joint_lastname]" defaultValue={this.state.user_data.joint_lastname} onBlur={this.onBlurInput} onKeyUp={this.onBlurInput} />
+                                                <input class="form-control" type="text" name="user[joint_lastname]" />
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Username")}</Trans> *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Username *</label>
                                             <div class="col-md-8">
-                                                <input class="form-control" type="text" ref="user[username]" name="user[username]" defaultValue={this.state.user_data.username} disabled={this.state.user_data.username !== null} onBlur={this.onBlurInput} onKeyUp={this.onBlurInput} required/>
+                                                <input class="form-control" type="text" name="user[username]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
-                                        {/*<div class="row form-group">*/}
-                                            {/*    <label class="text-md-right text-sm-left col-md-4 form-label">Password *</label>*/}
-                                            {/*    <div class="col-md-8">*/}
-                                                {/*        <input class="form-control" type="password" ref="user[password]" name="user[password]" onBlur={this.onBlurInput} onKeyUp={this.onBlurInput} required/>*/}
-                                                {/*        <div class="invalid-feedback"></div>*/}
-                                                {/*    </div>*/}
-                                            {/*</div>*/}
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Date of Birth")}</Trans> *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Date of Birth *</label>
                                             <div class="col-md-8">
-                                                <DateInput value={this.state.dob} dateFormat="MM/dd/YYYY" disabled={false} locale="en" modifiers={{disabled: {after: maxDate}}} onChange={this.dobChange} onBlur={this.onBlurDob} style={{backgroundImage: 'url("https://cdn0.iconfinder.com/data/icons/market-and-economics-19/48/49-512.png")', backgroundRepeat: 'no-repeat', backgroundPositionY: 'center', backgroundSize: 'calc(.75em + .375rem) calc(.75em + .375rem)', backgroundPosition: 'left calc(.1em + .075rem) center'}}/>
-                                                {/*<input type="hidden" ref="user[dateofbirth]" name="user[dateofbirth]" defaultValue={this.state.dob}/>*/}
+                                                <input class="form-control" type="date" name="user[dateofbirth]" max="{{date('Y-m-d', strtotime('-18 years'))}}" required>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
-                                        {
-                                        this.state.accountType == 'dc' ?
-                                        <div class="row form-group">
+                                        <div id="ssn_number" class="row form-group" style="display: none">
                                             <label class="text-md-right text-sm-left col-md-4 form-label">SSN/ITIN</label>
                                             <div class="col-md-8">
-                                                <input class="form-control" type="text" ref="user[ssn_number]" name="user[ssn_number]" defaultValue={this.state.user_data.ssn_number} onBlur={this.onBlurInput} onKeyUp={this.onBlurInput}/>
+                                                <input class="form-control" type="text" name="user[ssn_number]" />
                                                 <div class="invalid-feedback"></div>
                                             </div>
-                                        </div> : <div></div>
-                                        }
+                                        </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Mobile Phone")}</Trans> #*</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Mobile Phone #*</label>
                                             <div class="col-md-8">
-                                                <input class="form-control" type="text" ref="user[phone]" name="user[phone]" defaultValue={this.state.user_data.phone} onBlur={this.onBlurInput} onKeyUp={this.onBlurInput} required/>
+                                                <input class="form-control" type="text" name="user[phone]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <label class="text-md-right text-sm-left col-md-4 form-label">Email *</label>
                                             <div class="col-md-8">
-                                                <input class={this.state.user_data.email !== "" ? "form-control is-disabled" : "form-control"} type="text" ref="user[email]" name="user[email]" value={this.state.user_data.email} onBlur={this.onBlurInput} onKeyUp={this.onBlurInput} disabled={this.state.user_data.email !== ''} required/>
+                                                <input class="form-control" type="text" name="user[email]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
-                                        {/*<div class="row form-group">*/}
-                                            {/*<label class="text-md-right text-sm-left col-md-4 form-label" style={{color: '#3c763d'}}>SIGN-UP FOR ECLUB</label>*/}
-                                            {/*<div class="col-md-8">*/}
-                                                {/*<div class="form-check">*/}
-                                                    {/*<input type="checkbox" class="form-check-input" id="eclubCheckbox" ref="user[eclub_signup]" checked={this.state.eclub} onChange={this.eclubChecked} />*/}
-                                                    {/*<label class="form-check-label" htmlFor="eclubCheckbox">I would like to get company updates and receive special promotional emails.</label>*/}
-                                                    {/*</div>*/}
-                                                {/*/!*<Form.Check label="I would like to get company updates and receive special promotional emails." ref="user_eclub_signup" checked style={{color: '#3c763d'}}/>*!/*/}
-                                                {/*</div>*/}
-                                            {/*</div>*/}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div id="user-information" class="text-left">
-                                    <h2 class="subpage text-center"><b><Trans>{t("cart:MAIN ADDRESS")}</Trans></b></h2>
+                                <div id="address-information" class="text-left">
+                                    <h2 class="subpage text-center"><b>MAIN ADDRESS</b></h2>
                                     <br/>
                                     <div>
-                                        {/*<div class="row form-group">*/}
-                                            {/*<label class="text-md-right text-sm-left col-md-4 form-label">Contact Name (if different)</label>*/}
-                                            {/*<div class="col-md-8">*/}
-                                                {/*<input class="form-control" type="text" ref="address[contact_name]" name="address[contact_name]" onBlur={this.onBlurInput} onKeyUp={this.onBlurInput}/>*/}
-                                                {/*<div class="invalid-feedback"></div>*/}
-                                                {/*</div>*/}
-                                            {/*</div>*/}
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Address")}</Trans> 1 *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Address 1 *</label>
                                             <div class="col-md-8">
-                                                <input type="hidden" ref="address[id]" name="address[id]" defaultValue={this.state.address_data.id}/>
-                                                <input class="form-control" type="text" ref="address[address_1]" name="address[address_1]" defaultValue={this.state.address_data.address_1} required onBlur={this.onBlurInput} onKeyUp={this.onBlurInput}/>
+                                                <input type="hidden" name="address[id]"/>
+                                                <input class="form-control" type="text" name="address[address_1]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Address")}</Trans> 2</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Address 2</label>
                                             <div class="col-md-8">
-                                                <input class="form-control" type="text" ref="address[address_2]" name="address[address_2]" defaultValue={this.state.address_data.address_2}/>
+                                                <input class="form-control" type="text" name="address[address_2]"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:City")}</Trans> *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">City *</label>
                                             <div class="col-md-8">
-                                                <input class="form-control" type="text" ref="address[city]" name="address[city]" defaultValue={this.state.address_data.city} required onBlur={this.onBlurInput} onKeyUp={this.onBlurInput}/>
+                                                <input class="form-control" type="text" name="address[city]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:State")}</Trans> *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">State *</label>
                                             <div class="col-md-8">
-                                                <select class="form-control" ref="address[state_id]" name="address[state_id]" onBlur={this.onBlurInput} onKeyUp={this.onBlurInput}>
-                                                    {
-                                                    this.state.states.map(state => {
-                                                    return (
-                                                    <option value={state.id} selected={state.id == this.state.address_data.state_id}>{state.name}</option>
-                                                    )
-                                                    })
-                                                    }
+                                                <select class="form-control" name="address[state_id]">
+
                                                 </select>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label"><Trans>{t("cart:Postal Code")}</Trans> *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Postal Code *</label>
                                             <div class="col-md-8">
-                                                <input class="form-control" type="text" ref="address[postcode]" defaultValue={this.state.address_data.postcode} name="address[postcode]" required onBlur={this.onBlurInput} onKeyUp={this.onBlurInput}/>
+                                                <input class="form-control" type="text" name="address[postcode]" required/>
                                                 <div class="invalid-feedback"></div>
-                                                <input class="form-control" type="hidden" ref="address[type]" value="normal_address"/>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label" style={{color: '#3c763d'}}><Trans>{t("cart:Country")}</Trans> *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">Country *</label>
                                             <div class="col-md-8">
-                                                <select class="form-control" ref="address[country_id]" disabled={true} name="address[country_id]" onChange={this.changeCountry} onBlur={this.onBlurInput} onKeyUp={this.onBlurInput}>
-                                                    {
-                                                    this.state.countries.map(country => {
-                                                    return (
-                                                    <option value={country.id} selected={country.id == this.state.address_data.country_id || country.id == this.refs['country'].value}>{country.name}</option>
-                                                    )
-                                                    })
-                                                    }
+                                                <select class="form-control" name="address[country_id]" disabled>
+
                                                 </select>
                                                 <div class="invalid-feedback"></div>
                                             </div>
@@ -376,21 +287,79 @@
                                 </div>
                             </div>
                         </div>
-                    </div> :
-                    <div></div>
-                    }
+                        <div class="row">
+                            <div class="col">
+                                <div id="shipping-address-information" class="text-left">
+                                    <h2 class="subpage text-center"><b>SHIPPING ADDRESS</b></h2>
+                                    <div class="text-center">
+                                        <input class="form-check-input" type="checkbox" id="shipping_same" onchange="shippingSame(this)"/>
+                                        <label class="form-check-label" for="shipping_same">
+                                            Shipping address is same as main address.
+                                        </label>
+                                    </div>
+                                    <br/>
+                                    <div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Address 1 *</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="text" name="shipping_address[address_1]" required/>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Address 2</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="text" name="shipping_address[address_2]"/>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">City *</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="text" name="shipping_address[city]" required/>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">State *</label>
+                                            <div class="col-md-8">
+                                                <select class="form-control" name="shipping_address[state_id]">
+
+                                                </select>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Postal Code *</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="text" name="shipping_address[postcode]" required/>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">Country *</label>
+                                            <div class="col-md-8">
+                                                <select class="form-control" name="shipping_address[country_id]" disabled>
+
+                                                </select>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            {
-            !this.state.continue_button_disabled ?
-            <div>
+            <div id="terms" style="display: none;">
                 <div class="row">
                     <div class="col-md-10 offset-md-1 col-12">
                         <div class="">
                             <div class="detailsFull text-left">
-                                <div><h5 style={{marginBottom: '20px'}}><b><Trans>{t("cart:ACKNOWLEDGEMENT")}</Trans></b></h5></div>
+                                <div><h5 style="margin-bottom: 20px"><b>ACKNOWLEDGEMENT</b></h5></div>
                                 <div class="termsbox">
-                                    <p class="heading"><strong><Trans>{t("cart:TERMS & CONDITIONS")}</Trans></strong></p>
+                                    <p class="heading"><strong>TERMS & CONDITIONS</strong></p>
                                     <p class="paragraph">The use of this site or any other site owned or maintained by Ultrra, a corporation organized and existing under the laws of
                                         the United States of America ("Company") and is governed by the policies, terms and conditions set forth below. Please
                                         read them carefully. Your use of this site signifies your acceptance of the terms and conditions set forth below. Your order
@@ -600,9 +569,9 @@
                                 <div class="text-center col-md-8 offset-md-2">
                                     <div>
                                         <div class="row form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="termsCheck" onChange={this.termsChecked}/>
-                                            <label class="form-check-label" htmlFor="termsCheck">
-                                                <Trans>{t("cart:I agree to the terms and conditions of the Customer Agreement and the Policies and Procedures")}</Trans>.
+                                            <input class="form-check-input" type="checkbox" value="" id="termsCheck" onchange="termsChecked(this)"/>
+                                            <label class="form-check-label" for="termsCheck">
+                                                I agree to the terms and conditions of the Customer Agreement and the Policies and Procedures.
                                             </label>
                                         </div>
                                     </div>
@@ -611,25 +580,524 @@
                         </div>
                     </div>
                 </div>
-            </div> :
-            <div></div>
-            }
+            </div>
             <br/>
             <br/>
             <div class="row">
-                <div class="col-md-2 offset-md-5 col-12 text-center">
-                    <button id="submit-button" class="btn btn-dark btn-block" type="submit" disabled={this.state.continue_button_disabled || !this.state.termsChecked}><b><Trans>{t("cart:CONTINUE")}</Trans></b></button>
+                <div class="col-md-4 offset-md-4 text-center">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-outline-dark btn-block" onclick="previousPage();"><b>BACK</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="col-md-6">
+                            <button id="submit-button" class="btn btn-dark btn-block" type="submit" disabled><b>CONTINUE</b></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <br/>
     </form>
     <style>
-
+        h1, h2, h3, h4, h5, h6
+        {
+            margin: 0 0 20px !important;
+            font-weight: 400 !important;
+        }
+        h2
+        {
+            font-size: 2rem !important;
+        }
     </style>
 @endsection
 @push('js')
     <script>
+        let user = localStorage.getItem('user');
+        suffix = window.location.search;
+        if (localStorage.getItem('cart') === null)
+        {
+            window.location.href = '/www/products' + suffix;
+        }
+        window.addEventListener('load', function() {
+            $.validator.addMethod("alpha", function(value, element) {
+                return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
+            }, 'Should only contain letters and spaces');
+            $.validator.addMethod("alpha_numeric", function(value, element) {
+                return this.optional(element) || value == value.match(/^[a-z0-9]*$/);
+            }, 'Should only contain small letters and numbers');
 
+            $('form').validate({
+                onfocusout: function(element) {
+                    this.element(element);
+                },
+                rules: {
+                    "user[usertype]": {
+                        required: true,
+                    },
+                    "user[placement_search_id]": {
+                        required: true,
+                    },
+                    "user[placement_id]": {
+                        required: true,
+                    },
+                    "user[firstname]": {
+                        required: true,
+                        alpha: true,
+                    },
+                    "user[lastname]": {
+                        required: true,
+                        alpha: true,
+                    },
+                    "user[joint_firstname]": {
+                        alpha: true,
+                    },
+                    "user[joint_lastname]": {
+                        alpha: true,
+                    },
+                    "user[username]": {
+                        required: true,
+                        alpha_numeric: true,
+                        remote: '{{url("/www/check-username")}}'
+                    },
+                    "user[password]": {
+                        required: true,
+                        minlength: 6
+                    },
+                    "user[dateofbirth]": {
+                        required: true,
+                        date: true
+                    },
+                    "user[ssn_number]": {
+                        digits: true
+                    },
+                    "user[phone]": {
+                        required: true,
+                        digits: true,
+                        minlength: 10,
+                        maxlength: 15
+                    },
+                    "user[email]": {
+                        required: true,
+                        email: true,
+                        remote: '{{url("/www/check-email")}}'
+                    },
+                    "address[address_1]": {
+                        required: true,
+                    },
+                    "address[city]": {
+                        required: true,
+                    },
+                    "address[postcode]": {
+                        required: true,
+                    },
+                    "address[state_id]": {
+                        required: true,
+                    },
+                    "address[country_id]": {
+                        required: true,
+                    },
+                    "shipping_address[address_1]": {
+                        required: true,
+                    },
+                    "shipping_address[city]": {
+                        required: true,
+                    },
+                    "shipping_address[postcode]": {
+                        required: true,
+                    },
+                    "shipping_address[state_id]": {
+                        required: true,
+                    },
+                    "shipping_address[country_id]": {
+                        required: true,
+                    },
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("type") == "checkbox" || element.attr("type") == "radio")
+                    {
+                        if (element.parent().siblings().length > 0)
+                        {
+                            error.insertAfter(element.parent().siblings().last());
+                        }
+                        else
+                        {
+                            error.insertAfter(element.parent());
+                        }
+                    }
+                    else
+                    {
+                        error.insertAfter(element);
+                    }
+                },
+                submitHandler: function(form, event) {
+                    event.preventDefault();
+                    let myform = $('#create-account-form');
+                    let disabled = myform.find(':disabled').removeAttr('disabled');
+                    let formData = myform.serializeArray();
+                    disabled.attr('disabled','disabled');
+                    let formObject = {};
+                    $.each(formData, function(i, v) {
+                        formObject[v.name] = v.value;
+                    });
+                    console.log(formObject);
+
+                    let object = {user: {}, address: {}, shipping_address: {}};
+
+                    formData.forEach((value) => {
+                        let first_obj = {};
+                        let key = value.name;
+                        value = value.value;
+                        if (key.includes('['))
+                        {
+                            let main_key = key.split('[');
+                            let second_key = main_key[1].replace(']', '');
+                            first_obj[second_key] = value;
+                            object[main_key[0]][second_key] = value;
+                        }
+                        else
+                        {
+                            object[key] = value;
+                        }
+                    });
+                    console.log(object);
+                    object.shipping_address['contact_name'] = object.user.firstname + ' ' + object.user.lastname;
+                    object.shipping_address['contact_number'] = object.user.phone;
+                    object.user['enrollment_type'] = '';
+                    localStorage.setItem('user', JSON.stringify(object.user));
+                    localStorage.setItem('address', JSON.stringify(object.address));
+                    localStorage.setItem('shipping_address', JSON.stringify(object.shipping_address));
+                    localStorage.setItem('placement_type', object.placement_type);
+                    window.location.href = '{{url("/www/review")}}' + window.location.search;
+                },
+            });
+
+            let enrollParams = new URLSearchParams(window.location.search);
+
+            if (enrollParams.has('sponsor_id') && enrollParams.has('placement_user_id') && enrollParams.has('business_center_id') && enrollParams.has('leg'))
+            {
+                axios.get('/enroll/' + enrollParams.get('sponsor_id') + '/' + enrollParams.get('placement_user_id') + '/' + enrollParams.get('business_center_id') + '/' + enrollParams.get('leg')).then(response => {
+                    $('[name="user[sponsor_id]"]').val(response.data.data.sponsor.username);
+                    $('[value="manual"]').attr('checked', true);
+                    $('[name="user[placement_search_id]"]').val(response.data.data.placement_info.username);
+                    $('[name="user[leg]"] option').each(function (index, element) {
+                        if ($(element).val() === enrollParams.get('leg'))
+                        {
+                            $(element).attr('selected', true);
+                        }
+                        else
+                        {
+                            $(element).removeAttr('selected');
+                        }
+                    });
+                    $('#placement-info-business-center-leg b').text(response.data.data.business_center + ' - ' + enrollParams.get('leg'));
+                    $('#terms').attr('checked', true);
+                    $('#placement-details').show();
+                    $('[name="user[sponsor_id]"]').attr('disabled', true)
+                    $('[name="placement_type"]').attr('disabled', true);
+                    $('[name="user[placement_search_id]"]').attr('disabled', true);
+                    setTimeout(function () {
+                        $('[name="user[placement_id]"]').attr('disabled', true);
+                        $('[name="user[leg]"]').attr('disabled', true);
+                    }, 1000);
+                    getPlacement();
+                    $('[name="user[enrollment_type]"]').val('replicated');
+                });
+            }
+
+            if (localStorage.getItem('sponsor_input_value'))
+            {
+                $('[name="user[sponsor_id]"]').val(localStorage.getItem('sponsor_input_value'));
+                verifySponsor();
+            }
+            else if (enrollParams.has('username'))
+            {
+                $('[name="user[sponsor_id]"]').val(enrollParams.get('username'));
+                $('[name="user[enrollment_type]"]').val('replicated');
+                verifySponsor();
+            }
+
+            if (enrollParams.has('usertype'))
+            {
+                $('[value="'+enrollParams.get('usertype')+'"]').prop('checked', true);
+                $('[name="user[usertype]"]').attr('disabled', true);
+            }
+
+            axios.get('/all-countries').then(response => {
+                let options = '';
+                response.data.data.map((country) => {
+                    if (country.id == localStorage.getItem('products_country'))
+                    {
+                        options += '<option value="'+country.id+'" selected>'+country.name+'</option>';
+                    }
+                    else
+                    {
+                        options += '<option value="'+country.id+'">'+country.name+'</option>';
+                    }
+                });
+                $('#country').html(options);
+                $('[name="address[country_id]"]').html(options);
+                $('[name="shipping_address[country_id]"]').html(options);
+                axios.get('/states-by-country/' + localStorage.getItem('products_country')).then(response => {
+                    let options = '';
+                    response.data.data.map((state) => {
+                        options += '<option value="'+state.id+'">'+state.name+'</option>';
+                    });
+                    $('[name="address[state_id]"]').html(options);
+                    $('[name="shipping_address[state_id]"]').html(options);
+                });
+            });
+
+
+            if (localStorage.getItem('usertype') !== null)
+            {
+                $('[name="user[usertype]"]').each(function (index, element) {
+                    if ($(element).attr('value') == localStorage.getItem('usertype'))
+                    {
+                        $(element).prop('checked', true);
+                    }
+                });
+
+                $('[name="user[usertype]"]').attr('disabled', true);
+
+                if (localStorage.getItem('usertype') == 'rc')
+                {
+                    $('[name="placement_type"]').attr('disabled', true);
+                }
+
+            }
+
+            if (localStorage.getItem('user') !== null)
+            {
+                Object.keys(JSON.parse(localStorage.getItem('user'))).forEach(function (value) {
+                    $('[name="user['+value+']"]').val(JSON.parse(localStorage.getItem('user'))[value]);
+                });
+            }
+            if (localStorage.getItem('address') !== null)
+            {
+                Object.keys(JSON.parse(localStorage.getItem('address'))).forEach(function (value) {
+                    $('[name="address['+value+']"]').val(JSON.parse(localStorage.getItem('address'))[value]);
+                });
+            }
+            if (localStorage.getItem('shipping_address') !== null)
+            {
+                Object.keys(JSON.parse(localStorage.getItem('shipping_address'))).forEach(function (value) {
+                    $('[name="shipping_address['+value+']"]').val(JSON.parse(localStorage.getItem('address'))[value]);
+                });
+            }
+            if (localStorage.getItem('placement_type') !== null)
+            {
+                $('[value="'+JSON.parse(localStorage.getItem('placement_type'))+'"]').prop('checked', true);
+            }
+        });
+
+        function changeCountry(element)
+        {
+            let country_id = $(element).find('option:selected');
+            axios.get('/states-by-country/' + $(element).val()).then(response => {
+                let options = '';
+                response.data.data.map((state) => {
+                    options += '<option id="'+state.id+'">'+state.name+'</option>';
+                });
+                $('[name="address[state_id]"]').html(options);
+                $('[name="shipping_address[state_id]"]').html(options);
+                $('[name="address[country_id]"] option').each(function (index, element) {
+                    if ($(element).val() == $('#country').val())
+                    {
+                        $(element).attr('selected', true);
+                    }
+                    else
+                    {
+                        $(element).removeAttr('selected');
+                    }
+                });
+                $('[name="shipping_address[country_id]"] option').each(function (index, element) {
+                    if ($(element).val() == $('#country').val())
+                    {
+                        $(element).attr('selected', true);
+                    }
+                    else
+                    {
+                        $(element).removeAttr('selected');
+                    }
+                });
+            });
+        }
+
+        function sponsorIdKeyUp(element)
+        {
+            if ($(element).val() != '')
+            {
+                $('#sponsor-search-button').removeAttr('disabled');
+            }
+            else
+            {
+                $('#sponsor-search-button').attr('disabled', true);
+            }
+        }
+
+        function verifySponsor()
+        {
+            localStorage.setItem('sponsor_input_value', $('[name="user[sponsor_id]"]').val());
+            $('#sponsor-search-button').attr('disabled', true);
+            $('#sponsor-search-button i').removeClass('fa fa-search');
+            $('#sponsor-search-button i').addClass('fa fa-spinner fa-spin');
+            $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').removeClass('is-invalid');
+            $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').removeClass('is-valid');
+            $('#sponsor-search-button').parent().siblings('.col-md-6').find('div').remove();
+            axios.get('/check-sponsor/' + $('[name="user[sponsor_id]"]').val()).then((response) => {
+                if (response.data.data !== null)
+                {
+                    $('#selected-sponsor img').attr('src', 'https://admin.ultrra.com/user_images/' + response.data.data.image);
+                    $('#selected-sponsor span').text(response.data.data.username + ', ' + response.data.data.name);
+                    $('#placement-info-business-center-leg b').text(response.data.data.business_centers[0].business_center + ' - auto');
+                    $('#selected-sponsor').show();
+                    $('#main-form').show();
+                    $('#terms').show();
+                    $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').addClass('is-valid');
+                    $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').removeClass('is-invalid');
+                    $('#sponsor-search-button').parent().siblings('.col-md-6').find('div').remove();
+                    $('#sponsor-search-button i').removeClass('fa fa-spinner fa-spin');
+                    $('#sponsor-search-button i').addClass('fa fa-search');
+                    $('#sponsor-search-button').removeAttr('disabled');
+                    $('[name="user[placement_search_id]"]').val(response.data.data.username);
+                    axios.get('/get-placement/' + $('[name="user[sponsor_id]"]').val()).then((response) => {
+                        let options = '';
+                        response.data.data.map((placement) => {
+                            options += '<option value="'+placement.id+'">'+placement.business_center+'</option>';
+                        });
+                        $('[name="user[placement_id]"]').html(options);
+                        $('[name="user[placement_id]"]').removeAttr('disabled');
+                        $('[name="user[leg]"]').removeAttr('disabled');
+                        $('#placement-search-button').removeAttr('disabled');
+                    });
+                }
+                else
+                {
+                    $('#selected-sponsor').hide();
+                    $('#main-form').hide();
+                    $('#terms').hide();
+                    $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').removeClass('is-valid');
+                    $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').addClass('is-invalid');
+                    $('#sponsor-search-button').parent().siblings('.col-md-6').append('<div class="invalid-feedback">Sponsor not found</div>');
+                    $('#sponsor-search-button i').removeClass('fa fa-spinner fa-spin');
+                    $('#sponsor-search-button i').addClass('fa fa-search');
+                    $('#sponsor-search-button').removeAttr('disabled');
+                }
+                // if (localStorage.getItem('placement_info') !== null)
+                // {
+                //     let placement_info = JSON.parse(localStorage.getItem('placement_info'));
+                //     $('[name="placement_type"]').prop('checked', false);
+                //     this.setState({placementType: placement_info.placement_type});
+                //     $('[value="'+placement_info.placement_type+'"]').prop('checked', true);
+                //     this.setState({leg: placement_info.leg});
+                //     axios.get('/get-business-center/' + placement_info.placement_id).then(response => {
+                //         this.setState({placement_search_id: response.data.data.user.username});
+                //         this.setState({placement_info: response.data.data});
+                //         axios.get('/get-placement/' + response.data.data.user.username).then((response) => {
+                //             this.setState({placements: response.data.data});
+                //             $('#placement-search-button i').removeClass('fa fa-spinner fa-spin');
+                //             $('#placement-search-button i').addClass('fa fa-search');
+                //             $('#placement-search-button').removeAttr('disabled');
+                //         });
+                //     });
+                // }
+                // axios.get('/get-placement/' + response.data.data.business_centers[0].id + '/' + this.state.sponsor_id).then((response) => {
+                //     this.setState({placement_info: response.data.data});
+                //     this.setState({continue_button_disabled: false});
+                // });
+            });
+        }
+
+        function handleOptionChange2(element)
+        {
+            if ($('[name="placement_type"]:checked').val() == 'manual')
+            {
+                $('#placement-details').show();
+            }
+            else if ($('[name="placement_type"]:checked').val() == 'automatic')
+            {
+                $('#placement-details').hide();
+            }
+        }
+
+        function placementSearchKeyUp()
+        {
+            if ($('[name="user[placement_search_id]"]').val() != '')
+            {
+                $('#placement-search-button').removeAttr('disabled');
+            }
+            else
+            {
+                $('#placement-search-button').attr('disabled', true);
+            }
+        }
+
+        function getPlacement()
+        {
+            $('#placement-search-button').attr('disabled', true);
+            $('#placement-search-button i').removeClass('fa fa-search');
+            $('#placement-search-button i').addClass('fa fa-spinner fa-spin');
+            axios.get('/get-placement/' + $('[name="user[placement_search_id]"]').val()).then((response) => {
+                let options = '';
+                response.data.data.map((placement) => {
+                    options += '<option value="'+placement.id+'">'+placement.business_center+'</option>';
+                });
+                $('[name="user[placement_id]"]').html(options);
+                $('[name="user[placement_id]"]').removeAttr('disabled');
+                $('[name="user[leg]"]').removeAttr('disabled');
+                $('#placement-search-button i').removeClass('fa fa-spinner fa-spin');
+                $('#placement-search-button i').addClass('fa fa-search');
+                $('#placement-search-button').removeAttr('disabled');
+                $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
+            });
+        }
+
+        function selectPlacement()
+        {
+            $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
+        }
+
+        function termsChecked(element)
+        {
+            if ($(element).is(':checked'))
+            {
+                $('#submit-button').removeAttr('disabled');
+            }
+            else
+            {
+                $('#submit-button').attr('disabled', true);
+            }
+
+        }
+
+        function shippingSame(element)
+        {
+            $('#address-information input').each(function (index, input) {
+                if ($(element).is(':checked'))
+                {
+                    $('[name="shipping_'+$(input).attr('name')+'"]').val($(input).val());
+                }
+                else
+                {
+                    $('[name="shipping_'+$(input).attr('name')+'"]').val('');
+                }
+            });
+
+            $('[name="shipping_address[state_id]"] option').each(function (index, option) {
+                if ($(element).is(':checked') && $(option).attr('value') == $('[name="address[state_id]"]').val())
+                {
+                    $(option).attr('selected', true);
+                }
+                else
+                {
+                    $(option).removeAttr('selected');
+                }
+            });
+        }
+
+        function previousPage()
+        {
+            window.location.href = '/www/products' + window.location.search;
+        }
     </script>
 @endpush
