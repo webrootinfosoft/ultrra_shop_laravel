@@ -127,7 +127,7 @@
         {
             localStorage.setItem('usertype', usertype);
             localStorage.setItem('country', 233);
-            axios.post('/cart', {new_cart: true}).then((response) => {
+            axios.post('/cart', {new_cart: true, usertype:usertype}).then((response) => {
                 localStorage.setItem('cart', JSON.stringify(response.data.data));
                 window.location.href = '{{url("/www/products")}}' + window.location.search;
             });

@@ -47,34 +47,96 @@
                                 ACTIVATION <span class="details" style="font-weight: lighter">Details</span>
                             </h3>
                             <span class="editdetails">
-                            <a href="{{url('/www/products')}}">
-                                <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
-                                <span>Edit Details</span>
-                            </a>
-                        </span>
+                                <a href="{{url('/www/products')}}">
+                                    <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
+                                    <span>Edit Details</span>
+                                </a>
+                            </span>
                             <br/>
                             <div>
-                                <h6>ORDER OPTIONS</h6>
-                                <table id="order-details-table" class="table table-responsive-sm radio outline orderDetails-table">
-                                    <thead class="gray">
-                                    <tr>
-                                        <th width="50%">Description</th>
-                                        <th>QV</th>
-                                        <th>Qty</th>
-                                        <th>Price</th>
-                                        <th>Total</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
                                 <div class="row">
                                     <div class="col-md-8">
+                                        <h6>ORDER OPTIONS</h6>
+                                        <table id="order-details-table" class="table table-responsive-sm radio outline orderDetails-table">
+                                            <thead class="gray">
+                                            <tr>
+                                                <th width="50%">Description</th>
+                                                <th>QV</th>
+                                                <th>Qty</th>
+                                                <th>Price</th>
+                                                <th>Total</th>
+                                                <!-- <th>Action</th> -->
+                                            </tr>
+                                            </thead>
+                                            <tbody>
 
+                                            </tbody>
+                                            <thead style="background-color:#f2f2f2">
+                                            <tr>
+                                                <th style="background-color:#dfdfdf; color:black;">Total QV</th>
+                                                <th style="background-color:#dfdfdf; color:black;">
+                                                    <div class="totals-value" id="cart-qvTotal"></div>
+                                                </th>
+                                                <th colspan="2" style="background-color:#dfdfdf; color:black;">Sub Total
+                                                </th>
+                                                <th style="background-color:#dfdfdf; color:black;">
+                                                    <div class="totals-value" id="cart-subtotal"></div>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                        </table>
                                     </div>
+
                                     <div class="col-md-4">
-                                        <div class="totals">
+                                        <br><br>
+                                        <table class="table table-responsive-sm radio outline orderDetails-table">
+                                            <thead class="gray">
+                                            <tr>
+                                                <th style="text-align:left">Shipping Method</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td style="text-align:left">
+                                                    <div class="totals-value" id="cart-shipping"></div>
+                                                </td>
+                                            </tr>
+                                            <thead class="gray">
+                                            <tr>
+                                                <th style="text-align:left">Handling</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td style="text-align:left">
+                                                    <div class="totals-value" id="cart-handling"></div>
+                                                </td>
+                                            </tr>
+                                            <thead class="gray">
+                                            <tr>
+                                                <th style="text-align:left">Tax</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td style="text-align:left">
+                                                    <div class="totals-value" id="cart-tax"></div>
+                                                </td>
+                                            </tr>
+                                            <thead class="gray">
+                                            <tr>
+                                                <th style="text-align:left">Order Total</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td style="text-align:left">
+                                                    <div class="totals-value" id="cart-total"></div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- <div class="totals">
                                             <div class="totals-item">
                                                 <label class="text-md-right text-left">Total QV</label>
                                                 <div class="totals-value" id="cart-qvTotal"></div>
@@ -99,9 +161,9 @@
 
                                             <div class="totals-item totals-item-total">
                                                 <label class="text-md-right text-left">Grand Total</label>
-                                                <div class="totals-value" id="cart-total"></div>
+
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -200,8 +262,18 @@
 
                                         <div class="col-lg-4 col-md-4 col-12 hide-on-cod">
                                             <div class="form-group form-check pl-3 mb-2">
-                                                <span class="d-none d-md-none">&nbsp;&nbsp;&nbsp;&nbsp;</span><input class="form-check-input" type="checkbox" id="shipping_same_checkbox" name="billing_same" onchange="billingSameChecked(this)"/>
+                                                <span class="d-none d-md-none">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                                <input class="form-check-input" type="checkbox" id="shipping_same_checkbox" name="billing_same" onchange="billingSameChecked(this)"/>
                                                 <label class="form-check-label" for="shipping_same_checkbox">My billing address is the same as my shipping address</label>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <input class="form-control" type="hidden" name="billing_contact_name"/>
+                                                <input class="form-control" type="text" name="billing_firstname" placeholder="First Name"/>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <input class="form-control" type="text" name="billing_lastname" placeholder="Last Name"/>
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="form-group mb-2">
                                                 <input type="hidden" name="billing_contact_name"/>
@@ -243,13 +315,17 @@
                                             <div class="col-12">
                                                 <p style="color: #939391; line-height: 1.42857143; font-family: 'Montserrat-Regular'">
                                                     Your IP address has been logged as <span id="ip-address"></span> for
-                                                    confirmation and security purposes. You are now authorized to place this
+                                                    confirmation and security purposes. You are now authorized to place
+                                                    this
                                                     order using this payment method.
                                                 </p>
                                             </div>
                                             <div class="form-group form-check">
                                                 <input type="checkbox" class="form-check-input" id="termsCheck" onchange="termsChecked(this)"/>
-                                                <label class="form-check-label" for="termsCheck" style="font-size: 14px">I authorize Ultrra to charge the amount shown for the order above to the payment information I have entered.</label>
+                                                <label class="form-check-label" for="termsCheck" style="font-size: 14px">I authorize Ultrra to charge the amount
+                                                    shown for the order above to the payment information I have
+                                                    entered.
+                                                </label>
                                             </div>
                                         </div>
 
@@ -275,7 +351,7 @@
                 <br>
             </div>
             <div class="row">
-                <div id="loader" class="text-center" style="display: none; position: relative; background: #ffffff91; padding-top: 25%">
+                <div id="loader" class="text-center" style="display: none; position: absolute; background: #ffffff91; padding-top: 25%">
                     <i class="fa fa-spinner fa-spin fa-4x"></i>
                 </div>
             </div>
@@ -302,6 +378,7 @@
         {
             font-size: 12px !important;
         }
+
         label.error
         {
             color: red !important;
@@ -314,11 +391,11 @@
         {
             if ('{{auth()->check()}}' == 1)
             {
-                window.location.href = '/www/shipping-address';
+                window.location.href = '/www/shipping-address' + window.location.search;
             }
             else
             {
-                window.location.href = '/www/create-account';
+                window.location.href = '/www/create-account' + window.location.search;
             }
         }
         let user = JSON.parse(localStorage.getItem('user'));
@@ -340,23 +417,33 @@
         let is_membership_only = 0;
         let country_id = parseInt(localStorage.getItem('products_country'));
         let countries = [];
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
+            $(window).scroll(function (event) {
+                let scroll = $(window).scrollTop();
+                let review_rows_height = $('#review-rows').height();
+                let review_rows_top = $('.detailsfull').offset();
+                $('#loader').css({'width': $('#review-rows').width(), 'height': review_rows_height+'px', 'top': (review_rows_top.top - 10)+'px'});
+            });
             $('#loader').show();
-            let review_rows_offset = $('#review-rows').offset();
-            $('#loader').css({'width': $('#review-rows').width(), 'height': '1416px', 'margin-top': '-134.5%'});
+            let review_rows_height = $('#review-rows').height();
+            let review_rows_top = $('.detailsfull').offset();
+            $('#loader').css({'width': $('#review-rows').width(), 'height': review_rows_height+'px', 'top': (review_rows_top.top - 10)+'px'});
             Payment.formatCardNumber($('[name="card_number"]'));
             Payment.formatCardCVC($('[name="cvv"]'));
             $('#card_expiration').val($('#expiry_month').val() + ' / ' + $('#expiry_year').val());
-            $.validator.addMethod("alpha", function(value, element) {
+            $.validator.addMethod("alpha", function (value, element) {
                 return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
             }, 'Should only contain letters and spaces');
-            $.validator.addMethod("expiry_date", function(value, element) {
+            $.validator.addMethod("digit_space", function (value, element) {
+                return this.optional(element) || value == value.match(/^[0-9\s]+$/);
+            }, 'Please enter only numeric');
+            $.validator.addMethod("expiry_date", function (value, element) {
                 let date = value.split(' / ');
                 return Payment.fns.validateCardExpiry(date[0], date[1]);
             }, 'Card expiry is invalid');
             $('#review-order').validate({
                 ignore: [],
-                onfocusout: function(element) {
+                onfocusout: function (element) {
                     this.element(element);
                 },
                 rules: {
@@ -366,6 +453,8 @@
                     },
                     "card_number": {
                         required: true,
+                        digit_space: true,
+                        maxlength: 19
                     },
                     "cvv": {
                         required: true,
@@ -392,29 +481,25 @@
                         required: true,
                     },
                 },
-                errorPlacement: function(error, element) {
-                    if (element.attr("type") == "checkbox" || element.attr("type") == "radio")
-                    {
-                        if (element.parent().siblings().length > 0)
-                        {
+                errorPlacement: function (error, element) {
+                    if (element.attr("type") == "checkbox" || element.attr("type") == "radio") {
+                        if (element.parent().siblings().length > 0) {
                             error.insertAfter(element.parent().siblings().last());
                         }
-                        else
-                        {
+                        else {
                             error.insertAfter(element.parent());
                         }
                     }
-                    else
-                    {
+                    else {
                         error.insertAfter(element);
                     }
                 },
-                submitHandler: function(form, event) {
+                submitHandler: function (form, event) {
                     event.preventDefault();
                     let myform = $('#review-order');
                     let formData = myform.serializeArray();
                     let formObject = {};
-                    $.each(formData, function(i, v) {
+                    $.each(formData, function (i, v) {
                         formObject[v.name] = v.value;
                     });
 
@@ -426,13 +511,14 @@
                             delete formObject[key];
                         }
                     });
+                    billing_address['contact_name'] = billing_address.firstname + ' ' + billing_address.lastname;
                     formObject['billing_address'] = billing_address;
                     console.log(formObject);
 
                     let placement_info;
                     if (user.hasOwnProperty('id'))
                     {
-                        placement_info =  JSON.parse(localStorage.getItem('placement_info'))
+                        placement_info = JSON.parse(localStorage.getItem('placement_info'))
                     }
                     else
                     {
@@ -491,7 +577,7 @@
                 let country_options = '';
                 countries = response.data.data;
                 response.data.data.map((country) => {
-                    country_options += '<option value="'+country.id+'">'+country.name+'</option>';
+                    country_options += '<option value="' + country.id + '">' + country.name + '</option>';
                 });
                 $('[name="billing_country_id"]').html(country_options);
                 let shipping_country = response.data.data.find(country => country.id == shipping_address.country_id);
@@ -499,7 +585,7 @@
                 axios.get('states-by-country/' + countries[0].id).then((response) => {
                     let state_options = '';
                     response.data.data.map((state) => {
-                        state_options += '<option value="'+state.id+'">'+state.name+'</option>';
+                        state_options += '<option value="' + state.id + '">' + state.name + '</option>';
                     });
                     $('[name="billing_state_id"]').html(state_options);
                 });
@@ -520,7 +606,7 @@
             });
 
             axios.get('/check-sponsor/' + user.sponsor_id).then((response) => {
-                $('#sponsor-information').text(response.data.data.name+' ('+response.data.data.username+')');
+                $('#sponsor-information').text(response.data.data.name + ' (' + response.data.data.username + ')');
             });
 
             if ('{{auth()->check()}}' != 1)
@@ -533,7 +619,7 @@
             }
             else
             {
-                let placement_id = placement_info.placement_id
+                let placement_id = placement_info.placement_id;
                 axios.get('/get-business-center/' + placement_info.placement_id).then(response => {
                     $('#placement-information').text(response.data.data.business_center);
                     $('#placement-leg').text(placement_info.leg);
@@ -587,7 +673,7 @@
                     let components_div = '';
                     console.log(product)
                     product.product.product_components.map(component => {
-                        components_div += '<div style="padding-left: 20px; font-size: 12px"><i class="fa fa-level-up rotate90"></i>'+component.name+'</div>';
+                        components_div += '<div style="padding-left: 20px; font-size: 12px"><i class="fa fa-level-up rotate90"></i>' + component.name + '</div>';
                     });
                     let price = user.usertype === 'rc' ? product.product.retail_customer_price : user.usertype === 'pc' ? product.product.preferred_customer_price : product.product.distributor_price;
                     let single_qv = product.product.qv;
@@ -600,15 +686,19 @@
                     }
 
                     cart_tbody += '<tr>' +
-                        '<td><span>'+product.product.name+'</span>'+components_div+'</td>' +
-                        '<td>'+single_qv+'</td>' +
-                        '<td>'+product.quantity+'</td>' +
-                        '<td>'+price+'</td>' +
-                        '<td>'+(price * product.quantity)+'</td>' +
+                        '<td><span>' + product.product.name + '</span>' + components_div + '</td>' +
+                        '<td>' + single_qv + '</td>' +
+                        '<td>' + product.quantity + '</td>' +
+                        '<td>' + price + '</td>' +
+                        '<td>' + (price * product.quantity) + '</td>' +
                         '</tr>';
                 });
 
+                let review_rows_height = $('#review-rows').height();
+                let review_rows_top = $('.detailsfull').offset();
+                $('#loader').css({'width': $('#review-rows').width(), 'height': review_rows_height+'px', 'top': (review_rows_top.top - 10)+'px'});
                 $('#order-details-table tbody').html(cart_tbody);
+
             });
 
         });
@@ -634,13 +724,13 @@
                         range_amount: 0
                     }];
                     data.map((item) => {
-                        options += '<option value='+item.id+'>'+item.shipping_service_setting.service_name+'($'+item.range_amount+')</option>';
+                        options += '<option value=' + item.id + '>' + item.shipping_service_setting.service_name + '($' + item.range_amount + ')</option>';
                     });
                 }
                 else
                 {
                     response.data.data.map((item) => {
-                        options += '<option value='+item.range_amount+'>'+item.shipping_service_setting.service_name+'($'+item.range_amount+')</option>';
+                        options += '<option value=' + item.range_amount + '>' + item.shipping_service_setting.service_name + '($' + item.range_amount + ')</option>';
                     });
 
                 }
@@ -653,13 +743,25 @@
         function billingSameChecked(element)
         {
             console.log($(element).is(':checked'));
+            if (!$(element).is(':checked'))
+            {
+                // console.log('checked');
+                // $('[name="billing_firstname"').attr("disabled",false);
+                // $('[name="billing_lastname"').attr("disabled",false);
+                $('[name="billing_address_1"]').attr("disabled", false);
+                $('[name="billing_address_2"]').attr("disabled", false);
+                // $('[name="billing_city"').attr("disabled",false);
+                // $('[name="billing_postcode"').attr("disabled",false);
+                // $('[name="billing_country1"').attr("disabled",false);
+            }
             if ($(element).is(':checked'))
             {
                 Object.keys(shipping_address).map((key) => {
-                    if (['address_1', 'address_2', 'city', 'postcode', 'state_id', 'country_id'].includes(key))
+                    if (['firstname', 'lastname', 'address_1', 'address_2', 'city', 'postcode', 'state_id', 'country_id'].includes(key))
                     {
                         if ($('[name="billing_' + key + '"]')[0].localName == 'input')
                         {
+                            $('[name="billing_' + key + '"]').attr("disabled", true);
                             $('[name="billing_' + key + '"]').val(shipping_address[key]);
                         }
                         else
@@ -669,7 +771,7 @@
                                 axios.get('states-by-country/' + shipping_address.country_id).then((response) => {
                                     let state_options = '';
                                     response.data.data.map((state) => {
-                                        state_options += '<option value="'+state.id+'">'+state.name+'</option>';
+                                        state_options += '<option value="' + state.id + '">' + state.name + '</option>';
                                     });
                                     $('[name="billing_state_id"]').html(state_options);
                                     let option_elements = $('[name="billing_' + key + '"]').children('option');
@@ -709,17 +811,18 @@
             }
             else
             {
+
+
                 axios.get('states-by-country/' + countries[0].id).then((response) => {
                     let state_options = '';
                     response.data.data.map((state) => {
-                        state_options += '<option value="'+state.id+'">'+state.name+'</option>';
+                        state_options += '<option value="' + state.id + '">' + state.name + '</option>';
                     });
                     $('[name="billing_state_id"]').html(state_options);
                 });
 
                 Object.keys(shipping_address).map((key) => {
-                    if ($('[name="billing_' + key + '"]').localName == 'input')
-                    {
+                    if ($('[name="billing_' + key + '"]').localName == 'input') {
                         $('[name="billing_' + key + '"]').val('');
                     }
                 });
@@ -775,12 +878,13 @@
                 cart['subTotal'] = subTotal;
                 cart['grandTotal'] = grandTotal.toFixed(2);
                 $('#cart-qvTotal').html(cart.totalQV);
-                $('#cart-subtotal').html('$'+cart.subTotal);
-                $('#cart-tax').html('$'+cart.taxTotal);
-                $('#cart-shipping').html('$'+cart.shippingTotal);
-                $('#cart-handling').html('$'+cart.handlingCharges);
-                $('#cart-total').html('$'+cart.grandTotal);
+                $('#cart-subtotal').html('$' + cart.subTotal);
+                $('#cart-tax').html('$' + cart.taxTotal);
+                $('#cart-shipping').html('$' + cart.shippingTotal);
+                $('#cart-handling').html('$' + cart.handlingCharges);
+                $('#cart-total').html('$' + cart.grandTotal);
                 $('#loader').hide();
+
             });
         }
 
@@ -804,6 +908,7 @@
                 $('.hide-on-cod select').removeAttr('disabled');
             }
         }
+
         function wordsCheck(event)
         {
             $('#notes').parent().find('.invalid-feedback').css('display', 'block');

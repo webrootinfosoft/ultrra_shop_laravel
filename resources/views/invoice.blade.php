@@ -123,7 +123,7 @@
 
         @font-face {
             font-family: Montserrat-Regular;
-            src: url('/fonts/montserrat/Montserrat-Regular.ttf');
+            src: url('/fonts/montserrat/Montserrat-Regular_1.otf');
         }
         .main-div
         {

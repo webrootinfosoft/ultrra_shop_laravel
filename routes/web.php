@@ -66,10 +66,10 @@ Route::group(['prefix' => 'www'], function () {
     Route::get('/element', function () {
         return view('element');
     });
-    Route::get('/product-details2/{product_id}', function ($product_id) {
+    Route::get('/supplements/{product_id}', function ($product_id) {
         return view('product-details2', compact('product_id'));
     });
-    Route::get('/product-details3/{product_id}', function ($product_id) {
+    Route::get('/oils/{product_id}', function ($product_id) {
         return view('product-details3', compact('product_id'));
     });
     Route::get('/create-account', function () {

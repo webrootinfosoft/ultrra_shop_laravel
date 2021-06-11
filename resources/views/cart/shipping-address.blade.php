@@ -151,7 +151,7 @@
         let user = JSON.parse(localStorage.getItem('user'));
         if (localStorage.getItem('cart') === null)
         {
-            window.location.href = '/www/products';
+            window.location.href = '/www/products' + window.location.search;
         }
         window.addEventListener('load', function() {
             axios.defaults.headers.common['authorization'] = "Bearer " + localStorage.getItem('access_token');

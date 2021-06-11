@@ -255,6 +255,37 @@
 </div>
 @push('js')
     <script>
+        params = new URLSearchParams(window.location.search);
+        username = params.get('username');
+        user = JSON.parse(localStorage.getItem('user'));
+        window.addEventListener('load', function() {
+            if (username)
+            {
+                suffix = '?username=' + username;
+                axios.get('/check-sponsor/' + username).then(response => {
+                    let sponsor_user = response.data.data;
+                    $('.img-1').attr('src', 'https://admin.ultrra.com/user_images/' + sponsor_user.image);
+                    $('.img-2').attr('src', 'https://admin.ultrra.com/user_images/' + sponsor_user.image);
+                    $('#recommended-by').text(sponsor_user.name);
+                    $('#sponsor-phone').text(sponsor_user.phone);
+                    $('#sponsor-email').text(sponsor_user.email);
+                });
+            }
+            else if(user)
+            {
+                if (user.sponsor)
+                {
+                    suffix = '?username=' + user.sponsor.username;
+                    let sponsor_user = user.sponsor;
+                    $('.img-1').attr('src', 'https://admin.ultrra.com/user_images/' + sponsor_user.image);
+                    $('.img-2').attr('src', 'https://admin.ultrra.com/user_images/' + sponsor_user.image);
+                    $('#recommended-by').text(sponsor_user.name);
+                    $('#sponsor-phone').text(sponsor_user.phone);
+                    $('#sponsor-email').text(sponsor_user.email);
+                }
+            }
+        });
+
         function hideCookies()
         {
             Cookies.set('cookie', true);

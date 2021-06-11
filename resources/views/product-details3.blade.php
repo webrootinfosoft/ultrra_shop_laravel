@@ -49,7 +49,8 @@
 @endsection
 @push('js')
     <script>
-        let cart = JSON.parse(localStorage.getItem('cart'));
+        cart = JSON.parse(localStorage.getItem('cart'));
+        let user = JSON.parse(localStorage.getItem('user'));
         let image, secondary_image, product;
         window.addEventListener('load', function(){
             axios.get('/product/' + '{{$product_id}}').then((response) => {
@@ -164,7 +165,81 @@
 
         function addToCart(product_id)
         {
+            if ('{{auth()->check()}}' == 1 && user !== null && localStorage.getItem('address') !== null)
+            {
+                if (cart === null)
+                {
+                    axios.post('/cart', {user_id: user.id, create_cart: 1}).then(response => {
+                        axios.get('/user-cart/' + user.id).then(response => {
+                            if (response.data.data)
+                            {
+                                localStorage.setItem('cart', JSON.stringify(response.data.data));
+                                cart = response.data.data;
+                                addProduct(product_id);
+                            }
+                        }).catch((error) => {
+                            if (error.response.status === 401)
+                            {
+                                localStorage.clear();
+                                window.location.reload();
+                            }
+                        });
+                    }).catch((error) => {
+                        if (error.response.status === 401)
+                        {
+                            localStorage.clear();
+                            window.location.reload();
+                        }
+                    });
+                }
+                else
+                {
+                    addProduct(product_id);
+                }
+            }
+            else if(user !== null && localStorage.getItem('address') === null)
+            {
+                window.location.href = '/www/create-account?usertype=' + user.usertype;
+            }
+            else
+            {
+                window.location.href = '/www/enrollment';
+            }
+        }
 
+        function addProduct(id)
+        {
+            axios.get('/product/'+id).then((response) => {
+                if (response.data.data !== null && response.data.data.stock != 'out_of_stock')
+                {
+                    if (cart.products.findIndex(product => product.product.id === id) > -1)
+                    {
+                        let product = cart.products.find(product => product.product.id === id);
+                        axios.put('/cart/' + product.id, {quantity: product.quantity + 1}).then((response) => {
+                            getCart();
+                        });
+                    }
+                    else
+                    {
+                        axios.post('/cart', {product_id: id, cart_id: cart.id}).then((response) => {
+                            getCart();
+                        });
+                    }
+                }
+                else
+                {
+                    alert("Product out of stock");
+                }
+            });
+        }
+
+        function getCart()
+        {
+            axios.get('/cart/' + cart.id).then((response) => {
+                localStorage.setItem('cart', JSON.stringify(response.data.data));
+                cart = response.data.data;
+                $('.cart-value').text(cart.products.length);
+            });
         }
 
         function getImage(type)

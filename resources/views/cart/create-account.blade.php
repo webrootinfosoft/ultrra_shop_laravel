@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form id="create-account-form" method="post">
+    <form id="create-account-form" method="post" onkeydown="return event.key != 'Enter';">
         <div class="container-fluid text-center">
             <div class="col-md-10 offset-md-1">
                 <div class="stepwizard text-center">
@@ -21,7 +21,7 @@
                             </h2>
                         </div>
                     </div>
-                    <div class="row align-items-center">
+                    <!-- <div class="row align-items-center">
                         <div class="col">
                             <div id="country-language" class="text-left">
                                 <h2 class="subpage text-center">COUNTRY AND LANGUAGE INFORMATION</h2>
@@ -33,7 +33,7 @@
                                         <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">Country*</label>
                                         <div class="col-md-8">
                                             <select class="form-control" id="country" onchange="changeCountry(this)">
-                                                
+
                                             </select>
                                         </div>
                                     </div>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col">
                             <div id="account-type" class="text-left">
@@ -79,7 +79,7 @@
                                     <div class="row form-group">
                                         <label class="text-md-right text-sm-left col-md-4 form-label">Sponsor Username</label>
                                         <div class="col-md-6 col-9">
-                                            <input class="form-control" type="text" name="user[sponsor_id]" onkeyup="sponsorIdKeyUp(this)"/>
+                                            <input class="form-control" type="text" name="user[sponsor_id]" onkeyup="sponsorIdKeyUp(this)" onkeydown="verifySponsor1(event)"/>
                                         </div>
                                         <div class="col-md-2 col-3">
                                             <button id="sponsor-search-button" type="button" class="btn btn-primary float-right float-md-none" disabled onclick="verifySponsor()"><i class="fa fa-search"></i></button>
@@ -153,6 +153,9 @@
                                     <div id="placement-info-business-center-leg" class="text-center" style="padding-top: 30px">
                                         <b></b>
                                     </div>
+                                    <div id="placement-info-business-center-leg1" class="text-center" style="padding-top: 30px; display:none;">
+                                        <b></b>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -217,6 +220,15 @@
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="user[phone]" required/>
                                                 <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Preferred Language*</label>
+                                            <div class="col-md-8">
+                                                <select class="form-control" id="language">
+                                                    <option value="en">English (en)</option>
+                                                    <option value="es">Espanol (es)</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -298,7 +310,22 @@
                                         </label>
                                     </div>
                                     <br/>
-                                    <div>
+                                    <div id="shipping-address-fields">
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">First Name *</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="hidden" name="shipping_address[contact_name]" required/>
+                                                <input class="form-control" type="text" name="shipping_address[firstname]" required/>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Last Name *</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="text" name="shipping_address[lastname]" required/>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
                                         <div class="row form-group">
                                             <label class="text-md-right text-sm-left col-md-4 form-label">Address 1 *</label>
                                             <div class="col-md-8">
@@ -326,6 +353,13 @@
                                                 <select class="form-control" name="shipping_address[state_id]">
 
                                                 </select>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Mobile Phone #*</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="text" name="shipping_address[phone]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
@@ -614,6 +648,7 @@
     <script>
         let user = localStorage.getItem('user');
         suffix = window.location.search;
+        // console.log(suffix);
         if (localStorage.getItem('cart') === null)
         {
             window.location.href = '/www/products' + suffix;
@@ -680,6 +715,20 @@
                         required: true,
                         email: true,
                         remote: '{{url("/www/check-email")}}'
+                    },
+                    "shipping_address[firstname]": {
+                        required: true,
+                        alpha: true,
+                    },
+                    "shipping_address[lastname]": {
+                        required: true,
+                        alpha: true,
+                    },
+                    "user[phone1]": {
+                        required: true,
+                        digits: true,
+                        minlength: 10,
+                        maxlength: 15
                     },
                     "address[address_1]": {
                         required: true,
@@ -760,8 +809,8 @@
                         }
                     });
                     console.log(object);
-                    object.shipping_address['contact_name'] = object.user.firstname + ' ' + object.user.lastname;
-                    object.shipping_address['contact_number'] = object.user.phone;
+                    console.log(object.user.placement_type);
+                    object.shipping_address.contact_name = object.shipping_address.firstname + ' ' + object.shipping_address.lastname;
                     object.user['enrollment_type'] = '';
                     localStorage.setItem('user', JSON.stringify(object.user));
                     localStorage.setItem('address', JSON.stringify(object.address));
@@ -789,7 +838,7 @@
                             $(element).removeAttr('selected');
                         }
                     });
-                    $('#placement-info-business-center-leg b').text(response.data.data.business_center + ' - ' + enrollParams.get('leg'));
+                    $('#placement-info-business-center-leg1 b').text(response.data.data.business_center + ' - ' + enrollParams.get('leg'));
                     $('#terms').attr('checked', true);
                     $('#placement-details').show();
                     $('[name="user[sponsor_id]"]').attr('disabled', true)
@@ -809,9 +858,12 @@
                 $('[name="user[sponsor_id]"]').val(localStorage.getItem('sponsor_input_value'));
                 verifySponsor();
             }
-            else if (enrollParams.has('username'))
+
+            if (enrollParams.has('username'))
             {
                 $('[name="user[sponsor_id]"]').val(enrollParams.get('username'));
+                $('[name="user[sponsor_id]"]').attr('disabled', true);
+                console.log('gsd');
                 $('[name="user[enrollment_type]"]').val('replicated');
                 verifySponsor();
             }
@@ -886,7 +938,30 @@
             }
             if (localStorage.getItem('placement_type') !== null)
             {
-                $('[value="'+JSON.parse(localStorage.getItem('placement_type'))+'"]').prop('checked', true);
+                $('[value="'+localStorage.getItem('placement_type')+'"]').prop('checked', true);
+            }
+
+            if (localStorage.getItem('shipping_same') == 'true')
+            {
+                $('#shipping_same').prop('checked', true);
+                $('#shipping-address-fields').addClass('d-none');
+                $('[name="shipping_address[contact_name]"]').val($('[name="shipping_address[firstname]"]').val() + ' ' + $('[name="shipping_address[lastname]"]').val());
+            }
+            else
+            {
+                $('#shipping_same').prop('checked', false);
+                $('#shipping-address-fields').removeClass('d-none');
+                $('[name="shipping_address[contact_name]"]').val('');
+            }
+
+            if ($('#termsCheck').is(':checked'))
+            {
+                $('#submit-button').removeAttr('disabled');
+                $('#termsCheck').prop('checked', true);
+            }
+            else
+            {
+                $('#submit-button').attr('disabled', true);
             }
         });
 
@@ -937,6 +1012,7 @@
 
         function verifySponsor()
         {
+
             localStorage.setItem('sponsor_input_value', $('[name="user[sponsor_id]"]').val());
             $('#sponsor-search-button').attr('disabled', true);
             $('#sponsor-search-button i').removeClass('fa fa-search');
@@ -950,6 +1026,7 @@
                     $('#selected-sponsor img').attr('src', 'https://admin.ultrra.com/user_images/' + response.data.data.image);
                     $('#selected-sponsor span').text(response.data.data.username + ', ' + response.data.data.name);
                     $('#placement-info-business-center-leg b').text(response.data.data.business_centers[0].business_center + ' - auto');
+                    $('#placement-info-business-center-leg1 b').text(response.data.data.business_centers[0].business_center + ' - auto');
                     $('#selected-sponsor').show();
                     $('#main-form').show();
                     $('#terms').show();
@@ -1008,15 +1085,105 @@
             });
         }
 
+        function verifySponsor1(event)
+        {
+            console.log(event.keyCode);
+            if (event.keyCode  == 13)
+            {
+                // $('#create-account-form').on('submit', function(event1){
+                //     event1.preventDefault();
+                // });
+                localStorage.setItem('sponsor_input_value', $('[name="user[sponsor_id]"]').val());
+                $('#sponsor-search-button').attr('disabled', true);
+                $('#sponsor-search-button i').removeClass('fa fa-search');
+                $('#sponsor-search-button i').addClass('fa fa-spinner fa-spin');
+                $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').removeClass('is-invalid');
+                $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').removeClass('is-valid');
+                $('#sponsor-search-button').parent().siblings('.col-md-6').find('div').remove();
+                axios.get('/check-sponsor/' + $('[name="user[sponsor_id]"]').val()).then((response) => {
+                    if (response.data.data !== null)
+                    {
+                        $('#selected-sponsor img').attr('src', 'https://admin.ultrra.com/user_images/' + response.data.data.image);
+                        $('#selected-sponsor span').text(response.data.data.username + ', ' + response.data.data.name);
+                        $('#placement-info-business-center-leg b').text(response.data.data.business_centers[0].business_center + ' - auto');
+                        $('#placement-info-business-center-leg1 b').text(response.data.data.business_centers[0].business_center + ' - auto');
+                        $('#selected-sponsor').show();
+                        $('#main-form').show();
+                        $('#terms').show();
+                        $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').addClass('is-valid');
+                        $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').removeClass('is-invalid');
+                        $('#sponsor-search-button').parent().siblings('.col-md-6').find('div').remove();
+                        $('#sponsor-search-button i').removeClass('fa fa-spinner fa-spin');
+                        $('#sponsor-search-button i').addClass('fa fa-search');
+                        $('#sponsor-search-button').removeAttr('disabled');
+                        $('[name="user[placement_search_id]"]').val(response.data.data.username);
+                        axios.get('/get-placement/' + $('[name="user[sponsor_id]"]').val()).then((response) => {
+                            let options = '';
+                            response.data.data.map((placement) => {
+                                options += '<option value="'+placement.id+'">'+placement.business_center+'</option>';
+                            });
+                            $('[name="user[placement_id]"]').html(options);
+                            $('[name="user[placement_id]"]').removeAttr('disabled');
+                            $('[name="user[leg]"]').removeAttr('disabled');
+                            $('#placement-search-button').removeAttr('disabled');
+                        });
+                    }
+                    else
+                    {
+                        $('#selected-sponsor').hide();
+                        $('#main-form').hide();
+                        $('#terms').hide();
+                        $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').removeClass('is-valid');
+                        $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').addClass('is-invalid');
+                        $('#sponsor-search-button').parent().siblings('.col-md-6').append('<div class="invalid-feedback">Sponsor not found</div>');
+                        $('#sponsor-search-button i').removeClass('fa fa-spinner fa-spin');
+                        $('#sponsor-search-button i').addClass('fa fa-search');
+                        $('#sponsor-search-button').removeAttr('disabled');
+                    }
+                    // if (localStorage.getItem('placement_info') !== null)
+                    // {
+                    //     let placement_info = JSON.parse(localStorage.getItem('placement_info'));
+                    //     $('[name="placement_type"]').prop('checked', false);
+                    //     this.setState({placementType: placement_info.placement_type});
+                    //     $('[value="'+placement_info.placement_type+'"]').prop('checked', true);
+                    //     this.setState({leg: placement_info.leg});
+                    //     axios.get('/get-business-center/' + placement_info.placement_id).then(response => {
+                    //         this.setState({placement_search_id: response.data.data.user.username});
+                    //         this.setState({placement_info: response.data.data});
+                    //         axios.get('/get-placement/' + response.data.data.user.username).then((response) => {
+                    //             this.setState({placements: response.data.data});
+                    //             $('#placement-search-button i').removeClass('fa fa-spinner fa-spin');
+                    //             $('#placement-search-button i').addClass('fa fa-search');
+                    //             $('#placement-search-button').removeAttr('disabled');
+                    //         });
+                    //     });
+                    // }
+                    // axios.get('/get-placement/' + response.data.data.business_centers[0].id + '/' + this.state.sponsor_id).then((response) => {
+                    //     this.setState({placement_info: response.data.data});
+                    //     this.setState({continue_button_disabled: false});
+                    // });
+                });
+            }
+        }
+
         function handleOptionChange2(element)
         {
+
             if ($('[name="placement_type"]:checked').val() == 'manual')
             {
+
                 $('#placement-details').show();
+                $('#placement-info-business-center-leg').hide();
+                $('#placement-info-business-center-leg1').show();
+
             }
             else if ($('[name="placement_type"]:checked').val() == 'automatic')
             {
+
                 $('#placement-details').hide();
+                $('#placement-info-business-center-leg1').hide();
+                $('#placement-info-business-center-leg').show();
+
             }
         }
 
@@ -1048,20 +1215,21 @@
                 $('#placement-search-button i').removeClass('fa fa-spinner fa-spin');
                 $('#placement-search-button i').addClass('fa fa-search');
                 $('#placement-search-button').removeAttr('disabled');
-                $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
+                $('#placement-info-business-center-leg1 b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
             });
         }
 
         function selectPlacement()
         {
-            $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
+            $('#placement-info-business-center-leg1 b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
         }
 
         function termsChecked(element)
         {
-            if ($(element).is(':checked'))
+            if($(element).prop('checked', true))
             {
                 $('#submit-button').removeAttr('disabled');
+                $(element).prop('checked', true);
             }
             else
             {
@@ -1091,8 +1259,26 @@
                 else
                 {
                     $(option).removeAttr('selected');
+                    $('[name="shipping_address[state_id]"]').removeClass('d-none');
                 }
             });
+
+            if ($(element).is(':checked'))
+            {
+                $('[name="shipping_address[firstname]"]').val($('[name="user[firstname]"]').val());
+                $('[name="shipping_address[lastname]"]').val($('[name="user[lastname]"]').val());
+                $('#shipping-address-fields').addClass('d-none');
+                $('[name="shipping_address[contact_name]"]').val($('[name="shipping_address[firstname]"]').val() + ' ' + $('[name="shipping_address[lastname]"]').val());
+                localStorage.setItem('shipping_same', true);
+            }
+            else
+            {
+                $('[name="shipping_address[firstname]"]').val('');
+                $('[name="shipping_address[lastname]"]').val('');
+                $('#shipping-address-fields').removeClass('d-none');
+                $('[name="shipping_address[contact_name]"]').val('');
+                localStorage.setItem('shipping_same', false);
+            }
         }
 
         function previousPage()

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8337665f-779d-40e0-8552-7be6d841adc4" name="Ultrra Shop" url="http://45.79.35.127">
+        <fileTransfer host="45.79.35.127" port="22" rootFolder="/applications/ultrra_shop_laravel/public_html" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
