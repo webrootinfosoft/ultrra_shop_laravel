@@ -46,4 +46,29 @@ class User extends Authenticatable
     {
         return $this->joint_firstname.' '.$this->joint_lastname;
     }
+
+    public function sponsor()
+    {
+        return $this->belongsTo('App\User', 'sponsor_id');
+    }
+
+    public function users()
+    {
+        return $this->hasMany('App\User', 'sponsor_id');
+    }
+
+    public function country()
+    {
+        return $this->belongsTo('App\Country');
+    }
+
+    public function state()
+    {
+        return $this->belongsTo('App\State');
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany('App\Address');
+    }
 }

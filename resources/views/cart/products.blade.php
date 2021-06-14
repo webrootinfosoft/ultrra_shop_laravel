@@ -98,7 +98,7 @@
         <br/>
         <div class="row">
             <div class="col-md-2 offset-md-5 text-center">
-                <button id="submit-button" onclick="" class="btn btn-dark btn-block" disabled><b>CONTINUE</b></button>
+                <button type="button" id="submit-button" onclick="nextPage()" class="btn btn-dark btn-block" disabled><b>CONTINUE</b></button>
             </div>
         </div>
         <br/>
@@ -122,7 +122,7 @@
 @push('js')
     <script>
         let user = JSON.parse(localStorage.getItem('user'));
-        let usertype = localStorage.getItem('usertype');
+        let usertype = localStorage.getItem('usertype') !== null ? localStorage.getItem('usertype') : user ? user.usertype : 'rc';
         let cartProducts = [];
         suffix = window.location.search;
         console.log(suffix);
@@ -196,6 +196,13 @@
                     }
                 });
             }
+            else if ('{{auth()->check()}}' == 1 && localStorage.getItem('user') !== null && localStorage.getItem('address') !== null && localStorage.getItem('cart') === null)
+            {
+                axios.post('/cart', {create_cart: 1, user_id: user.id}).then((response) => {
+                    localStorage.setItem('cart', JSON.stringify(response.data.data));
+                    getCartProducts();
+                });
+            }
             else
             {
                 getCartProducts();
@@ -208,7 +215,7 @@
             let html = '';
 
             products.map(product => {
-                let product_details_href = product.product_layout === 'oil' ? "/www/product-details3/"+product.id : "/www/product-details2/"+product.id;
+                let product_details_href = product.product_layout === 'oil' ? "/www/oils/"+product.id : "/www/supplements/"+product.id;
                 let product_stock = product.product_layout === 'out_of_stock' ? 'Out of Stock' : '<a href="javascript:void(0)" class="addtocart btn-round" id="add-to-cart'+product.id+'" onclick="addToCart('+product.id+')">Add to cart</button>';
                 let product_price = 0;
                 let product_qv = 0;
@@ -300,7 +307,7 @@
 
                     if (product.product.product_countries.length > 0 && typeof product.product.product_countries.find(product_country => product_country.country_id == $('#product_country_div').val()) !== 'undefined')
                     {
-                        let product_country = product.product.product_countries.find(product_country => product_country.country_id == this.state.country_id);
+                        let product_country = product.product.product_countries.find(product_country => product_country.country_id == $('#product_country_div').val());
                         price = usertype === 'rc' ? product_country.retail_customer_price : usertype === 'pc' ? product_country.preferred_customer_price : product_country.distributor_price;
                         single_qv = product_country.qv;
                     }
@@ -378,6 +385,13 @@
                 if (total > 0)
                 {
                     $('#continue-button').removeAttr('disabled');
+                    $('#submit-button').removeAttr('disabled');
+                }
+
+                if (response.data.data.products.length === 1 && [83, 84].includes(response.data.data.products[0].product_id) && total === 0)
+                {
+                    $('#continue-button').removeAttr('disabled');
+                    $('#submit-button').removeAttr('disabled');
                 }
             });
         }
@@ -404,7 +418,7 @@
                     }
                     else if (response.data.status === 200)
                     {
-                        this.getCartProducts();
+                        getCartProducts();
                         $('#cart-sidebar').show();
                     }
 
@@ -415,6 +429,7 @@
         function addToCart(product_id)
         {
             let cart = JSON.parse(localStorage.getItem('cart'));
+            let usertype = localStorage.getItem('usertype');
             if (!$('#add-to-cart' + product_id).attr("class").split(/\s+/).includes('disabled'))
             {
                 $('#add-to-cart'+product_id).append('&nbsp;<i class="fa fa-spinner fa-spin"></i>');
@@ -423,7 +438,7 @@
                     if (response.data.data !== null && response.data.data.stock != 'out_of_stock')
                     {
                         $('#cart-loader').show();
-                        axios.post('/cart', {product_id: product_id, cart_id: cart.id}).then((response) => {
+                        axios.post('/cart', {product_id: product_id, cart_id: cart.id,usertype:usertype}).then((response) => {
                             getCartProducts();
                             $('#cart-sidebar').show();
                             $('#add-to-cart'+product_id+' i').remove();

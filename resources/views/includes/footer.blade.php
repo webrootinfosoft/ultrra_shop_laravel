@@ -1,4 +1,4 @@
-<div class="instagram-gallery">
+<div class="instagram-gallery {{request()->is('www/products') || request()->is('www/shipping-address') || request()->is('www/create-account') || request()->is('www/review') ? 'd-none' : ''}}">
     <div class="no-padding">
         <div class="row no-gutters">
             <div class="col-lg-6">

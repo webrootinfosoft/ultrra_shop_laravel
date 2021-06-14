@@ -62,7 +62,7 @@
                     '                                            <div style="font-size: 50px; font-weight: 800; color: #8ec41a">' + response.data.data.name + '</div>\n' +
                     '                                            <div style="font-size: 25px; font-weight: 500; color: #333333">' + response.data.data.category + '</div>\n' +
                     '                                            <span class="fs-18 text-brown fw-600 mr-3">\n' + product_tag_images + '</span>\n' +
-                    '                                            <h6 class="text-custom-black fw-600">$' + response.data.data.retail_customer_price + ' <span class="fw-500" style="font-size: 14px">(QV ' + response.data.data.qv + ')</span></h6>\n' +
+                    '                                            <h6 class="text-custom-black fw-600">$' + getPrice(response.data.data) + ' <span class="fw-500" style="font-size: 14px">(QV ' + response.data.data.qv + ')</span></h6>\n' +
                     '                                            <p>' + response.data.data.description + '</p>\n' +
                     '                                            <ul>' + tick_points + '</ul>\n' +
                     '                                            <button onclick="addToCart('+response.data.data.id+')" class="theme-btn"><span class="btn-text">Add to Cart</span></button>\n' +
@@ -112,6 +112,18 @@
                 $('#disclaimer').html(product.disclaimer)
             });
         });
+
+        function getPrice(product)
+        {
+            if (user !== null)
+            {
+                return user.usertype === 'dc' ? product.distributor_price : user.usertype === 'pc' ? product.preferred_customer_price : product.retail_customer_price;
+            }
+            else
+            {
+                return product.retail_customer_price;
+            }
+        }
 
         function addToCart(product_id)
         {
