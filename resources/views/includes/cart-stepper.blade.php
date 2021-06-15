@@ -1,5 +1,5 @@
 <div class="stepwizard-row">
-    <div class="stepwizard-step stepactive">
+    <div class="stepwizard-step">
         <button class="btn btn-circle {{request()->is('www/products') ? 'btn-primary' : 'btn-light'}}" type="button">1</button>
         <p>Select Products</p>
     </div>

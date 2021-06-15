@@ -37,22 +37,22 @@
                                 <div class="menu-slider">
                                     <div id="first-slider">
                                         <div class="slide-item">
-                                            <a href="{{url('/product-details2/103')}}">
+                                            <a href="{{url('/supplements/103')}}">
                                                 <img src="{{url('/images/bestseller5.png')}}" class="image-fit first-slider-image" alt="img"/>
                                             </a>
                                         </div>
                                         <div class="slide-item">
-                                            <a href="{{url('/product-details2/109')}}">
+                                            <a href="{{url('/supplements/109')}}">
                                                 <img src="{{url('/images/bestseller2.png')}}" class="image-fit first-slider-image" alt="img"/>
                                             </a>
                                         </div>
                                         <div class="slide-item">
-                                            <a href="{{url('/product-details2/106')}}">
+                                            <a href="{{url('/supplements/106')}}">
                                                 <img src="{{url('/images/bestseller3.png')}}" class="image-fit first-slider-image" alt="img"/>
                                             </a>
                                         </div>
                                         <div class="slide-item">
-                                            <a href="{{url('/product-details2/108')}}">
+                                            <a href="{{url('/supplements/108')}}">
                                                 <img src="{{url('/images/bestseller4.png')}}" class="image-fit first-slider-image" alt="img"/>
                                             </a>
                                         </div>
@@ -168,7 +168,7 @@
                                     </h2>
                                     <p style="font-weight: bold">Essential Oil Protection Blend</p>
                                     <p>Overpower is an Ultrra Rare blend of oils that support a healthy environment by combining natural germ fighting essential oils to help support your body's natural immune response.</p>
-                                    <a href="{{url('/product-details2/118')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
+                                    <a href="{{url('/oils/118')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
                                 </div>
                                 <img src="/images/cookie.png" class="cookie" alt="img" />
                             </div>
@@ -199,7 +199,7 @@
                                     </h2>
                                     <p style="font-weight: bold">Joint Support Chews</p>
                                     <p>Ultrra's unique formulation helps support joint comfort after exercise, promoting cartilage regeneration, while providing the necessary building blocks for optimal joint lubrication. </p>
-                                    <a href="{{url('/product-details2/113')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
+                                    <a href="{{url('/supplements/113')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
                                 </div>
                                 <img src="/images/cookie.png" class="cookie" alt="img" />
                             </div>
@@ -230,7 +230,7 @@
                                     </h2>
                                     <p style="font-weight: bold">Active Protection Serum</p>
                                     <p>Ultrra APS contains powerful nutrients and elements known to support a healthy immune system, enhanced with Monolaurin and Colloidal Silver.</p>
-                                    <a href="{{url('/product-details2/112')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
+                                    <a href="{{url('/supplements/112')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
                                 </div>
                                 <img src="/images/cookie.png" class="cookie" alt="img" />
                             </div>
@@ -271,7 +271,7 @@
                             <div class="section-header left-side">
                                 <div class="section-heading">
                                     <h3 class="text-custom-white fw-700"><span class="fs-20">THE ULTRRA DETOX</span> <br/> 24 Hours to a<br/> BETTER YOU</h3>
-                                    <a href="{{url('/product-details2/241')}}" class="theme-btn"><span class="btn-text">Learn More</span></a>
+                                    <a href="{{url('/supplements/241')}}" class="theme-btn"><span class="btn-text">Learn More</span></a>
                                 </div>
                             </div>
                         </div>
@@ -307,7 +307,7 @@
                             </div>
                         </div>
                         <p class="text-custom-white fs-16">ULTRRA’S MISSION is to grow human potential, and advance society to achieve great things through scientifically documented products produced by the power of nature.</p>
-                        <a href="{{url('/about')}}}" class="theme-btn btn-style-2 border-0 bg-custom-black"><div class="btn-text">Learn More</div></a>
+                        <a href="{{url('/about')}}" class="theme-btn btn-style-2 border-0 bg-custom-black"><div class="btn-text">Learn More</div></a>
                     </div>
                 </div>
             </div>
@@ -352,7 +352,7 @@
             <div class="slide-item col-12" onclick="gotoCat('rare-oil/15')">
                 <div class="ul-category-box p-relative">
                     <div class="ul-category-img animate-img">
-                        <a href="{{url('/rare-oil')}}">
+                        <a href="{{url('/rare-oil/15')}}">
                             <img src="https://via.placeholder.com/255x270" class="image-fit" alt="img" style="visibility: hidden"/>
                         </a>
                         <div class="overlay overlay-bg-blue-gr"></div>
@@ -532,13 +532,13 @@
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="text-center ul-dist-shop-box mb-xs-40">
                         <label class="text-custom-white fs-16 mb-xl-20">As a Customer...</label>
-                        <a href="{{url('/signup?usertype=rc')}}" class="theme-btn full-width"><span class="btn-text">Shop Now</span></a>
+                        <a href="{{url('/www/enrollment')}}" class="theme-btn full-width"><span class="btn-text">Shop Now</span></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="text-center ul-dist-shop-box style-2">
                         <label class="text-custom-white fs-16 mb-xl-20">As an Entrepreneur...</label>
-                        <a href="{{url('/signup?usertype=dc')}}" class="theme-btn full-width"><span class="btn-text">Earn Today</span></a>
+                        <a href="{{url('/www/enrollment')}}" class="theme-btn full-width"><span class="btn-text">Earn Today</span></a>
                     </div>
                 </div>
             </div>

@@ -33,7 +33,7 @@
                                         <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">Country*</label>
                                         <div class="col-md-8">
                                             <select class="form-control" id="country" onchange="changeCountry(this)">
-
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -223,14 +223,14 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Preferred Language*</label>
-                                            <div class="col-md-8">
-                                                <select class="form-control" id="language">
-                                                    <option value="en">English (en)</option>
-                                                    <option value="es">Espanol (es)</option>
-                                                </select>
-                                            </div>
+                                        <label class="text-md-right text-sm-left col-md-4 form-label">Preferred Language*</label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" id="language">
+                                                <option value="en">English (en)</option>
+                                                <option value="es">Espanol (es)</option>
+                                            </select>
                                         </div>
+                                    </div>
                                         <div class="row form-group">
                                             <label class="text-md-right text-sm-left col-md-4 form-label">Email *</label>
                                             <div class="col-md-8">
@@ -290,7 +290,7 @@
                                             <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">Country *</label>
                                             <div class="col-md-8">
                                                 <select class="form-control" name="address[country_id]" disabled>
-
+                                                     
                                                 </select>
                                                 <div class="invalid-feedback"></div>
                                             </div>
@@ -311,7 +311,7 @@
                                     </div>
                                     <br/>
                                     <div id="shipping-address-fields">
-                                        <div class="row form-group">
+                                    <div class="row form-group">
                                             <label class="text-md-right text-sm-left col-md-4 form-label">First Name *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="hidden" name="shipping_address[contact_name]" required/>
@@ -603,7 +603,7 @@
                                 <div class="text-center col-md-8 offset-md-2">
                                     <div>
                                         <div class="row form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="termsCheck" onchange="termsChecked(this)"/>
+                                            <input class="form-check-input" type="checkbox" id="termsCheck" onchange="termsChecked(this)"/>
                                             <label class="form-check-label" for="termsCheck">
                                                 I agree to the terms and conditions of the Customer Agreement and the Policies and Procedures.
                                             </label>
@@ -648,10 +648,11 @@
     <script>
         let user = localStorage.getItem('user');
         suffix = window.location.search;
-        // console.log(suffix);
+        let enrollParams = new URLSearchParams(window.location.search);
+       // console.log(suffix);
         if (localStorage.getItem('cart') === null)
         {
-            window.location.href = '/www/products' + suffix;
+            window.location.href = '/www/products' + window.location.search;
         }
         window.addEventListener('load', function() {
             $.validator.addMethod("alpha", function(value, element) {
@@ -811,7 +812,15 @@
                     console.log(object);
                     console.log(object.user.placement_type);
                     object.shipping_address.contact_name = object.shipping_address.firstname + ' ' + object.shipping_address.lastname;
+                    object.shipping_address.contact_number = object.shipping_address.phone;
                     object.user['enrollment_type'] = '';
+                    object.user['user'] = 'avatar-big.png';
+                    object.user['address1'] = object.address.address_1;
+                    object.user['address2'] = object.address.address_2;
+                    object.user['city'] = object.address.city;
+                    object.user['postcode'] = object.address.postcode;
+                    object.user['state_id'] = object.address.state_id;
+                    object.user['country_id'] = object.address.country_id;
                     localStorage.setItem('user', JSON.stringify(object.user));
                     localStorage.setItem('address', JSON.stringify(object.address));
                     localStorage.setItem('shipping_address', JSON.stringify(object.shipping_address));
@@ -819,8 +828,6 @@
                     window.location.href = '{{url("/www/review")}}' + window.location.search;
                 },
             });
-
-            let enrollParams = new URLSearchParams(window.location.search);
 
             if (enrollParams.has('sponsor_id') && enrollParams.has('placement_user_id') && enrollParams.has('business_center_id') && enrollParams.has('leg'))
             {
@@ -838,18 +845,19 @@
                             $(element).removeAttr('selected');
                         }
                     });
+                    $('#selected-sponsor img').attr('src', 'https://admin.ultrra.com/user_images/' + (response.data.data.sponsor.image !== null ? response.data.data.sponsor.image : 'avatar-big.png'));
+                    $('#selected-sponsor span').text(response.data.data.sponsor.username + ', ' + response.data.data.sponsor.name);
+                    $('#placement-info-business-center-leg b').text(response.data.data.business_center + ' - ' + enrollParams.get('leg'));
                     $('#placement-info-business-center-leg1 b').text(response.data.data.business_center + ' - ' + enrollParams.get('leg'));
-                    $('#terms').attr('checked', true);
                     $('#placement-details').show();
-                    $('[name="user[sponsor_id]"]').attr('disabled', true)
+                    $('[name="user[sponsor_id]"]').attr('disabled', true);
                     $('[name="placement_type"]').attr('disabled', true);
                     $('[name="user[placement_search_id]"]').attr('disabled', true);
-                    setTimeout(function () {
-                        $('[name="user[placement_id]"]').attr('disabled', true);
-                        $('[name="user[leg]"]').attr('disabled', true);
-                    }, 1000);
                     getPlacement();
                     $('[name="user[enrollment_type]"]').val('replicated');
+                    $('#selected-sponsor').show();
+                    $('#main-form').show();
+                    $('#terms').show();
                 });
             }
 
@@ -933,7 +941,7 @@
             if (localStorage.getItem('shipping_address') !== null)
             {
                 Object.keys(JSON.parse(localStorage.getItem('shipping_address'))).forEach(function (value) {
-                    $('[name="shipping_address['+value+']"]').val(JSON.parse(localStorage.getItem('address'))[value]);
+                    $('[name="shipping_address['+value+']"]').val(JSON.parse(localStorage.getItem('shipping_address'))[value]);
                 });
             }
             if (localStorage.getItem('placement_type') !== null)
@@ -1012,7 +1020,7 @@
 
         function verifySponsor()
         {
-
+           
             localStorage.setItem('sponsor_input_value', $('[name="user[sponsor_id]"]').val());
             $('#sponsor-search-button').attr('disabled', true);
             $('#sponsor-search-button i').removeClass('fa fa-search');
@@ -1046,6 +1054,11 @@
                         $('[name="user[placement_id]"]').removeAttr('disabled');
                         $('[name="user[leg]"]').removeAttr('disabled');
                         $('#placement-search-button').removeAttr('disabled');
+                        if (enrollParams.has('sponsor_id') && enrollParams.has('placement_user_id') && enrollParams.has('business_center_id') && enrollParams.has('leg'))
+                        {
+                            $('[name="user[placement_id]"]').attr('disabled', true);
+                            $('[name="user[leg]"]').attr('disabled', true);
+                        }
                     });
                 }
                 else
@@ -1126,6 +1139,11 @@
                             $('[name="user[placement_id]"]').removeAttr('disabled');
                             $('[name="user[leg]"]').removeAttr('disabled');
                             $('#placement-search-button').removeAttr('disabled');
+                            if (enrollParams.has('sponsor_id') && enrollParams.has('placement_user_id') && enrollParams.has('business_center_id') && enrollParams.has('leg'))
+                            {
+                                $('[name="user[placement_id]"]').attr('disabled', true);
+                                $('[name="user[leg]"]').attr('disabled', true);
+                            }
                         });
                     }
                     else
@@ -1168,22 +1186,22 @@
 
         function handleOptionChange2(element)
         {
-
+          
             if ($('[name="placement_type"]:checked').val() == 'manual')
             {
-
+                
                 $('#placement-details').show();
                 $('#placement-info-business-center-leg').hide();
                 $('#placement-info-business-center-leg1').show();
-
+               
             }
             else if ($('[name="placement_type"]:checked').val() == 'automatic')
             {
-
+               
                 $('#placement-details').hide();
                 $('#placement-info-business-center-leg1').hide();
                 $('#placement-info-business-center-leg').show();
-
+               
             }
         }
 
@@ -1215,21 +1233,27 @@
                 $('#placement-search-button i').removeClass('fa fa-spinner fa-spin');
                 $('#placement-search-button i').addClass('fa fa-search');
                 $('#placement-search-button').removeAttr('disabled');
+                $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
                 $('#placement-info-business-center-leg1 b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
+                if (enrollParams.has('sponsor_id') && enrollParams.has('placement_user_id') && enrollParams.has('business_center_id') && enrollParams.has('leg'))
+                {
+                    $('[name="user[placement_id]"]').attr('disabled', true);
+                    $('[name="user[leg]"]').attr('disabled', true);
+                }
             });
         }
 
         function selectPlacement()
         {
+            $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
             $('#placement-info-business-center-leg1 b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
         }
 
         function termsChecked(element)
         {
-            if($(element).prop('checked', true))
+            if($(element).is(':checked'))
             {
                 $('#submit-button').removeAttr('disabled');
-                $(element).prop('checked', true);
             }
             else
             {

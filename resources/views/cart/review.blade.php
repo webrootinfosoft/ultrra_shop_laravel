@@ -15,16 +15,16 @@
             <div id="review-rows" class="row">
                 <div class="col-md-12 col-10 offset-1 offset-md-0">
                     <div class="row">
-                        <div class="detailsfull text-left">
+                        <div id="sponsor-placement-div" class="detailsfull text-left">
                             <h3>
                                 SPONSOR <span class="details" style="font-weight: lighter">Details</span>
                             </h3>
                             <span class="editdetails">
-                        <a href="{{url('/www/create-account')}}">
-                            <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
-                            <span>Edit Details</span>
-                        </a>
-                        </span>
+                            <a href="{{url('/www/create-account').str_replace(request()->url(), '', request()->fullUrl())}}">
+                                <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
+                                <span>Edit Details</span>
+                            </a>
+                            </span>
                             <br/>
                             <div class="col-md-12">
                                 <div class="row">
@@ -40,14 +40,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div style="margin-left: -25px">
+                                <div id="sponsor-loader" class="text-center" style="display: none; position: absolute; background: #ffffff91; padding-top: 60px">
+                                    <i class="fa fa-spinner fa-spin fa-4x"></i>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="detailsfull text-left">
+                        <div id="order-details-div" class="detailsfull text-left">
                             <h3>
                                 ACTIVATION <span class="details" style="font-weight: lighter">Details</span>
                             </h3>
                             <span class="editdetails">
-                                <a href="{{url('/www/products')}}">
+                                <a href="{{url('/www/products').str_replace(request()->url(), '', request()->fullUrl())}}">
                                     <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
                                     <span>Edit Details</span>
                                 </a>
@@ -65,7 +70,7 @@
                                                 <th>Qty</th>
                                                 <th>Price</th>
                                                 <th>Total</th>
-                                                <!-- <th>Action</th> -->
+                                                <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -77,11 +82,11 @@
                                                 <th style="background-color:#dfdfdf; color:black;">
                                                     <div class="totals-value" id="cart-qvTotal"></div>
                                                 </th>
-                                                <th colspan="2" style="background-color:#dfdfdf; color:black;">Sub Total
-                                                </th>
+                                                <th colspan="2" style="background-color:#dfdfdf; color:black;">Sub Total</th>
                                                 <th style="background-color:#dfdfdf; color:black;">
                                                     <div class="totals-value" id="cart-subtotal"></div>
                                                 </th>
+                                                <th style="background-color:#dfdfdf; color:black;"></th>
                                             </tr>
                                             </thead>
                                         </table>
@@ -98,7 +103,10 @@
                                             <tbody>
                                             <tr>
                                                 <td style="text-align:left">
-                                                    <div class="totals-value" id="cart-shipping"></div>
+                                                    <select class="form-control" name="shipping_method" id="shipping_method" onchange="shippingMethodChange(this);">
+
+                                                    </select>
+                                                    <div class="totals-value" id="cart-shipping" style="margin-top: 15px;"></div>
                                                 </td>
                                             </tr>
                                             <thead class="gray">
@@ -167,17 +175,22 @@
                                     </div>
                                 </div>
                             </div>
+                            <div style="margin-left: -25px">
+                                <div id="order-loader" class="text-center" style="display: none; position: absolute; background: #ffffff91; padding-top: 180px">
+                                    <i class="fa fa-spinner fa-spin fa-4x"></i>
+                                </div>
+                            </div>
                         </div>
-                        <div class="detailsfull payment-box text-left">
+                        <div id="shipping-details-div" class="detailsfull payment-box text-left">
                             <h3 class="details-title text-uppercase">
                                 Shipping <span class="details" style="font-weight: lighter">Details</span>
                             </h3>
                             <span class="editdetails">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
-                                <span>Edit Details</span>
-                            </a>
-                        </span>
+                                <a href="{{auth()->check() ? url('/www/shipping-address').str_replace(request()->url(), '', request()->fullUrl()) : url('/www/create-account').str_replace(request()->url(), '', request()->fullUrl())}}">
+                                    <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
+                                    <span>Edit Details</span>
+                                </a>
+                            </span>
                             <br/>
                             <div class="row">
                                 <div class="col-md-3">
@@ -188,15 +201,20 @@
                                         </div>
                                     </address>
                                 </div>
-                                <div class="col-md-4">
-                                    <h6>SHIPPING METHOD</h6>
-                                    <div id="shipping-methods-div">
-                                        <div>
-                                            <select class="form-control" name="shipping_method" id="shipping_method" onchange="shippingMethodChange(this);">
+                                {{--<div class="col-md-4">--}}
+                                {{--<h6>SHIPPING METHOD</h6>--}}
+                                {{--<div id="shipping-methods-div">--}}
+                                {{--<div>--}}
+                                {{--<select class="form-control" name="shipping_method" id="shipping_method" onchange="shippingMethodChange(this);">--}}
 
-                                            </select>
-                                        </div>
-                                    </div>
+                                {{--</select>--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                            </div>
+                            <div style="margin-left: -25px">
+                                <div id="shipping-loader" class="text-center" style="display: none; position: absolute; background: #ffffff91; padding-top: 30px">
+                                    <i class="fa fa-spinner fa-spin fa-3x"></i>
                                 </div>
                             </div>
                         </div>
@@ -314,15 +332,13 @@
                                             </div>
                                             <div class="col-12">
                                                 <p style="color: #939391; line-height: 1.42857143; font-family: 'Montserrat-Regular'">
-                                                    Your IP address has been logged as <span id="ip-address"></span> for
-                                                    confirmation and security purposes. You are now authorized to place
-                                                    this
-                                                    order using this payment method.
+                                                    Your IP address has been logged as <span id="ip-address"></span> for confirmation and security purposes. You are now authorized to place this order using this payment method.
                                                 </p>
                                             </div>
                                             <div class="form-group form-check">
                                                 <input type="checkbox" class="form-check-input" id="termsCheck" onchange="termsChecked(this)"/>
-                                                <label class="form-check-label" for="termsCheck" style="font-size: 14px">I authorize Ultrra to charge the amount
+                                                <label class="form-check-label" for="termsCheck" style="font-size: 14px">
+                                                    I authorize Ultrra to charge the amount
                                                     shown for the order above to the payment information I have
                                                     entered.
                                                 </label>
@@ -350,37 +366,27 @@
                 <br>
                 <br>
             </div>
-            <div class="row">
-                <div id="loader" class="text-center" style="display: none; position: absolute; background: #ffffff91; padding-top: 25%">
-                    <i class="fa fa-spinner fa-spin fa-4x"></i>
-                </div>
-            </div>
         </form>
     </div>
     <style>
-        h1, h2, h3, h4, h5, h6
-        {
+        h1, h2, h3, h4, h5, h6 {
             margin: 0 0 20px !important;
             font-weight: 400 !important;
         }
 
-        h2
-        {
+        h2 {
             font-size: 2rem !important;
         }
 
-        p
-        {
+        p {
             margin-bottom: 0 !important;
         }
 
-        body
-        {
+        body {
             font-size: 12px !important;
         }
 
-        label.error
-        {
+        label.error {
             color: red !important;
         }
     </style>
@@ -417,20 +423,29 @@
         let is_membership_only = 0;
         let country_id = parseInt(localStorage.getItem('products_country'));
         let countries = [];
+        let window_width = screen.width;
+
         window.addEventListener('load', function () {
             $(window).scroll(function (event) {
-                let scroll = $(window).scrollTop();
-                let review_rows_height = $('#review-rows').height();
-                let review_rows_top = $('.detailsfull').offset();
-                $('#loader').css({'width': $('#review-rows').width(), 'height': review_rows_height+'px', 'top': (review_rows_top.top - 10)+'px'});
+                $('#shipping-loader').css({
+                    'width': $('#shipping-details-div').parent().width(),
+                    'height': '140px',
+                    'top': (window_width > 768 ? '780' : window_width === 768 ? '760' : ($('#shipping-details-div').offset().top - 190)) + 'px'
+                });
             });
-            $('#loader').show();
-            let review_rows_height = $('#review-rows').height();
-            let review_rows_top = $('.detailsfull').offset();
-            $('#loader').css({'width': $('#review-rows').width(), 'height': review_rows_height+'px', 'top': (review_rows_top.top - 10)+'px'});
+
+            $('#sponsor-loader').parent().css('margin-left', window_width > 768 ? '-25px': '-10px');
+            $('#sponsor-loader').show();
+            $('#sponsor-loader').css({
+                'width': $('#sponsor-placement-div').parent().width(),
+                'height': '157px',
+                'top': '40px'
+            });
+
             Payment.formatCardNumber($('[name="card_number"]'));
             Payment.formatCardCVC($('[name="cvv"]'));
             $('#card_expiration').val($('#expiry_month').val() + ' / ' + $('#expiry_year').val());
+
             $.validator.addMethod("alpha", function (value, element) {
                 return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
             }, 'Should only contain letters and spaces');
@@ -441,6 +456,7 @@
                 let date = value.split(' / ');
                 return Payment.fns.validateCardExpiry(date[0], date[1]);
             }, 'Card expiry is invalid');
+
             $('#review-order').validate({
                 ignore: [],
                 onfocusout: function (element) {
@@ -459,7 +475,8 @@
                     "cvv": {
                         required: true,
                         digits: true,
-                        maxlength: 4
+                        minlength: 3,
+                        maxlength: 4,
                     },
                     "card_expiration": {
                         required: true,
@@ -482,22 +499,28 @@
                     },
                 },
                 errorPlacement: function (error, element) {
-                    if (element.attr("type") == "checkbox" || element.attr("type") == "radio") {
-                        if (element.parent().siblings().length > 0) {
+                    if (element.attr("type") == "checkbox" || element.attr("type") == "radio")
+                    {
+                        if (element.parent().siblings().length > 0)
+                        {
                             error.insertAfter(element.parent().siblings().last());
                         }
-                        else {
+                        else
+                        {
                             error.insertAfter(element.parent());
                         }
                     }
-                    else {
+                    else
+                    {
                         error.insertAfter(element);
                     }
                 },
                 submitHandler: function (form, event) {
                     event.preventDefault();
                     let myform = $('#review-order');
+                    let disabled = myform.find(':disabled').removeAttr('disabled');
                     let formData = myform.serializeArray();
+                    disabled.attr('disabled', 'disabled');
                     let formObject = {};
                     $.each(formData, function (i, v) {
                         formObject[v.name] = v.value;
@@ -560,8 +583,20 @@
                         else if (response.data.status === 200)
                         {
                             localStorage.clear();
-                            window.location.href = '/www/invoice/' + response.data.data.id;
-                            // this.props.history.push('/www/invoice/' + response.data.data.id);
+                            if (data.payment_method == 'credit_card' && '{{auth()->check()}}' != 1)
+                            {
+                                $.ajax({
+                                    url: '/www/login-by-id/' + response.data.data.user_id,
+                                    method: 'GET',
+                                    success: function () {
+                                        window.location.href = '/www/invoice/' + response.data.data.id;
+                                    }
+                                })
+                            }
+                            else
+                            {
+                                window.location.href = '/www/invoice/' + response.data.data.id;
+                            }
                         }
                     }).catch((error) => {
                         console.log(error);
@@ -573,6 +608,14 @@
                 },
             });
 
+            $('#shipping-loader').parent().css('margin-left', window_width > 768 ? '-25px': '-10px');
+            $('#shipping-loader').show();
+            $('#shipping-loader').css({
+                'width': $('#shipping-details-div').parent().width(),
+                'height': '140px',
+                'top': (window_width > 768 ? '780' : window_width === 768 ? '760' : ($('#shipping-details-div').offset().top - 190)) + 'px'
+            });
+            console.log($('#shipping-details-div').offset());
             axios.get('all-countries').then((response) => {
                 let country_options = '';
                 countries = response.data.data;
@@ -598,8 +641,7 @@
                         shipping_address.postcode + ', ' + shipping_state.name + '<br/>' +
                         shipping_country.name;
 
-                    let state_options = '';
-
+                    $('#shipping-loader').hide();
                     $('#shipping-address div').html('<address>' + shipping_address_html + '</address>');
 
                 });
@@ -615,19 +657,70 @@
                     let placement = response.data.data.find(item => item.id == user.placement_id);
                     $('#placement-information').text(placement.business_center);
                     $('#placement-leg').text(user.leg);
+                    $('#sponsor-loader').hide();
                 });
             }
             else
             {
-                let placement_id = placement_info.placement_id;
-                axios.get('/get-business-center/' + placement_info.placement_id).then(response => {
-                    $('#placement-information').text(response.data.data.business_center);
-                    $('#placement-leg').text(placement_info.leg);
+                if (placement_info !== null)
+                {
+                    let placement_id = placement_info.placement_id;
+                    axios.get('/get-business-center/' + placement_info.placement_id).then(response => {
+                        $('#placement-information').text(response.data.data.business_center);
+                        $('#placement-leg').text(placement_info.leg);
+                        $('#sponsor-loader').hide();
+                    });
+                }
+                else
+                {
+                    axios.get('/get-placement/' + user.sponsor_id).then((response) => {
+                        let placement = response.data.data[0];
+                        placement_info = {placement_id: placement.id, leg: user.leg == 'default' ? 'auto' : user.leg};
+                        localStorage.setItem('placement_info', JSON.stringify(placement_info));
+                        $('#placement-information').text(placement.business_center);
+                        $('#placement-leg').text(user.leg);
+                        $('#sponsor-loader').hide();
+                    });
+                }
+
+                axios.get('/user-orders-by-id/' + '{{auth()->id()}}').then(response => {
+                    if (response.data.data.length > 0)
+                    {
+                        $('#sponsor-placement-div').hide();
+                    }
                 });
             }
 
+            getCart();
+        });
+
+        function getCart()
+        {
+            $('#order-loader').parent('div').css('margin-left', window_width > 768 ? '-25px' : '-10px');
+            $('#order-loader').show();
+            $('#order-loader').css({
+                'width': $('#order-details-div').parent().width(),
+                'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
+                'top': (window_width > 768 ? '237' : '227') + 'px'
+            });
+
+            totalQV = 0;
+            shippingTotal = 0;
+            taxTotal = 0;
+            handlingCharges = 0;
+            subTotal = 0;
+            taxFreeSubTotal = 0;
+            fast_shipping_price = 0;
+            regular_shipping_price = 0;
+            shippingMethod = '';
+            is_membership_only = 0;
+
             axios.get('/cart/' + cart.id).then(response => {
                 cart = response.data.data;
+                if (cart.products.length == 0)
+                {
+                    window.location.href = '/www/products' + window.location.search;
+                }
                 cart.products.forEach(product => {
                     let price = user.usertype === 'rc' ? product.product.retail_customer_price : user.usertype === 'pc' ? product.product.preferred_customer_price : product.product.distributor_price;
                     let single_qv = product.product.qv;
@@ -666,8 +759,6 @@
                     fast_shipping_price = 0
                 }
 
-                getShippingRates(shipping_address.country_id, regular_shipping_price, fast_shipping_price, is_membership_only);
-
                 let cart_tbody = '';
                 cart.products.map((product) => {
                     let components_div = '';
@@ -685,23 +776,37 @@
                         single_qv = product_country.qv;
                     }
 
+                    let buttons = ![80, 83, 84].includes(product.product_id) ? '<button type="button" onclick="editCartProduct('+product.id+')"><i class="fas fa-pencil-alt"></i></button>&nbsp;&nbsp;<button type="button" onclick="deleteCartProduct('+product.id+')"><i class="fas fa-trash-alt"></i></button>' : '';
                     cart_tbody += '<tr>' +
                         '<td><span>' + product.product.name + '</span>' + components_div + '</td>' +
                         '<td>' + single_qv + '</td>' +
-                        '<td>' + product.quantity + '</td>' +
+                        '<td id="cart-product-quantity-'+product.id+'">' + product.quantity + '</td>' +
                         '<td>' + price + '</td>' +
                         '<td>' + (price * product.quantity) + '</td>' +
+                        '<td>' + buttons + '</td>' +
                         '</tr>';
                 });
 
-                let review_rows_height = $('#review-rows').height();
-                let review_rows_top = $('.detailsfull').offset();
-                $('#loader').css({'width': $('#review-rows').width(), 'height': review_rows_height+'px', 'top': (review_rows_top.top - 10)+'px'});
                 $('#order-details-table tbody').html(cart_tbody);
 
-            });
+                $('#order-loader').css({
+                    'width': $('#order-details-div').parent().width(),
+                    'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
+                    'top': (window_width > 768 ? '237' : '227') + 'px'
+                });
 
-        });
+                getShippingRates(shipping_address.country_id, regular_shipping_price, fast_shipping_price, is_membership_only);
+
+                if (cart.products.length === 1 && [83, 84].includes(cart.products[0].product_id) && subTotal === 0)
+                {
+                    $('#payment_method').find('[value="cod"]').attr('selected', true);
+                    $('#payment_method').attr('disabled', true);
+                    $('.hide-on-cod').hide();
+                    $('.hide-on-cod input').attr('disabled', true);
+                    $('.hide-on-cod select').attr('disabled', true);
+                }
+            });
+        }
 
         function getShippingRates(country_id, price, fast_shipping_price, is_membership_only)
         {
@@ -736,27 +841,29 @@
                 }
                 $('#shipping_method').html(options);
 
+                $('#order-loader').css({
+                    'width': $('#order-details-div').parent().width(),
+                    'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
+                    'top': (window_width > 768 ? '237' : '227') + 'px'
+                });
+
                 getTotals();
             });
         }
 
         function billingSameChecked(element)
         {
-            console.log($(element).is(':checked'));
-            if (!$(element).is(':checked'))
-            {
-                // console.log('checked');
-                // $('[name="billing_firstname"').attr("disabled",false);
-                // $('[name="billing_lastname"').attr("disabled",false);
-                $('[name="billing_address_1"]').attr("disabled", false);
-                $('[name="billing_address_2"]').attr("disabled", false);
-                // $('[name="billing_city"').attr("disabled",false);
-                // $('[name="billing_postcode"').attr("disabled",false);
-                // $('[name="billing_country1"').attr("disabled",false);
-            }
             if ($(element).is(':checked'))
             {
                 Object.keys(shipping_address).map((key) => {
+                    if (key == 'contact_name')
+                    {
+                        let name = shipping_address['contact_name'].split(' ');
+                        $('[name="billing_firstname"]').attr("disabled", true);
+                        $('[name="billing_firstname"]').val(name[0]);
+                        $('[name="billing_lastname"]').attr("disabled", true);
+                        $('[name="billing_lastname"]').val(name[name.length - 1]);
+                    }
                     if (['firstname', 'lastname', 'address_1', 'address_2', 'city', 'postcode', 'state_id', 'country_id'].includes(key))
                     {
                         if ($('[name="billing_' + key + '"]')[0].localName == 'input')
@@ -768,23 +875,28 @@
                         {
                             if (key == 'state_id')
                             {
+                                if ($('#termsCheck').is(':checked'))
+                                {
+                                    $('#submit-button').attr('disabled', true);
+                                }
                                 axios.get('states-by-country/' + shipping_address.country_id).then((response) => {
                                     let state_options = '';
                                     response.data.data.map((state) => {
-                                        state_options += '<option value="' + state.id + '">' + state.name + '</option>';
-                                    });
-                                    $('[name="billing_state_id"]').html(state_options);
-                                    let option_elements = $('[name="billing_' + key + '"]').children('option');
-                                    for (let option_element in option_elements)
-                                    {
-                                        if ($(option_element).attr('value') == shipping_address[key])
+                                        if (state.id == shipping_address.state_id)
                                         {
-                                            $(option_element).attr('selected', true);
+                                            state_options += '<option value="' + state.id + '" selected>' + state.name + '</option>';
                                         }
                                         else
                                         {
-                                            $(option_element).removeAttr('selected');
+                                            state_options += '<option value="' + state.id + '">' + state.name + '</option>';
                                         }
+                                    });
+                                    $('[name="billing_state_id"]').html(state_options);
+                                    $('[name="billing_state_id"]').attr('disabled', true);
+                                    $('[name="billing_country_id"]').attr('disabled', true);
+                                    if ($('#termsCheck').is(':checked'))
+                                    {
+                                        $('#submit-button').removeAttr('disabled');
                                     }
                                 });
                             }
@@ -811,20 +923,34 @@
             }
             else
             {
-
-
+                if ($('#termsCheck').is(':checked'))
+                {
+                    $('#submit-button').attr('disabled', true);
+                }
                 axios.get('states-by-country/' + countries[0].id).then((response) => {
                     let state_options = '';
                     response.data.data.map((state) => {
                         state_options += '<option value="' + state.id + '">' + state.name + '</option>';
                     });
                     $('[name="billing_state_id"]').html(state_options);
+                    if ($('#termsCheck').is(':checked'))
+                    {
+                        $('#submit-button').removeAttr('disabled');
+                    }
                 });
 
                 Object.keys(shipping_address).map((key) => {
-                    if ($('[name="billing_' + key + '"]').localName == 'input') {
+                    if ($('[name="billing_' + key + '"]').length > 0 && $('[name="billing_' + key + '"]')[0].localName == 'input')
+                    {
+                        // console.log($('[name="billing_' + key + '"]'));
                         $('[name="billing_' + key + '"]').val('');
+                        $('[name="billing_' + key + '"]').removeAttr('disabled');
                     }
+
+                    $('[name="billing_firstname"]').val('');
+                    $('[name="billing_firstname"]').removeAttr('disabled');
+                    $('[name="billing_lastname"]').val('');
+                    $('[name="billing_lastname"]').removeAttr('disabled');
                 });
 
                 $('[name="billing_state_id"] option').map((index, option) => {
@@ -834,6 +960,9 @@
                 $('[name="billing_country_id"] option').map((index, option) => {
                     $(option).removeAttr('selected');
                 });
+
+                $('[name="billing_state_id"]').removeAttr('disabled');
+                $('[name="billing_country_id"]').removeAttr('disabled');
             }
         }
 
@@ -883,13 +1012,19 @@
                 $('#cart-shipping').html('$' + cart.shippingTotal);
                 $('#cart-handling').html('$' + cart.handlingCharges);
                 $('#cart-total').html('$' + cart.grandTotal);
-                $('#loader').hide();
 
+                $('#order-loader').css({
+                    'width': $('#order-details-div').parent().width(),
+                    'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
+                    'top': (window_width > 768 ? '237' : '227') + 'px'
+                });
+                $('#order-loader').hide();
             });
         }
 
         function shippingMethodChange(element)
         {
+            $('#order-loader').show();
             getTotals();
         }
 
@@ -913,6 +1048,54 @@
         {
             $('#notes').parent().find('.invalid-feedback').css('display', 'block');
             $('#notes').parent().find('.invalid-feedback').text($('#notes').val().length + '/500');
+        }
+
+        function editCartProduct(product_id)
+        {
+            let quantity = $('#cart-product-quantity-'+product_id).text();
+            let options = '';
+            for (let i = 1; i <= 30; i++)
+            {
+                if (quantity == i)
+                {
+                    options += '<option value="'+i+'" selected>'+i+'</option>';
+                }
+                else
+                {
+                    options += '<option value="'+i+'">'+i+'</option>';
+                }
+            }
+            let select = '<select id="cart-product-quantity-select-'+product_id+'" class="form-control" onchange="cartQuantityChange(this, '+product_id+')">'+options+'</select>';
+            $('#cart-product-quantity-'+product_id).html(select);
+        }
+
+        function deleteCartProduct(product_id)
+        {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Are you sure you want to delete this?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                customClass: {
+                    confirmButton: 'bg-danger'
+                }
+            }).then((result) => {
+                if (result.isConfirmed)
+                {
+                    axios.delete('/cart/' + product_id).then((response) => {
+                        getCart();
+                    });
+                }
+            });
+        }
+
+        function cartQuantityChange(element, product_id)
+        {
+            let quantity = $(element).val();
+
+            axios.put('/cart/' + product_id, {quantity: quantity}).then((response) => {
+                getCart();
+            });
         }
     </script>
 @endpush

@@ -195,13 +195,13 @@
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="text-center ul-dist-shop-box mb-xs-40">
                         <label class="text-custom-white fs-16 mb-xl-20">As a Customer...</label>
-                        <a href="{{url('/signup?usertype=rc')}}" class="theme-btn full-width"><span class="btn-text">Shop Now</span></a>
+                        <a href="{{url('/www/enrollment')}}" class="theme-btn full-width"><span class="btn-text">Shop Now</span></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="text-center ul-dist-shop-box style-2">
                         <label class="text-custom-white fs-16 mb-xl-20">As an Entrepreneur...</label>
-                        <a href="{{url('/signup?usertype=dc')}}" class="theme-btn full-width"><span class="btn-text">Earn Today</span></a>
+                        <a href="{{url('/www/enrollment')}}" class="theme-btn full-width"><span class="btn-text">Earn Today</span></a>
                     </div>
                 </div>
             </div>

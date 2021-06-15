@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
 Route::get('/{username?}', function ($username = null) {
     if (!is_null($username) && $username != 'www')
     {
@@ -38,6 +39,7 @@ Route::get('d/{username?}', function ($username = null) {
     return redirect('/');
 });
 Route::group(['prefix' => 'www'], function () {
+    Auth::routes();
     Route::get('/invoice/{id}', 'HomeController@invoice');
     Route::get('/about', function () {
         return view('about');
@@ -73,9 +75,14 @@ Route::group(['prefix' => 'www'], function () {
         return view('product-details3', compact('product_id'));
     });
     Route::get('/create-account', function () {
+        if (auth()->check())
+        {
+            return redirect()->back();
+        }
         return view('cart.create-account');
     });
     Route::get('/enrollment', function () {
+        auth()->logout();
         return view('enrollment');
     });
     Route::get('/products', function () {
@@ -92,7 +99,10 @@ Route::group(['prefix' => 'www'], function () {
     });
     Route::get('/login-by-id/{id}', function ($id) {
         auth()->loginUsingId($id);
-        return redirect('/www/products');
+        if (!request()->ajax())
+        {
+            return redirect('/www/products');
+        }
     });
     Route::get('/check-username/{id?}', function ($id = null) {
         $request = request()->all();
@@ -117,7 +127,5 @@ Route::group(['prefix' => 'www'], function () {
         return $users == 0 ? '"true"' : '"Email has been already taken"';
     });
 });
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

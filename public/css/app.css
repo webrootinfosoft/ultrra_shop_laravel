@@ -724,6 +724,11 @@ Version: 1.0.0
 	}
 }
 @media (max-width: 767px) {
+	.header-style-1 .cart-box .cart-btn>.cart-value
+	{
+		left: -3px !important;
+		top: -8px !important;
+	}
 	.ul-btm-popup .ul-popup-text.flash, .ul-btm-popup .ul-popup-text {
 		opacity: 0 !important;
 		transform: scale(1) translate(-0px,70px) !important;

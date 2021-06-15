@@ -34,7 +34,7 @@
                         <ul class="top-nav custom-flex">
                             <li class="language">
                                 <div id="language-1" class="select" onclick="dropdown()">
-                                    <a class="text-brown">
+                                    <a href="javascript:void(0)" class="text-brown">
                                         English
                                     </a>
                                 </div>
@@ -42,12 +42,12 @@
                                     <ul class="custom">
                                         <li>
                                             <a href="javascript:void(0)" class="text-brown">
-                                            English
+                                                English
                                             </a>
                                         </li>
                                         <li>
                                             <a href="javascript:void(0)" class="text-brown">
-                                            Spanish
+                                                Spanish
                                             </a>
                                         </li>
                                     </ul>
@@ -57,8 +57,9 @@
                                 @if(!auth()->check())
                                     <a href="https://office.ultrra.com/signin" target="_blank" class="text-brown">Login</a>
                                 @else
-                                    <a href="javascript:void(0)" class="text-brown" onclick="$('#logout-form').submit();">Logout</a>
-                                    <form id="logout-form" action="{{url('logout')}}" class="d-none">
+                                    <a href="javascript:void(0)" class="text-brown" onclick="localStorage.clear(); $('#logout-form').submit();">Logout</a>
+                                    <form id="logout-form" action="{{url('www/logout')}}" class="d-none" method="post">
+                                        @csrf
                                         <button type="submit"></button>
                                     </form>
                                 @endif
@@ -67,7 +68,7 @@
                             <li class="menu-item">
                                 @if(!auth()->check())
                                     <a href="{{url('/www/enrollment')}}" class="text-brown">Enroll</a>
-                                @elseif(!auth()->user()->address)
+                                @elseif(count(auth()->user()->addresses) == 0)
                                     <a href="{{url('/www/create-account?usertype='.auth()->user()->usertype)}}" class="text-brown">Enroll</a>
                                 @endif
                             </li>
@@ -77,9 +78,9 @@
                             </li>
                             <li class="menu-item">
                                 @if(!auth()->user())
-                                    <a href="{{url('/www/signup?usertype=rc')}}" class="text-brown">Shop</a>
+                                    <a href="{{url('/www/enrollment')}}" class="text-brown">Shop</a>
                                 @else
-                                    <a href="{{url('/www/cart')}}" class="text-brown">Shop</a>
+                                    <a href="{{url('/www/products')}}" class="text-brown">Shop</a>
                                 @endif
                             </li>
                             <li class="menu-item cart-box">
@@ -318,6 +319,73 @@
                     $('.cart-value').text(response.data.data.products.length);
                 });
             }
+
+            if ('{{auth()->check()}}' == 1)
+            {
+                axios.get('/user/' + '{{auth()->id()}}').then(response => {
+                    if (response.data.status_code === 200 && response.data.user !== null)
+                    {
+                        localStorage.setItem('user', JSON.stringify(response.data.user));
+                        localStorage.setItem('country', JSON.stringify(response.data.user.country_id));
+                        let sponsor_user = response.data.user.sponsor;
+                        $('.img-1').attr('src', 'https://admin.ultrra.com/user_images/' + sponsor_user.image);
+                        $('.img-2').attr('src', 'https://admin.ultrra.com/user_images/' + sponsor_user.image);
+                        $('#recommended-by').text(sponsor_user.name);
+                        $('#sponsor-phone').text(sponsor_user.phone);
+                        $('#sponsor-email').text(sponsor_user.email);
+                        axios.get('/get-placement-info/' + response.data.user.id).then(response => {
+                            if (response.data.data !== null)
+                            {
+                                localStorage.setItem('placement_info', JSON.stringify(response.data.data));
+                            }
+                        });
+                        axios.get('/user-addresses-by-id/' + '{{auth()->id()}}').then(response => {
+                            if (response.data.data.length > 0)
+                            {
+                                localStorage.setItem('address', JSON.stringify(response.data.data[0]));
+                            }
+                        });
+                        axios.get('/user-orders-by-id/' + '{{auth()->id()}}').then(response => {
+                            if (response.data.data.total > 0)
+                            {
+                                let user_data = JSON.parse(localStorage.getItem('user'));
+                                axios.get('/user-cart/' + user_data.id).then(response => {
+                                    if (response.data.data !== null)
+                                    {
+                                        localStorage.setItem('cart', JSON.stringify(response.data.data));
+                                    }
+                                    axios.post('/cart', {user_id: user_data.id, create_cart: 1}).then(response => {
+                                        axios.get('/user-cart/' + user_data.id).then(response => {
+                                            if (response.data.data)
+                                            {
+                                                localStorage.setItem('cart', JSON.stringify(response.data.data));
+                                            }
+                                        }).catch((error) => {
+                                            if (error.response.status === 401)
+                                            {
+                                                localStorage.clear();
+                                                window.location.reload();
+                                            }
+                                        });
+                                    }).catch((error) => {
+                                        if (error.response.status === 401)
+                                        {
+                                            localStorage.clear();
+                                            window.location.reload();
+                                        }
+                                    });
+                                }).catch((error) => {
+                                    if (error.response.status === 401)
+                                    {
+                                        localStorage.clear();
+                                        window.location.reload();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
         });
 
         window.addEventListener('scroll', handleScroll, true);
@@ -408,8 +476,9 @@
             }
             else
             {
-                window.location.href = ('/www/products'+search);
+                window.location.href = '/www/products' + search;
             }
         }
+        console.log('{{str_replace(request()->url(), '', request()->fullUrl())}}')
     </script>
 @endpush
