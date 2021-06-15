@@ -40,9 +40,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div style="margin-left: -25px">
+                                <div id="sponsor-loader" class="text-center" style="display: none; position: absolute; background: #ffffff91; padding-top: 60px">
+                                    <i class="fa fa-spinner fa-spin fa-4x"></i>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="detailsfull text-left">
+                        <div id="order-details-div" class="detailsfull text-left">
                             <h3>
                                 ACTIVATION <span class="details" style="font-weight: lighter">Details</span>
                             </h3>
@@ -170,8 +175,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div style="margin-left: -25px">
+                                <div id="order-loader" class="text-center" style="display: none; position: absolute; background: #ffffff91; padding-top: 180px">
+                                    <i class="fa fa-spinner fa-spin fa-4x"></i>
+                                </div>
+                            </div>
                         </div>
-                        <div class="detailsfull payment-box text-left">
+                        <div id="shipping-details-div" class="detailsfull payment-box text-left">
                             <h3 class="details-title text-uppercase">
                                 Shipping <span class="details" style="font-weight: lighter">Details</span>
                             </h3>
@@ -192,15 +202,20 @@
                                     </address>
                                 </div>
                                 {{--<div class="col-md-4">--}}
-                                    {{--<h6>SHIPPING METHOD</h6>--}}
-                                    {{--<div id="shipping-methods-div">--}}
-                                        {{--<div>--}}
-                                            {{--<select class="form-control" name="shipping_method" id="shipping_method" onchange="shippingMethodChange(this);">--}}
+                                {{--<h6>SHIPPING METHOD</h6>--}}
+                                {{--<div id="shipping-methods-div">--}}
+                                {{--<div>--}}
+                                {{--<select class="form-control" name="shipping_method" id="shipping_method" onchange="shippingMethodChange(this);">--}}
 
-                                            {{--</select>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
+                                {{--</select>--}}
                                 {{--</div>--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                            </div>
+                            <div style="margin-left: -25px">
+                                <div id="shipping-loader" class="text-center" style="display: none; position: absolute; background: #ffffff91; padding-top: 30px">
+                                    <i class="fa fa-spinner fa-spin fa-3x"></i>
+                                </div>
                             </div>
                         </div>
                         <div class="detailsfull text-left">
@@ -351,11 +366,6 @@
                 <br>
                 <br>
             </div>
-            <div class="row">
-                <div id="loader" class="text-center" style="display: none; position: absolute; background: #ffffff91; padding-top: 25%">
-                    <i class="fa fa-spinner fa-spin fa-4x"></i>
-                </div>
-            </div>
         </form>
     </div>
     <style>
@@ -413,28 +423,29 @@
         let is_membership_only = 0;
         let country_id = parseInt(localStorage.getItem('products_country'));
         let countries = [];
+        let window_width = screen.width;
+
         window.addEventListener('load', function () {
             $(window).scroll(function (event) {
-                let scroll = $(window).scrollTop();
-                let review_rows_height = $('#review-rows').height();
-                let review_rows_top = $('.detailsfull').offset();
-                $('#loader').css({
-                    'width': $('#review-rows').width(),
-                    'height': review_rows_height + 'px',
-                    'top': (review_rows_top.top - 10) + 'px'
+                $('#shipping-loader').css({
+                    'width': $('#shipping-details-div').parent().width(),
+                    'height': '140px',
+                    'top': (window_width > 768 ? '780' : window_width === 768 ? '760' : ($('#shipping-details-div').offset().top - 190)) + 'px'
                 });
             });
-            $('#loader').show();
-            let review_rows_height = $('#review-rows').height();
-            let review_rows_top = $('.detailsfull').offset();
-            $('#loader').css({
-                'width': $('#review-rows').width(),
-                'height': review_rows_height + 'px',
-                'top': (review_rows_top.top - 10) + 'px'
+
+            $('#sponsor-loader').parent().css('margin-left', window_width > 768 ? '-25px': '-10px');
+            $('#sponsor-loader').show();
+            $('#sponsor-loader').css({
+                'width': $('#sponsor-placement-div').parent().width(),
+                'height': '157px',
+                'top': '40px'
             });
+
             Payment.formatCardNumber($('[name="card_number"]'));
             Payment.formatCardCVC($('[name="cvv"]'));
             $('#card_expiration').val($('#expiry_month').val() + ' / ' + $('#expiry_year').val());
+
             $.validator.addMethod("alpha", function (value, element) {
                 return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
             }, 'Should only contain letters and spaces');
@@ -445,6 +456,7 @@
                 let date = value.split(' / ');
                 return Payment.fns.validateCardExpiry(date[0], date[1]);
             }, 'Card expiry is invalid');
+
             $('#review-order').validate({
                 ignore: [],
                 onfocusout: function (element) {
@@ -596,6 +608,14 @@
                 },
             });
 
+            $('#shipping-loader').parent().css('margin-left', window_width > 768 ? '-25px': '-10px');
+            $('#shipping-loader').show();
+            $('#shipping-loader').css({
+                'width': $('#shipping-details-div').parent().width(),
+                'height': '140px',
+                'top': (window_width > 768 ? '780' : window_width === 768 ? '760' : ($('#shipping-details-div').offset().top - 190)) + 'px'
+            });
+            console.log($('#shipping-details-div').offset());
             axios.get('all-countries').then((response) => {
                 let country_options = '';
                 countries = response.data.data;
@@ -621,8 +641,7 @@
                         shipping_address.postcode + ', ' + shipping_state.name + '<br/>' +
                         shipping_country.name;
 
-                    let state_options = '';
-
+                    $('#shipping-loader').hide();
                     $('#shipping-address div').html('<address>' + shipping_address_html + '</address>');
 
                 });
@@ -638,6 +657,7 @@
                     let placement = response.data.data.find(item => item.id == user.placement_id);
                     $('#placement-information').text(placement.business_center);
                     $('#placement-leg').text(user.leg);
+                    $('#sponsor-loader').hide();
                 });
             }
             else
@@ -648,6 +668,7 @@
                     axios.get('/get-business-center/' + placement_info.placement_id).then(response => {
                         $('#placement-information').text(response.data.data.business_center);
                         $('#placement-leg').text(placement_info.leg);
+                        $('#sponsor-loader').hide();
                     });
                 }
                 else
@@ -658,6 +679,7 @@
                         localStorage.setItem('placement_info', JSON.stringify(placement_info));
                         $('#placement-information').text(placement.business_center);
                         $('#placement-leg').text(user.leg);
+                        $('#sponsor-loader').hide();
                     });
                 }
 
@@ -665,11 +687,6 @@
                     if (response.data.data.length > 0)
                     {
                         $('#sponsor-placement-div').hide();
-                        $('#loader').css({
-                            'width': $('#review-rows').width(),
-                            'height': review_rows_height + 'px',
-                            'top': (review_rows_top.top - 10) + 'px'
-                        });
                     }
                 });
             }
@@ -679,6 +696,14 @@
 
         function getCart()
         {
+            $('#order-loader').parent('div').css('margin-left', window_width > 768 ? '-25px' : '-10px');
+            $('#order-loader').show();
+            $('#order-loader').css({
+                'width': $('#order-details-div').parent().width(),
+                'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
+                'top': (window_width > 768 ? '237' : '227') + 'px'
+            });
+
             totalQV = 0;
             shippingTotal = 0;
             taxTotal = 0;
@@ -689,6 +714,7 @@
             regular_shipping_price = 0;
             shippingMethod = '';
             is_membership_only = 0;
+
             axios.get('/cart/' + cart.id).then(response => {
                 cart = response.data.data;
                 if (cart.products.length == 0)
@@ -733,8 +759,6 @@
                     fast_shipping_price = 0
                 }
 
-                getShippingRates(shipping_address.country_id, regular_shipping_price, fast_shipping_price, is_membership_only);
-
                 let cart_tbody = '';
                 cart.products.map((product) => {
                     let components_div = '';
@@ -763,14 +787,15 @@
                         '</tr>';
                 });
 
-                let review_rows_height = $('#review-rows').height();
-                let review_rows_top = $('.detailsfull').offset();
-                $('#loader').css({
-                    'width': $('#review-rows').width(),
-                    'height': review_rows_height + 'px',
-                    'top': (review_rows_top.top - 10) + 'px'
-                });
                 $('#order-details-table tbody').html(cart_tbody);
+
+                $('#order-loader').css({
+                    'width': $('#order-details-div').parent().width(),
+                    'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
+                    'top': (window_width > 768 ? '237' : '227') + 'px'
+                });
+
+                getShippingRates(shipping_address.country_id, regular_shipping_price, fast_shipping_price, is_membership_only);
 
                 if (cart.products.length === 1 && [83, 84].includes(cart.products[0].product_id) && subTotal === 0)
                 {
@@ -816,24 +841,18 @@
                 }
                 $('#shipping_method').html(options);
 
+                $('#order-loader').css({
+                    'width': $('#order-details-div').parent().width(),
+                    'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
+                    'top': (window_width > 768 ? '237' : '227') + 'px'
+                });
+
                 getTotals();
             });
         }
 
         function billingSameChecked(element)
         {
-            console.log($(element).is(':checked'));
-            if (!$(element).is(':checked'))
-            {
-                // console.log('checked');
-                // $('[name="billing_firstname"').attr("disabled",false);
-                // $('[name="billing_lastname"').attr("disabled",false);
-                $('[name="billing_address_1"]').attr("disabled", false);
-                $('[name="billing_address_2"]').attr("disabled", false);
-                // $('[name="billing_city"').attr("disabled",false);
-                // $('[name="billing_postcode"').attr("disabled",false);
-                // $('[name="billing_country1"').attr("disabled",false);
-            }
             if ($(element).is(':checked'))
             {
                 Object.keys(shipping_address).map((key) => {
@@ -993,13 +1012,19 @@
                 $('#cart-shipping').html('$' + cart.shippingTotal);
                 $('#cart-handling').html('$' + cart.handlingCharges);
                 $('#cart-total').html('$' + cart.grandTotal);
-                $('#loader').hide();
 
+                $('#order-loader').css({
+                    'width': $('#order-details-div').parent().width(),
+                    'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
+                    'top': (window_width > 768 ? '237' : '227') + 'px'
+                });
+                $('#order-loader').hide();
             });
         }
 
         function shippingMethodChange(element)
         {
+            $('#order-loader').show();
             getTotals();
         }
 
