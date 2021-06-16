@@ -31,7 +31,9 @@
             if (response.data.status_code === 200 && response.data.user !== null)
             {
                 localStorage.setItem('user', JSON.stringify(response.data.user));
+                localStorage.setItem('usertype', response.data.user.usertype);
                 localStorage.setItem('country', JSON.stringify(response.data.user.country_id));
+                localStorage.setItem('products_country', JSON.stringify(response.data.user.country_id));
                 axios.get('/get-placement-info/' + response.data.user.id).then(response => {
                     if (response.data.data !== null)
                     {

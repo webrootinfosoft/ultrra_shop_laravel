@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enquiry;
 use App\Order;
 use App\OrderProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -44,4 +46,24 @@ class HomeController extends Controller
         }
     }
 
+    public function contactUsSubmit(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'phone' => 'required|digits_between:10,15',
+            'email' => 'required|email',
+            'subject' => 'required',
+            'message' => 'required'
+        ]);
+
+        $enquiry = Enquiry::create($request->except('_token'));
+
+        if ($enquiry)
+        {
+            Mail::send('emails.contact', ['enquiry' => $enquiry], function ($m) use ($enquiry) {
+                $m->to('cc@ultrra.com')->subject($enquiry->subject);
+            });
+        }
+        return redirect()->back()->with('message', 'Your message has been received. Our contact support team will reach out to you shortly.');
+    }
 }

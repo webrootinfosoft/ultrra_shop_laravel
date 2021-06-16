@@ -4,7 +4,7 @@
             <div class="row justify-content-between">
                 <div class="col-md-6 col-9">
                     <div class="top-bar-media">
-                        <span class="media-txt fs-14">Connect With</span>
+                        <span class="media-txt fs-14">@lang('header.Connect With')</span>
                         <ul class="custom-flex mb-0">
                             <li>
                                 <a href="https://www.facebook.com/ultrraofficial" target="_blank" class="text-brown" style="height: 36px">
@@ -35,18 +35,18 @@
                             <li class="language">
                                 <div id="language-1" class="select" onclick="dropdown()">
                                     <a href="javascript:void(0)" class="text-brown">
-                                        English
+                                        {{app()->getLocale() == 'es' ? 'Spanish' : 'English'}}
                                     </a>
                                 </div>
                                 <div id="language-1-drop" class="dropdown" style="display: none">
                                     <ul class="custom">
                                         <li>
-                                            <a href="javascript:void(0)" class="text-brown">
+                                            <a href="{{url('/lang/en')}}" class="text-brown">
                                                 English
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)" class="text-brown">
+                                            <a href="{{url('/lang/es')}}" class="text-brown">
                                                 Spanish
                                             </a>
                                         </li>
@@ -55,7 +55,7 @@
                             </li>
                             <li class="menu-item">
                                 @if(!auth()->check())
-                                    <a href="https://office.ultrra.com/signin" target="_blank" class="text-brown">Login</a>
+                                    <a href="https://office.ultrra.com/signin" target="_blank" class="text-brown">@lang('header.Login')</a>
                                 @else
                                     <a href="javascript:void(0)" class="text-brown" onclick="localStorage.clear(); $('#logout-form').submit();">Logout</a>
                                     <form id="logout-form" action="{{url('www/logout')}}" class="d-none" method="post">
@@ -67,9 +67,9 @@
                             {{--@if($show_enroll)--}}
                             <li class="menu-item">
                                 @if(!auth()->check())
-                                    <a href="{{url('/www/enrollment')}}" class="text-brown">Enroll</a>
+                                    <a href="{{url('/www/enrollment')}}" class="text-brown">@lang('header.Enroll')</a>
                                 @elseif(count(auth()->user()->addresses) == 0)
-                                    <a href="{{url('/www/create-account?usertype='.auth()->user()->usertype)}}" class="text-brown">Enroll</a>
+                                    <a href="{{url('/www/create-account?usertype='.auth()->user()->usertype)}}" class="text-brown">@lang('header.Enroll')</a>
                                 @endif
                             </li>
                             {{--@endif--}}
@@ -78,9 +78,9 @@
                             </li>
                             <li class="menu-item">
                                 @if(!auth()->user())
-                                    <a href="{{url('/www/enrollment')}}" class="text-brown">Shop</a>
+                                    <a href="{{url('/www/enrollment')}}" class="text-brown">@lang('header.Shop')</a>
                                 @else
-                                    <a href="{{url('/www/products')}}" class="text-brown">Shop</a>
+                                    <a href="{{url('/www/products')}}" class="text-brown">@lang('header.Shop')</a>
                                 @endif
                             </li>
                             <li class="menu-item cart-box">
@@ -129,48 +129,48 @@
     <div class="navigation-body row no-gutters">
         <div class="col-xl-8 col-lg-7 left-side">
             <div class="nav-body">
-                <p class="nav-title text-custom-white">Menu</p>
+                <p class="nav-title text-custom-white">@lang('header.Menu')</p>
                 <ul class="custom menu-list">
                     <li>
                         <a href="{{url('/')}}">
-                            <span class="text-first text-left">Home</span>
+                            <span class="text-first text-left">@lang('header.Home')</span>
                             <span class="text-second text-left">Ultrra</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{url('/www/about')}}">
-                            <span class="text-first text-left">About Us</span>
-                            <span class="text-second text-left">Our Story</span>
+                            <span class="text-first text-left">@lang('header.About Us')</span>
+                            <span class="text-second text-left">@lang('header.Our Story')</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{url('/www/opportunity')}}">
-                            <span class="text-first text-left">Opportunity</span>
-                            <span class="text-second text-left">Work from home</span>
+                            <span class="text-first text-left">@lang('header.Opportunity')</span>
+                            <span class="text-second text-left">@lang('header.Work from home')</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{url('/www/testimonial')}}">
-                            <span class="text-first text-left">Testimonials</span>
-                            <span class="text-second text-left">Real People, Real Results</span>
+                            <span class="text-first text-left">@lang('header.Testimonials')</span>
+                            <span class="text-second text-left">@lang('header.Real People, Real Results')</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{url('/www/research')}}">
-                            <span class="text-first text-left">Research</span>
-                            <span class="text-second text-left" style="white-space: normal">East Meets West</span>
+                            <span class="text-first text-left">@lang('header.Research')</span>
+                            <span class="text-second text-left" style="white-space: normal">@lang('header.East Meets West')</span>
                         </a>
                     </li>
                     <li>
                         @if(!auth()->user())
                             <a href="{{url('/www/signup?usertype=rc')}}" class="text-brown">
-                                <span class="text-first text-left">Shop</span>
-                                <span class="text-second text-left">Try Ultrra Products</span>
+                                <span class="text-first text-left">@lang('header.Shop')</span>
+                                <span class="text-second text-left">@lang('header.Try Ultrra Products')</span>
                             </a>
                         @else
                             <a href="{{url('/www/cart')}}" class="text-brown">
-                                <span class="text-first text-left">Shop</span>
-                                <span class="text-second text-left">Try Ultrra Products</span>
+                                <span class="text-first text-left">@lang('header.Shop')</span>
+                                <span class="text-second text-left">@lang('header.Try Ultrra Products')</span>
                             </a>
                         @endif
                     </li>
@@ -178,7 +178,7 @@
                 <ul class="custom-flex menu-apply">
                     <li>
                         <a href="{{url('/www/contact')}}">
-                            <span class="text">Contact</span>
+                            <span class="text">@lang('header.Contact')</span>
                             <span class="arrow">
                                 <span>
                                     <svg viewBox="0 0 16 7"><path d="M15.216.8L.812 6.2 3.206.825z" fillRule="evenodd"></path></svg>
@@ -189,9 +189,9 @@
                 </ul>
             </div>
             <div class="nav-footer">
-                <a href="javascript:void(0)">Privacy Policy</a>
-                <a href="{{url('/files/terms.pdf')}}" target="_blank">Terms of use</a>
-                <a href="javascript:void(0)">Disclosure</a>
+                <a href="javascript:void(0)">@lang('header.Privacy Policy')</a>
+                <a href="{{url('/files/terms.pdf')}}" target="_blank">@lang('header.Terms of use')</a>
+                <a href="javascript:void(0)">@lang('header.Disclosure')</a>
             </div>
         </div>
         <div class="col-xl-4 col-lg-5 right-side">
@@ -199,11 +199,11 @@
                 <img src="{{asset('/images/menu-side.png')}}" alt="img" />
             </div>
             <div class="nav-body">
-                <p class="nav-title text-custom-white">Category</p>
+                <p class="nav-title text-custom-white">@lang('header.Category')</p>
                 <ul class="custom menu-list">
                     <li>
                         <a href="{{url('/www/nutritional')}}">
-                            <span class="text text-left">Nutritionals</span>
+                            <span class="text text-left">@lang('header.Nutritionals')</span>
                             <span class="arrow">
                                 <span>
                                     <svg viewBox="0 0 16 7"><path d="M15.216.8L.812 6.2 3.206.825z" fillRule="evenodd"></path></svg>
@@ -216,7 +216,7 @@
                     </li>
                     <li>
                         <a href="{{url('/www/beverage')}}">
-                            <span class="text text-left">Beverages</span>
+                            <span class="text text-left">@lang('header.Beverages')</span>
                             <span class="arrow">
                                 <span>
                                     <svg viewBox="0 0 16 7"><path d="M15.216.8L.812 6.2 3.206.825z" fillRule="evenodd"></path></svg>
@@ -229,7 +229,7 @@
                     </li>
                     <li>
                         <a href="{{url('/www/rare-oil/15')}}">
-                            <span class="text text-left">Rare Oils Blends</span>
+                            <span class="text text-left">@lang('header.Rare Oils') @lang('header.Blends')</span>
                             <span class="arrow">
                                 <span>
                                     <svg viewBox="0 0 16 7"><path d="M15.216.8L.812 6.2 3.206.825z" fillRule="evenodd"></path></svg>
@@ -242,7 +242,7 @@
                     </li>
                     <li>
                         <a href="{{url('/www/rare-oil/14')}}">
-                            <span class="text text-left">Rare Oils Singles</span>
+                            <span class="text text-left">@lang('header.Rare Oils') @lang('header.Singles')</span>
                             <span class="arrow">
                                 <span>
                                     <svg viewBox="0 0 16 7"><path d="M15.216.8L.812 6.2 3.206.825z" fillRule="evenodd"></path></svg>
@@ -255,7 +255,7 @@
                     </li>
                     <li>
                         <a href="{{url('/www/element')}}">
-                            <span class="text text-left">Elements</span>
+                            <span class="text text-left">@lang('header.Elements')</span>
                             <span class="arrow">
                                 <span>
                                     <svg viewBox="0 0 16 7"><path d="M15.216.8L.812 6.2 3.206.825z" fillRule="evenodd"></path></svg>
@@ -290,7 +290,7 @@
                     </li>
                 </ul>
             </div>
-            <span class="copyright">© 2011-{{date('Y')}} ULTRRA, LLC ™. ALL RIGHTS RESERVED.</span>
+            <span class="copyright">© 2011-{{date('Y')}} ULTRRA, LLC ™. @lang('header.ALL RIGHTS RESERVED').</span>
         </div>
     </div>
 </nav>

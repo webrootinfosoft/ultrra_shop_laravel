@@ -12,7 +12,7 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12">
-                            <h3>Products</h3>
+                            <h3>@lang('cart.Products')</h3>
                         </div>
                         <div class="col-8"></div>
                         <div class="col-md-4">
@@ -43,7 +43,7 @@
                     <div class="cart-sidebar-body">
                         <div class="sidebar-order-section">
                             <div class="cart-body-title text-left">
-                                <p style="color: #fff; font-weight: bold; margin-bottom: 0 !important;">Todays Order</p>
+                                <p style="color: #fff; font-weight: bold; margin-bottom: 0 !important;">@lang('cart.Todays Order')</p>
                             </div>
                             <div id="main-cart-div" class="cart_section">
 
@@ -59,7 +59,7 @@
                                 <div class="cart-sidebar-total-desc"></div>
                             </div>
                         </div>
-                        <p class="text-center" style="font-weight: bold; margin-bottom: 0 !important; padding: 0 2px !important;">Shipping and tax calculated at checkout</p>
+                        <p class="text-center" style="font-weight: bold; margin-bottom: 0 !important; padding: 0 2px !important;">@lang('cart.Shipping and tax calculated at checkout')</p>
                         <div class="cart-sidebar-image-section">
                             <div class="cart-sidebar-image-section text-center d-block-center">
                                 <img src="" alt="" class="img-responsive d-block-center"/>
@@ -67,20 +67,20 @@
                         </div>
                         <div class="cart-sidebar-button-section">
                             <div class="cart-sidebar-button-inner text-center">
-                                <a id="continue-button" href="javascript:void(0)" class="btn btn-dark btn-block btn-round" disabled onclick="nextPage();" style="margin: 20px 0px;">CHECKOUT</a>
-                                <button onclick="$('#cart-sidebar').hide()" class="btn btn-outline-dark btn-block btn-round" style="margin: 20px 0px;">CONTINUE SHOPPING</button>
+                                <a id="continue-button" href="javascript:void(0)" class="btn btn-dark btn-block btn-round" disabled onclick="nextPage(this);" style="margin: 20px 0px;">@lang('cart.CHECKOUT')</a>
+                                <button onclick="$('#cart-sidebar').hide()" class="btn btn-outline-dark btn-block btn-round" style="margin: 20px 0px;">@lang('cart.CONTINUE SHOPPING')</button>
                             </div>
                         </div>
                         <div class="row" style="margin: 0;">
                             <div class="mastercard pull-left col-6 col-sm-6 col-md-6 col-lg-6 text-center" style="display: grid; text-align: center;">
                                 <i class="fa fa-credit-card" style="color: grey"></i>
-                                <small class="gray block" style="margin-top: -85px"><b>Mastercard and Visa Credit Cards accepted</b></small>
+                                <small class="gray block" style="margin-top: -85px"><b>@lang('cart.Mastercard and Visa Credit Cards accepted')</b></small>
                             </div>
                             <div class="orders pull-left col-6 col-sm-6 col-md-6 col-lg-6 text-center" style="display: grid; text-align: center">
                                 <i class="fa fa-truck" style="color: grey"></i>
                                 <small class="gray block">
                                     <b>
-                                        Orders typically ship with 2 - 4 days Shipping during peak times, however, will vary depending on product selection and shipping address
+                                        @lang('cart.Orders typically ship with 2 - 4 days Shipping during peak times, however, will vary depending on product selection and shipping address')
                                     </b>
                                 </small>
                             </div>
@@ -98,7 +98,7 @@
         <br/>
         <div class="row">
             <div class="col-md-2 offset-md-5 text-center">
-                <button type="button" id="submit-button" onclick="nextPage()" class="btn btn-dark btn-block" disabled><b>CONTINUE</b></button>
+                <button type="button" id="submit-button" onclick="nextPage(this)" class="btn btn-dark btn-block" disabled><b>@lang('cart.CONTINUE')</b></button>
             </div>
         </div>
         <br/>
@@ -125,7 +125,9 @@
         let usertype = localStorage.getItem('usertype') !== null ? localStorage.getItem('usertype') : user ? user.usertype : 'rc';
         let cartProducts = [];
         suffix = window.location.search;
-        console.log(suffix);
+
+        localStorage.setItem('usertype', usertype);
+
         window.addEventListener('load', function() {
             axios.get('/product-categories').then((response) => {
                 let options = '';
@@ -142,7 +144,7 @@
                     {
                         options += '<option value="'+country.id+'" selected>'+country.name+'</option>';
                     }
-                    else if (country.id == 233)
+                    else if (localStorage.getItem('products_country') === null && country.id == 233)
                     {
                         options += '<option value="'+country.id+'" selected>'+country.name+'</option>';
                     }
@@ -216,7 +218,7 @@
 
             products.map(product => {
                 let product_details_href = product.product_layout === 'oil' ? "/www/oils/"+product.id : "/www/supplements/"+product.id;
-                let product_stock = product.product_layout === 'out_of_stock' ? 'Out of Stock' : '<a href="javascript:void(0)" class="addtocart btn-round" id="add-to-cart'+product.id+'" onclick="addToCart('+product.id+')">Add to cart</button>';
+                let product_stock = product.product_layout === 'out_of_stock' ? 'Out of Stock' : '<a href="javascript:void(0)" class="addtocart btn-round" id="add-to-cart'+product.id+'" onclick="addToCart('+product.id+')">@lang("cart.Add to cart")</button>';
                 let product_price = 0;
                 let product_qv = 0;
                 if (product.product_countries.length > 0 && typeof product.product_countries.find(product_country => product_country.country_id == $('#product_country_div').val()) !== 'undefined')
@@ -281,7 +283,7 @@
                     '            </div>\n' +
                     '            <div class="product-listing-box-add-cart text-center">' + product_stock + '</div>\n' +
                     '            <div class="product-listing-learn-more text-center">\n' +
-                    '                <a href="'+product_details_href+'" target="_blank" class="text-center">Details</a>\n' +
+                    '                <a href="'+product_details_href+'" target="_blank" class="text-center">@lang("cart.Details")</a>\n' +
                     '            </div>\n' +
                     '        </div>\n' +
                     '    </div>\n' +
@@ -392,6 +394,12 @@
                 {
                     $('#continue-button').removeAttr('disabled');
                     $('#submit-button').removeAttr('disabled');
+                }
+
+                if (response.data.data.products.length === 0)
+                {
+                    $('#continue-button').attr('disabled', true);
+                    $('#submit-button').attr('disabled', true);
                 }
             });
         }
@@ -528,15 +536,18 @@
             });
         }
 
-        function nextPage()
+        function nextPage(element)
         {
-            if (user !== null && user.hasOwnProperty('id') && '{{auth()->check()}}' == 1)
+            if (!($(element).attr("disabled")))
             {
-                window.location.href = '/www/shipping-address' + window.location.search;
-            }
-            else
-            {
-                window.location.href = '/www/create-account' + window.location.search;
+                if (user !== null && user.hasOwnProperty('id') && '{{auth()->check()}}' == 1)
+                {
+                    window.location.href = '/www/shipping-address' + window.location.search;
+                }
+                else
+                {
+                    window.location.href = '/www/create-account' + window.location.search;
+                }
             }
         }
     </script>

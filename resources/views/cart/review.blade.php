@@ -17,24 +17,24 @@
                     <div class="row">
                         <div id="sponsor-placement-div" class="detailsfull text-left">
                             <h3>
-                                SPONSOR <span class="details" style="font-weight: lighter">Details</span>
+                                @lang('cart.SPONSOR') <span class="details" style="font-weight: lighter">@lang('cart.Details')</span>
                             </h3>
                             <span class="editdetails">
                             <a href="{{url('/www/create-account').str_replace(request()->url(), '', request()->fullUrl())}}">
                                 <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
-                                <span>Edit Details</span>
+                                <span>@lang('cart.Edit Details')</span>
                             </a>
                             </span>
                             <br/>
                             <div class="col-md-12">
                                 <div class="row">
                                     <div>
-                                        <h6 class="mb-0">Sponsor Info</h6>
+                                        <h6 class="mb-0">@lang('cart.Sponsor Info')</h6>
                                         <span id="sponsor-information"></span>
                                         <br/><br/>
                                     </div>
                                     <div class="ml-3">
-                                        <h6 class="mb-0">Placement Info</h6>
+                                        <h6 class="mb-0">@lang('cart.Placement Info')</h6>
                                         <span id="placement-information"></span><br/>
                                         leg-<span id="placement-leg"></span>
                                     </div>
@@ -49,27 +49,27 @@
 
                         <div id="order-details-div" class="detailsfull text-left">
                             <h3>
-                                ACTIVATION <span class="details" style="font-weight: lighter">Details</span>
+                                @lang('cart.ACTIVATION') <span class="details" style="font-weight: lighter">@lang('cart.Details')</span>
                             </h3>
                             <span class="editdetails">
                                 <a href="{{url('/www/products').str_replace(request()->url(), '', request()->fullUrl())}}">
                                     <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
-                                    <span>Edit Details</span>
+                                    <span>@lang('cart.Edit Details')</span>
                                 </a>
                             </span>
                             <br/>
                             <div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <h6>ORDER OPTIONS</h6>
+                                        <h6>@lang('cart.ORDER OPTIONS')</h6>
                                         <table id="order-details-table" class="table table-responsive-sm radio outline orderDetails-table">
                                             <thead class="gray">
                                             <tr>
-                                                <th width="50%">Description</th>
+                                                <th width="50%">@lang('cart.Description')</th>
                                                 <th>QV</th>
                                                 <th>Qty</th>
-                                                <th>Price</th>
-                                                <th>Total</th>
+                                                <th>@lang('cart.Price')</th>
+                                                <th>@lang('cart.Total')</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -82,7 +82,7 @@
                                                 <th style="background-color:#dfdfdf; color:black;">
                                                     <div class="totals-value" id="cart-qvTotal"></div>
                                                 </th>
-                                                <th colspan="2" style="background-color:#dfdfdf; color:black;">Sub Total</th>
+                                                <th colspan="2" style="background-color:#dfdfdf; color:black;">@lang('cart.Subtotal')</th>
                                                 <th style="background-color:#dfdfdf; color:black;">
                                                     <div class="totals-value" id="cart-subtotal"></div>
                                                 </th>
@@ -97,7 +97,7 @@
                                         <table class="table table-responsive-sm radio outline orderDetails-table">
                                             <thead class="gray">
                                             <tr>
-                                                <th style="text-align:left">Shipping Method</th>
+                                                <th style="text-align:left">@lang('cart.SHIPPING METHOD')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -111,7 +111,7 @@
                                             </tr>
                                             <thead class="gray">
                                             <tr>
-                                                <th style="text-align:left">Handling</th>
+                                                <th style="text-align:left">@lang('cart.Handling')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -122,7 +122,7 @@
                                             </tr>
                                             <thead class="gray">
                                             <tr>
-                                                <th style="text-align:left">Tax</th>
+                                                <th style="text-align:left">@lang('cart.Tax')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -133,7 +133,7 @@
                                             </tr>
                                             <thead class="gray">
                                             <tr>
-                                                <th style="text-align:left">Order Total</th>
+                                                <th style="text-align:left">@lang('cart.ORDER') @lang('cart.Total')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -183,18 +183,18 @@
                         </div>
                         <div id="shipping-details-div" class="detailsfull payment-box text-left">
                             <h3 class="details-title text-uppercase">
-                                Shipping <span class="details" style="font-weight: lighter">Details</span>
+                                @lang('cart.Shipping') <span class="details" style="font-weight: lighter">@lang('cart.Details')</span>
                             </h3>
                             <span class="editdetails">
                                 <a href="{{auth()->check() ? url('/www/shipping-address').str_replace(request()->url(), '', request()->fullUrl()) : url('/www/create-account').str_replace(request()->url(), '', request()->fullUrl())}}">
                                     <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
-                                    <span>Edit Details</span>
+                                    <span>@lang('cart.Edit Details')</span>
                                 </a>
                             </span>
                             <br/>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <h6>SHIPPING ADDRESS</h6>
+                                    <h6>@lang('cart.SHIPPING ADDRESS')</h6>
                                     <address id="shipping-address">
                                         <div>
 
@@ -220,7 +220,7 @@
                         </div>
                         <div class="detailsfull text-left">
                             <h3 class="details-title">
-                                PAYMENT <span class="details">Details</span>
+                                @lang('cart.PAYMENT') <span class="details">@lang('cart.Details')</span>
                             </h3>
                             <br/>
                             <div style="display: flex; box-sizing: border-box; flex-direction: column">
@@ -228,10 +228,10 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4 col-12">
                                             <div class="form-group mb-2">
-                                                <label for="payment_method">Payment Method <span>*</span></label>
+                                                <label for="payment_method">@lang('cart.Payment Method') <span>*</span></label>
                                                 <select id="payment_method" name="payment_method" class="form-control" onchange="onPaymentMethodChange(this)">
-                                                    <option value="credit_card">Credit Card (CC) #</option>
-                                                    <option value="cod">Cash/Manual</option>
+                                                    <option value="credit_card">@lang('cart.Credit Card') (CC) #</option>
+                                                    <option value="cod">@lang('cart.Cash')/@lang('cart.Manual')</option>
                                                 </select>
                                                 <div class="invalid-feedback"></div>
                                             </div>
@@ -282,7 +282,7 @@
                                             <div class="form-group form-check pl-3 mb-2">
                                                 <span class="d-none d-md-none">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                 <input class="form-check-input" type="checkbox" id="shipping_same_checkbox" name="billing_same" onchange="billingSameChecked(this)"/>
-                                                <label class="form-check-label" for="shipping_same_checkbox">My billing address is the same as my shipping address</label>
+                                                <label class="form-check-label" for="shipping_same_checkbox">@lang('cart.My billing address is the same as the my shipping address')</label>
                                             </div>
                                             <div class="form-group mb-2">
                                                 <input class="form-control" type="hidden" name="billing_contact_name"/>
@@ -357,7 +357,7 @@
             <div class="row">
                 <div class="text-center col-md-2 offset-md-5">
                     <div class="col-md-12">
-                        <button id="submit-button" class="btn btn-dark btn-block" type="submit" disabled><b>PAY NOW</b></button>
+                        <button id="submit-button" class="btn btn-dark btn-block" type="submit" disabled><b>@lang('cart.PAY NOW')</b></button>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -424,6 +424,7 @@
         let country_id = parseInt(localStorage.getItem('products_country'));
         let countries = [];
         let window_width = screen.width;
+        let order_loader_top_offset = window_width > 768 ? 237 : 227;
 
         window.addEventListener('load', function () {
             $(window).scroll(function (event) {
@@ -687,6 +688,12 @@
                     if (response.data.data.length > 0)
                     {
                         $('#sponsor-placement-div').hide();
+                        order_loader_top_offset = order_loader_top_offset - (157 + 40);
+                        $('#order-loader').css({
+                            'width': $('#order-details-div').parent().width(),
+                            'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
+                            'top': order_loader_top_offset + 'px'
+                        });
                     }
                 });
             }
@@ -701,7 +708,7 @@
             $('#order-loader').css({
                 'width': $('#order-details-div').parent().width(),
                 'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
-                'top': (window_width > 768 ? '237' : '227') + 'px'
+                'top': order_loader_top_offset + 'px'
             });
 
             totalQV = 0;
@@ -792,7 +799,7 @@
                 $('#order-loader').css({
                     'width': $('#order-details-div').parent().width(),
                     'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
-                    'top': (window_width > 768 ? '237' : '227') + 'px'
+                    'top': order_loader_top_offset + 'px'
                 });
 
                 getShippingRates(shipping_address.country_id, regular_shipping_price, fast_shipping_price, is_membership_only);
@@ -844,7 +851,7 @@
                 $('#order-loader').css({
                     'width': $('#order-details-div').parent().width(),
                     'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
-                    'top': (window_width > 768 ? '237' : '227') + 'px'
+                    'top': order_loader_top_offset + 'px'
                 });
 
                 getTotals();
@@ -1016,7 +1023,7 @@
                 $('#order-loader').css({
                     'width': $('#order-details-div').parent().width(),
                     'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
-                    'top': (window_width > 768 ? '237' : '227') + 'px'
+                    'top': order_loader_top_offset + 'px'
                 });
                 $('#order-loader').hide();
             });

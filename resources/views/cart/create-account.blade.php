@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col">
                             <h2 style="color: #0090cd; margin-bottom: 0; font-family: apex-sans-bold">
-                                <span style="font-weight: normal; font-family: apex-sans-light">WELCOME</span> <span id="welcome-name"></span>
+                                <span style="font-weight: normal; font-family: apex-sans-light">@lang('cart.WELCOME')</span> <span id="welcome-name"></span>
                             </h2>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col">
                             <div id="account-type" class="text-left">
-                                <h2 class="subpage text-center">SELECT AN ACCOUNT TYPE</h2>
+                                <h2 class="subpage text-center">@lang('cart.SELECT AN ACCOUNT TYPE')</h2>
                                 <div class="text-center">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" id="inlineCheckbox1" value="rc" name="user[usertype]" />
@@ -74,10 +74,10 @@
                     <div class="row">
                         <div class="col">
                             <div id="sponsor-select" class="text-left">
-                                <h2 class="subpage text-center"><b>PERSONAL SPONSOR INFORMATION</b></h2>
+                                <h2 class="subpage text-center"><b>@lang('cart.PERSONAL SPONSOR INFORMATION')</b></h2>
                                 <div>
                                     <div class="row form-group">
-                                        <label class="text-md-right text-sm-left col-md-4 form-label">Sponsor Username</label>
+                                        <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Sponsor Username')</label>
                                         <div class="col-md-6 col-9">
                                             <input class="form-control" type="text" name="user[sponsor_id]" onkeyup="sponsorIdKeyUp(this)" onkeydown="verifySponsor1(event)"/>
                                         </div>
@@ -87,9 +87,9 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <b><i>Don't Have a Sponsor?</i></b>
+                                    <b><i>@lang('cart.Don\'t Have a Sponsor?')</i></b>
                                     <br/>
-                                    <p>Please contact the person who referred you to Ultrra for this information?.</p>
+                                    <p>@lang('cart.Please contact the person who referred you to Ultrra for this information')?.</p>
                                 </div>
                                 <div id="selected-sponsor" style="display: none;">
                                     <div class="text-center">
@@ -103,24 +103,24 @@
                         <div id="placement-sponsor-information" class="row">
                             <div class="col">
                                 <div class="text-left">
-                                    <h2 class="subpage text-center"><b>PLACEMENT SPONSOR INFORMATION</b></h2>
+                                    <h2 class="subpage text-center"><b>@lang('cart.PLACEMENT SPONSOR INFORMATION')</b></h2>
                                     <div style="padding-bottom: 30px">
-                                        <p>If you wish to select your position, click Manual and enter your placement ID number and proceed to select tracking center location Otherwise choose Automatic and Ultrra's system will make the assignment</p>
+                                        <p>@lang('cart.If you wish to select your position, click Manual and enter your placement ID number and proceed to select tracking center location Otherwise choose Automatic and Ultrra\'s system will make the assignment')</p>
                                     </div>
                                     <div class="text-center">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" id="Checkbox1" value="automatic" name="placement_type" checked onchange="handleOptionChange2(this)" />
-                                            <label class="form-check-label" for="Checkbox1">Automatic</label>
+                                            <label class="form-check-label" for="Checkbox1">@lang('cart.Automatic')</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" id="Checkbox2" value="manual" name="placement_type" onchange="handleOptionChange2(this)" />
-                                            <label class="form-check-label" for="Checkbox2">Manual</label>
+                                            <label class="form-check-label" for="Checkbox2">@lang('cart.Manual')</label>
                                         </div>
                                     </div>
                                     <br/>
                                     <div id="placement-details" style="display: none;">
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Placement ID#</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Placement ID')#</label>
                                             <div class="col-md-5 col-8">
                                                 <input type="text" name="user[placement_search_id]" class="form-control" onkeyup="placementSearchKeyUp()"/>
                                                 <div class="invalid-feedback"></div>
@@ -130,7 +130,7 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Select Placement</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Select Placement')</label>
                                             <div class="col-md-8">
                                                 <select class="form-control" name="user[placement_id]" disabled onchange="selectPlacement()">
 
@@ -139,7 +139,7 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Select Placement Side</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Select Placement Side')</label>
                                             <div class="col-md-8">
                                                 <select class="form-control" name="user[leg]" disabled onchange="selectPlacement()">
                                                     <option value="auto">Auto</option>
@@ -162,11 +162,11 @@
                         <div class="row">
                             <div class="col">
                                 <div id="user-information" class="text-left">
-                                    <h4 class="subpage text-center"><b>Account Information</b></h4>
+                                    <h4 class="subpage text-center"><b>@lang('cart.Account Information')</b></h4>
                                     <br/>
                                     <div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">First Name *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.First Name') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="user[firstname]" required/>
                                                 <input class="form-control" type="hidden" name="user[enrollment_type]" value="direct"/>
@@ -174,35 +174,35 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Last Name *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Last Name') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="user[lastname]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Joint First Name</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Joint') @lang('cart.First Name')</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="user[joint_firstname]" />
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Joint Last Name</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Joint') @lang('cart.Last Name')</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="user[joint_lastname]" />
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Username *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Username') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="user[username]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Date of Birth *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Date of Birth') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="date" name="user[dateofbirth]" max="{{date('Y-m-d', strtotime('-18 years'))}}" required>
                                                 <div class="invalid-feedback"></div>
@@ -216,7 +216,7 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Mobile Phone #*</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Mobile Phone') #*</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="user[phone]" required/>
                                                 <div class="invalid-feedback"></div>
@@ -245,11 +245,11 @@
                         <div class="row">
                             <div class="col">
                                 <div id="address-information" class="text-left">
-                                    <h2 class="subpage text-center"><b>MAIN ADDRESS</b></h2>
+                                    <h2 class="subpage text-center"><b>@lang('cart.MAIN ADDRESS')</b></h2>
                                     <br/>
                                     <div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Address 1 *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Address') 1 *</label>
                                             <div class="col-md-8">
                                                 <input type="hidden" name="address[id]"/>
                                                 <input class="form-control" type="text" name="address[address_1]" required/>
@@ -257,21 +257,21 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Address 2</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Address') 2</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="address[address_2]"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">City *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.City') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="address[city]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">State *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.State') *</label>
                                             <div class="col-md-8">
                                                 <select class="form-control" name="address[state_id]">
 
@@ -280,14 +280,14 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Postal Code *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Postal Code') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="address[postcode]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">Country *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">@lang('cart.Country') *</label>
                                             <div class="col-md-8">
                                                 <select class="form-control" name="address[country_id]" disabled>
                                                      
@@ -302,17 +302,17 @@
                         <div class="row">
                             <div class="col">
                                 <div id="shipping-address-information" class="text-left">
-                                    <h2 class="subpage text-center"><b>SHIPPING ADDRESS</b></h2>
+                                    <h2 class="subpage text-center"><b>@lang('cart.SHIPPING ADDRESS')</b></h2>
                                     <div class="text-center">
                                         <input class="form-check-input" type="checkbox" id="shipping_same" onchange="shippingSame(this)"/>
                                         <label class="form-check-label" for="shipping_same">
-                                            Shipping address is same as main address.
+                                            @lang('cart.Shipping address is the same as the main address').
                                         </label>
                                     </div>
                                     <br/>
                                     <div id="shipping-address-fields">
                                     <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">First Name *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.First Name') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="hidden" name="shipping_address[contact_name]" required/>
                                                 <input class="form-control" type="text" name="shipping_address[firstname]" required/>
@@ -320,35 +320,35 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Last Name *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Last Name') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="shipping_address[lastname]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Address 1 *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Address') 1 *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="shipping_address[address_1]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Address 2</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Address') 2</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="shipping_address[address_2]"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">City *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.City') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="shipping_address[city]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">State *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.State') *</label>
                                             <div class="col-md-8">
                                                 <select class="form-control" name="shipping_address[state_id]">
 
@@ -357,21 +357,21 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Mobile Phone #*</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Mobile Phone') #*</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="shipping_address[phone]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">Postal Code *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Postal Code') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="shipping_address[postcode]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">Country *</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">@lang('cart.Country') *</label>
                                             <div class="col-md-8">
                                                 <select class="form-control" name="shipping_address[country_id]" disabled>
 
@@ -391,9 +391,9 @@
                     <div class="col-md-10 offset-md-1 col-12">
                         <div class="">
                             <div class="detailsFull text-left">
-                                <div><h5 style="margin-bottom: 20px"><b>ACKNOWLEDGEMENT</b></h5></div>
+                                <div><h5 style="margin-bottom: 20px"><b>@lang('cart.ACKNOWLEDGEMENT')</b></h5></div>
                                 <div class="termsbox">
-                                    <p class="heading"><strong>TERMS & CONDITIONS</strong></p>
+                                    <p class="heading"><strong>@lang('cart.TERMS & CONDITIONS')</strong></p>
                                     <p class="paragraph">The use of this site or any other site owned or maintained by Ultrra, a corporation organized and existing under the laws of
                                         the United States of America ("Company") and is governed by the policies, terms and conditions set forth below. Please
                                         read them carefully. Your use of this site signifies your acceptance of the terms and conditions set forth below. Your order
@@ -605,7 +605,7 @@
                                         <div class="row form-check">
                                             <input class="form-check-input" type="checkbox" id="termsCheck" onchange="termsChecked(this)"/>
                                             <label class="form-check-label" for="termsCheck">
-                                                I agree to the terms and conditions of the Customer Agreement and the Policies and Procedures.
+                                                @lang('cart.I agree to the terms and conditions of the Customer Agreement and the Policies and Procedures').
                                             </label>
                                         </div>
                                     </div>
@@ -621,10 +621,10 @@
                 <div class="col-md-4 offset-md-4 text-center">
                     <div class="row">
                         <div class="col-md-6">
-                            <button class="btn btn-outline-dark btn-block" onclick="previousPage();"><b>BACK</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-outline-dark btn-block" onclick="previousPage();"><b>@lang('cart.BACK')</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
                         <div class="col-md-6">
-                            <button id="submit-button" class="btn btn-dark btn-block" type="submit" disabled><b>CONTINUE</b></button>
+                            <button id="submit-button" class="btn btn-dark btn-block" type="submit" disabled><b>@lang('cart.CONTINUE')</b></button>
                         </div>
                     </div>
                 </div>
@@ -1020,7 +1020,7 @@
 
         function verifySponsor()
         {
-           
+
             localStorage.setItem('sponsor_input_value', $('[name="user[sponsor_id]"]').val());
             $('#sponsor-search-button').attr('disabled', true);
             $('#sponsor-search-button i').removeClass('fa fa-search');
@@ -1186,22 +1186,22 @@
 
         function handleOptionChange2(element)
         {
-          
+
             if ($('[name="placement_type"]:checked').val() == 'manual')
             {
-                
+
                 $('#placement-details').show();
                 $('#placement-info-business-center-leg').hide();
                 $('#placement-info-business-center-leg1').show();
-               
+
             }
             else if ($('[name="placement_type"]:checked').val() == 'automatic')
             {
-               
+
                 $('#placement-details').hide();
                 $('#placement-info-business-center-leg1').hide();
                 $('#placement-info-business-center-leg').show();
-               
+
             }
         }
 

@@ -37,22 +37,22 @@
                                 <div class="menu-slider">
                                     <div id="first-slider">
                                         <div class="slide-item">
-                                            <a href="{{url('/supplements/103')}}">
+                                            <a href="{{url('/www/supplements/103')}}">
                                                 <img src="{{url('/images/bestseller5.png')}}" class="image-fit first-slider-image" alt="img"/>
                                             </a>
                                         </div>
                                         <div class="slide-item">
-                                            <a href="{{url('/supplements/109')}}">
+                                            <a href="{{url('/www/supplements/109')}}">
                                                 <img src="{{url('/images/bestseller2.png')}}" class="image-fit first-slider-image" alt="img"/>
                                             </a>
                                         </div>
                                         <div class="slide-item">
-                                            <a href="{{url('/supplements/106')}}">
+                                            <a href="{{url('/www/supplements/106')}}">
                                                 <img src="{{url('/images/bestseller3.png')}}" class="image-fit first-slider-image" alt="img"/>
                                             </a>
                                         </div>
                                         <div class="slide-item">
-                                            <a href="{{url('/supplements/108')}}">
+                                            <a href="{{url('/www/supplements/108')}}">
                                                 <img src="{{url('/images/bestseller4.png')}}" class="image-fit first-slider-image" alt="img"/>
                                             </a>
                                         </div>
@@ -73,7 +73,7 @@
                                                 <span class="text-light-yellow"><i class="fas fa-star"></i></span>
                                                 <span class="text-light-yellow"><i class="fas fa-star"></i></span>
                                             </div>
-                                            <h5 class="fs-20 fw-600 text-custom-white">I was pleasantly surprised at my results with the Detox. I feel lighter, more energized, and balanced. So happy!</h5>
+                                            <h5 class="fs-20 fw-600 text-custom-white">{{app()->getLocale()}}I was pleasantly surprised at my results with the Detox. I feel lighter, more energized, and balanced. So happy!</h5>
                                             <div class="name-box">
                                                 <a href="javascript:void(0)" class="fs-16 text-white td-none">- Chris Hilliard</a>
                                             </div>
@@ -168,7 +168,7 @@
                                     </h2>
                                     <p style="font-weight: bold">Essential Oil Protection Blend</p>
                                     <p>Overpower is an Ultrra Rare blend of oils that support a healthy environment by combining natural germ fighting essential oils to help support your body's natural immune response.</p>
-                                    <a href="{{url('/oils/118')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
+                                    <a href="{{url('/www/oils/118')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
                                 </div>
                                 <img src="/images/cookie.png" class="cookie" alt="img" />
                             </div>
@@ -199,7 +199,7 @@
                                     </h2>
                                     <p style="font-weight: bold">Joint Support Chews</p>
                                     <p>Ultrra's unique formulation helps support joint comfort after exercise, promoting cartilage regeneration, while providing the necessary building blocks for optimal joint lubrication. </p>
-                                    <a href="{{url('/supplements/113')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
+                                    <a href="{{url('/www/supplements/113')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
                                 </div>
                                 <img src="/images/cookie.png" class="cookie" alt="img" />
                             </div>
@@ -230,7 +230,7 @@
                                     </h2>
                                     <p style="font-weight: bold">Active Protection Serum</p>
                                     <p>Ultrra APS contains powerful nutrients and elements known to support a healthy immune system, enhanced with Monolaurin and Colloidal Silver.</p>
-                                    <a href="{{url('/supplements/112')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
+                                    <a href="{{url('/www/supplements/112')}}" class="theme-btn"><span class="btn-text">Buy Now</span></a>
                                 </div>
                                 <img src="/images/cookie.png" class="cookie" alt="img" />
                             </div>
@@ -255,7 +255,7 @@
                         <div class="img-box mb-xl-20">
                             <img src="/images/img-clg.png" class="img-fluid" alt="img" />
                         </div>
-                        <a href="{{url('/research')}}" class="theme-btn bg-custom-black border-0"><span class="btn-text">Read More</span></a>
+                        <a href="{{url('/www/research')}}" class="theme-btn bg-custom-black border-0"><span class="btn-text">Read More</span></a>
                     </div>
                 </div>
             </div>
@@ -271,7 +271,7 @@
                             <div class="section-header left-side">
                                 <div class="section-heading">
                                     <h3 class="text-custom-white fw-700"><span class="fs-20">THE ULTRRA DETOX</span> <br/> 24 Hours to a<br/> BETTER YOU</h3>
-                                    <a href="{{url('/supplements/241')}}" class="theme-btn"><span class="btn-text">Learn More</span></a>
+                                    <a href="{{url('/www/supplements/241')}}" class="theme-btn"><span class="btn-text">Learn More</span></a>
                                 </div>
                             </div>
                         </div>
@@ -307,7 +307,7 @@
                             </div>
                         </div>
                         <p class="text-custom-white fs-16">ULTRRA’S MISSION is to grow human potential, and advance society to achieve great things through scientifically documented products produced by the power of nature.</p>
-                        <a href="{{url('/about')}}" class="theme-btn btn-style-2 border-0 bg-custom-black"><div class="btn-text">Learn More</div></a>
+                        <a href="{{url('/www/about')}}" class="theme-btn btn-style-2 border-0 bg-custom-black"><div class="btn-text">Learn More</div></a>
                     </div>
                 </div>
             </div>
@@ -335,13 +335,13 @@
             <div class="slide-item col-12" onclick="gotoCat('nutritional')">
                 <div class="ul-category-box p-relative">
                     <div class="ul-category-img animate-img">
-                        <a href="{{url('/nutritional')}}">
+                        <a href="{{url('/www/nutritional')}}">
                             <img src="https://via.placeholder.com/255x270" class="image-fit" alt="img"  style="visibility: hidden"/>
                         </a>
                         <div class="overlay overlay-bg-blue-gr"></div>
                     </div>
                     <div class="ul-category-title text-center">
-                        <h4 class="fw-600 title"><a href="{{url('/nutritional')}}" class="text-custom-black">Nutritionals</a></h4>
+                        <h4 class="fw-600 title"><a href="{{url('/www/nutritional')}}" class="text-custom-black">Nutritionals</a></h4>
                         <p class="no-margin text-custom-black description fs-16 text-capitalize">essences of nature</p>
                     </div>
                     <div class="ul-category-img-2">
@@ -352,13 +352,13 @@
             <div class="slide-item col-12" onclick="gotoCat('rare-oil/15')">
                 <div class="ul-category-box p-relative">
                     <div class="ul-category-img animate-img">
-                        <a href="{{url('/rare-oil/15')}}">
+                        <a href="{{url('/www/rare-oil/15')}}">
                             <img src="https://via.placeholder.com/255x270" class="image-fit" alt="img" style="visibility: hidden"/>
                         </a>
                         <div class="overlay overlay-bg-blue-gr"></div>
                     </div>
                     <div class="ul-category-title text-center">
-                        <h4 class="fw-600 title"><a href="{{url('/rare-oil')}}" class="text-custom-black">Rare Oils</a></h4>
+                        <h4 class="fw-600 title"><a href="{{url('/www/rare-oil/15')}}" class="text-custom-black">Rare Oils</a></h4>
                         <p class="no-margin text-custom-black description fs-16 text-capitalize">better health and fitness</p>
                     </div>
                     <div class="ul-category-img-2">
@@ -369,13 +369,13 @@
             <div class="slide-item col-12" onclick="gotoCat('beverage')">
                 <div class="ul-category-box p-relative">
                     <div class="ul-category-img animate-img">
-                        <a href="{{url('/beverage')}}">
+                        <a href="{{url('/www/beverage')}}">
                             <img src="https://via.placeholder.com/255x270" class="image-fit" alt="img"  style="visibility: hidden"/>
                         </a>
                         <div class="overlay overlay-bg-pink-gr"></div>
                     </div>
                     <div class="ul-category-title text-center">
-                        <h4 class="fw-600 title"><a href="{{url('/beverage')}}" class="text-custom-black">Beverages</a></h4>
+                        <h4 class="fw-600 title"><a href="{{url('/www/beverage')}}" class="text-custom-black">Beverages</a></h4>
                         <p class="no-margin text-custom-black description fs-16 text-capitalize">energy, balance, focus</p>
                     </div>
                     <div class="ul-category-img-2">
@@ -386,13 +386,13 @@
             <div class="slide-item col-12" onclick="gotoCat('element')">
                 <div class="ul-category-box p-relative">
                     <div class="ul-category-img animate-img">
-                        <a href="{{url('/element')}}">
+                        <a href="{{url('/www/element')}}">
                             <img src="https://via.placeholder.com/255x270" class="image-fit" alt="img" style="visibility: hidden"/>
                         </a>
                         <div class="overlay overlay-bg-pink-gr"></div>
                     </div>
                     <div class="ul-category-title text-center">
-                        <h4 class="fw-600 title"><a href="{{url('/element')}}" class="text-custom-black">Elements</a></h4>
+                        <h4 class="fw-600 title"><a href="{{url('/www/element')}}" class="text-custom-black">Elements</a></h4>
                         <p class="no-margin text-custom-black description fs-16 text-capitalize">immune support and joint health</p>
                     </div>
                     <div class="ul-category-img-2">
@@ -454,7 +454,7 @@
                     </div>
                 </div>
                 <div class="col-12 text-center">
-                    <a href="{{url('/opportunity')}}" class="theme-btn"><span class="btn-text">Read More</span></a>
+                    <a href="{{url('/www/opportunity')}}" class="theme-btn"><span class="btn-text">Read More</span></a>
                 </div>
             </div>
         </div>
@@ -621,7 +621,7 @@
             $('#about-products-slider').slick({
                 customPaging: function(slick,i) {
                     let image = i < 2 ? i + 2 : 1;
-                    return '<a><img src="/images/featured-product'+image+'.png"/></a>';
+                    return '<a href="javascript:void(0)"><img src="/images/featured-product'+image+'.png"/></a>';
                 },
                 dots: true,
                 dotsClass: "slick-dots slick-thumb second-slider-ul col-md-10 offset-md-1 col-lg-10 offset-lg-1 mb-0",
