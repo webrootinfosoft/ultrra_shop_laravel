@@ -18,7 +18,7 @@
                         <div class="row">
                             <div class="col">
                                 <div id="user-information" class="text-left">
-                                    <h2 class="subpage text-center notop"><b>SHIPPING DETAILS</b></h2>
+                                    <h2 class="subpage text-center notop"><b>@lang('cart.SHIPPING DETAILS')</b></h2>
                                     <br/>
                                     <div class="row" style="border: 1px solid #cccccc; border-radius: 5px">
                                         <div class="col-md-12">
@@ -33,42 +33,42 @@
                                         <br>
                                         <div>
                                             <div class="row form-group">
-                                                <label class="text-md-right text-sm-left col-md-4 form-label">Contact Name *</label>
+                                                <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Contact Name') *</label>
                                                 <div class="col-md-8">
                                                     <input class="form-control" type="text" id="contact_name" name="contact_name" required/>
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <label class="text-md-right text-sm-left col-md-4 form-label">Contact Number *</label>
+                                                <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Contact Number') *</label>
                                                 <div class="col-md-8">
                                                     <input class="form-control" type="text" id="contact_number" name="contact_number" required/>
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <label class="text-md-right text-sm-left col-md-4 form-label">Address 1 *</label>
+                                                <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Address') 1 *</label>
                                                 <div class="col-md-8">
                                                     <input class="form-control" type="text" id="address_1" name="address_1" required/>
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <label class="text-md-right text-sm-left col-md-4 form-label">Address 2</label>
+                                                <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Address') 2</label>
                                                 <div class="col-md-8">
                                                     <input class="form-control" type="text" id="address_2" name="address_2" />
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <label class="text-md-right text-sm-left col-md-4 form-label">City *</label>
+                                                <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.City') *</label>
                                                 <div class="col-md-8">
                                                     <input class="form-control" type="text" id="city" name="city" required/>
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <label class="text-md-right text-sm-left col-md-4 form-label">State *</label>
+                                                <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.State') *</label>
                                                 <div class="col-md-8">
                                                     <select class="form-control" id="state_id" name="state_id">
 
@@ -77,16 +77,16 @@
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <label class="text-md-right text-sm-left col-md-4 form-label">Postal Code *</label>
+                                                <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Postal Code') *</label>
                                                 <div class="col-md-8">
                                                     <input class="form-control" type="text" id="postcode" name="postcode" required/>
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
-                                                <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">Country *</label>
+                                                <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">@lang('cart.Country') *</label>
                                                 <div class="col-md-8">
-                                                    <select class="form-control" id="country_id" name="country_id" onchange="changeShippingCountry();">
+                                                    <select class="form-control" id="country_id" name="country_id" disabled onchange="changeShippingCountry();">
 
                                                     </select>
                                                     <div class="invalid-feedback"></div>
@@ -107,10 +107,10 @@
                     <div class="text-center col-md-4 offset-md-4">
                         <div class="row">
                             <div class="col-md-6">
-                                <button class="btn btn-outline-dark btn-block" onclick="previousPage()"><b>BACK</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-outline-dark btn-block" onclick="previousPage()"><b>@lang('cart.BACK')</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                             <div class="col-md-6">
-                                <button id="submit-button" class="btn btn-dark btn-block" type="submit" disabled><b>CONTINUE</b></button>
+                                <button id="submit-button" class="btn btn-dark btn-block" type="submit" disabled><b>@lang('cart.CONTINUE')</b></button>
                             </div>
                         </div>
                     </div>
@@ -209,7 +209,9 @@
                 submitHandler: function(form, event) {
                     event.preventDefault();
                     let myform = $('#shipping-address-form');
+                    let disabled = myform.find(':disabled').removeAttr('disabled');
                     let formData = myform.serializeArray();
+                    disabled.attr('disabled','disabled');
                     let formObject = {};
                     $.each(formData, function (i, v) {
                         formObject[v.name] = v.value;
@@ -225,7 +227,7 @@
                     console.log(formObject);
                     $('#submit-button').attr('disabled', 'disabled');
                     $('#submit-button').append('<i class="fa fa-spinner fa-spin"></i>');
-                    if ($('#inlineRadio2AddNew').is(':checked'))
+                    if (isNaN(parseInt($('[name="user_shipping_address_id"]').val())))
                     {
                         axios.post('/address', address).then((response) => {
                             if (response.data.status == 200)
@@ -312,6 +314,10 @@
             {
                 $('#shipping-inputs').show();
                 $('#submit-button').removeAttr('disabled');
+                $('#shipping-inputs input[type="text"]').removeClass('valid');
+                $('#shipping-inputs input[type="text"]').removeClass('error');
+                $('#shipping-inputs select').removeClass('valid');
+                $('#shipping-inputs select').removeClass('error');
             }
             else
             {
@@ -339,8 +345,12 @@
             }
             else if ($('#inlineRadio2AddNew').is(':checked'))
             {
-                $('#shipping-inputs').hide();
-                $('#submit-button').attr('disabled', true);
+                $('#shipping-inputs').show();
+                $('#submit-button').removeAttr('disabled');
+                $('#shipping-inputs input[type="text"]').removeClass('valid');
+                $('#shipping-inputs input[type="text"]').removeClass('error');
+                $('#shipping-inputs select').removeClass('valid');
+                $('#shipping-inputs select').removeClass('error');
             }
         }
 
@@ -349,7 +359,7 @@
             $('#user-shipping-addresses-loader').show();
             axios.get('/user-addresses-by-id/' + '{{auth()->id()}}').then(response => {
                 let shipping_address = JSON.parse(localStorage.getItem('shipping_address'));
-                let user_shipping_addresses = response.data.data.filter((item) => item.is_shipping === 1);
+                let user_shipping_addresses = response.data.data.filter((item) => item.is_shipping === 1 && item.country_id == localStorage.getItem('products_country'));
                 let address_inputs = '';
                 if (user_shipping_addresses.length > 0)
                 {

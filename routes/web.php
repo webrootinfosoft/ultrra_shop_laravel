@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('lang/{locale}', 'LanguageController@lang');
 Route::get('/', function () {
     return view('home');
 });
@@ -56,6 +56,7 @@ Route::group(['prefix' => 'www'], function () {
     Route::get('/contact', function () {
         return view('contact');
     });
+    Route::post('/contact-us', 'HomeController@contactUsSubmit');
     Route::get('/nutritional', function () {
         return view('nutritional');
     });

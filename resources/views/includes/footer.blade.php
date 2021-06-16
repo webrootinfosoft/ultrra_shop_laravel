@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="insta-text text-center">
-                        <h5 class="text-custom-white fw-600 no-margin">Follow Us On <i class="fab fa-instagram"></i></h5>
+                        <h5 class="text-custom-white fw-600 no-margin">@lang('footer.Follow Us On') <i class="fab fa-instagram"></i></h5>
                         <h3 class="text-custom-white fw-600 no-margin">Instagram</h3>
                         <a href="https://www.instagram.com/ultrraofficial/" target="_blank" class="text-white td-none fs-16">@UltrraOfficial</a>
                     </div>
@@ -86,7 +86,7 @@
                 <div class="row mb-xl-80">
                     <div class="col-12 text-center">
                         <div class="ft-social-media-box">
-                            <h5 class="text-custom-white">Socialize With <span class="text-light-blue fw-700">Ultrra</span></h5>
+                            <h5 class="text-custom-white">@lang('footer.Socialize With') <span class="text-light-blue fw-700">Ultrra</span></h5>
                             <ul class="custom-flex justify-content-center">
                                 <li class="fb">
                                     <a href="https://www.facebook.com/ultrraofficial" target="_blank" class="text-white td-none">
@@ -116,7 +116,7 @@
                     <div class="col-xl-3 col-sm-6">
                         <div class="footer-box mb-xl-80">
                             <div class="ft-heading mb-xl-40">
-                                <h4 class="text-custom-white no-margin text-left">Support</h4>
+                                <h4 class="text-custom-white no-margin text-left">@lang('footer.Support')</h4>
                             </div>
                             <ul class="custom ft-links">
                                 <li class="text-custom-white">
@@ -137,20 +137,20 @@
                     <div class="col-xl-3 col-sm-6">
                         <div class="footer-box mb-xl-80">
                             <div class="ft-heading mb-xl-40">
-                                <h4 class="text-custom-white no-margin text-left">Quick Links</h4>
+                                <h4 class="text-custom-white no-margin text-left">@lang('footer.Quick Links')</h4>
                             </div>
                             <ul class="custom ft-links">
                                 <li>
-                                    <a href="{{url('/about')}}" class="text-custom-white fs-16 mb-xl-10 td-none">About Us</a>
+                                    <a href="{{url('/about')}}" class="text-custom-white fs-16 mb-xl-10 td-none">@lang('footer.About Us')</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('/nutritional')}}" class="text-custom-white fs-16 mb-xl-10 td-none">Products</a>
+                                    <a href="{{url('/nutritional')}}" class="text-custom-white fs-16 mb-xl-10 td-none">@lang('footer.Products')</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('/opportunity')}}" class="text-custom-white fs-16 td-none mb-xl-10">Work from home</a>
+                                    <a href="{{url('/opportunity')}}" class="text-custom-white fs-16 td-none mb-xl-10">@lang('footer.Work from home')</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('/testimonial')}}" class="text-custom-white fs-16 td-none">Testimonials</a>
+                                    <a href="{{url('/testimonial')}}" class="text-custom-white fs-16 td-none">@lang('footer.Testimonials')</a>
                                 </li>
                             </ul>
                         </div>
@@ -162,13 +162,13 @@
                             </div>
                             <ul class="custom ft-links">
                                 <li>
-                                    <a href="{{url('/contact')}}" class="text-custom-white fs-16 mb-xl-10 td-none">Contact Us</a>
+                                    <a href="{{url('/contact')}}" class="text-custom-white fs-16 mb-xl-10 td-none">@lang('footer.Contact Us')</a>
                                 </li>
                                 <li>
                                     <a href="https://office.ultrra.com/" target="_blank" class="text-custom-white fs-16 mb-xl-10 td-none">Ultrra Office</a>
                                 </li>
                                 <li>
-                                    <a href="{{asset('/files/terms.pdf')}}" target="_blank" class="text-custom-white fs-16 mb-xl-10 td-none">Terms</a>
+                                    <a href="{{asset('/files/terms.pdf')}}" target="_blank" class="text-custom-white fs-16 mb-xl-10 td-none">@lang('footer.Terms')</a>
                                 </li>
                                 <li>
                                     <a href="http://www.dsa.org/consumerprotection/Code" target="_blank" class="text-custom-white fs-16 td-none">DSA Code of Ethics</a>
@@ -179,7 +179,7 @@
                     <div class="col-xl-3 col-sm-6">
                         <div class="footer-box mb-xl-80">
                             <div class="ft-heading mb-xl-40">
-                                <h4 class="text-custom-white no-margin text-left">Newsletter</h4>
+                                <h4 class="text-custom-white no-margin text-left">@lang('footer.Newsletter')</h4>
                             </div>
                             <div class="form-newsletter">
                                 <form class="form-style-2">
@@ -188,7 +188,7 @@
                                             <div class="form-group">
                                                 <input type="email" name="#" class="form-control form-control-custom" placeholder="Enter your Email" />
                                             </div>
-                                            <button type="button" class="theme-btn btn-style-4"><span class="btn-text">Subscribe</span></button>
+                                            <button type="button" class="theme-btn btn-style-4"><span class="btn-text">@lang('footer.Subscribe')</span></button>
                                         </div>
                                     </div>
                                 </form>
@@ -198,7 +198,7 @@
                 </div>
                 <div class="row ft-copyright">
                     <div class="col-lg-6 align-self-center text-left">
-                        <p class="text-custom-white">© 2011-{{date('Y')}} <a href="javascript:void(0)" class="text-custom-white"> Ultrra</a> LLC ™. ALL RIGHTS RESERVED.</p>
+                        <p class="text-custom-white">© 2011-{{date('Y')}} <a href="javascript:void(0)" class="text-custom-white"> Ultrra</a> LLC ™. @lang('footer.ALL RIGHTS RESERVED').</p>
                     </div>
                     <div class="col-lg-6">
                         <div class="payment-img mb-xl-20">
@@ -213,7 +213,7 @@
 <div class="cookies" style="display: none;">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12"><span>Ultrra is monitoring the global COVID-19 pandemic. At this time there are no FDA approved therapies or vaccines to treat COVID-19. It is of the utmost importance that Ultrra Distributors do not misrepresent our products as they are not intended to prevent, treat, or cure any medical illnesses. Any misrepresented claims of this capacity are in violation of our company policy and are strictly prohibited. The wellbeing of our Ultrra family is most important, and we encourage all to practice COVID-19 prevention measures.</span>
+            <div class="col-sm-12"><span>@lang('footer.Ultrra is monitoring the global COVID-19 pandemic. At this time there are no FDA approved therapies or vaccines to treat COVID-19. It is of the utmost importance that Ultrra Distributors do not misrepresent our products as they are not intended to prevent, treat, or cure any medical illnesses. Any misrepresented claims of this capacity are in violation of our company policy and are strictly prohibited. The wellbeing of our Ultrra family is most important, and we encourage all to practice COVID-19 prevention measures').</span>
                 <a href="javascript:void(0)" class="close-cookie-warning theme-btn" onclick="hideCookies()"><span class="btn-text">Ok</span></a>
             </div>
         </div>

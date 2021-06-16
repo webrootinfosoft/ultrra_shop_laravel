@@ -68,35 +68,51 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <form class="form-style-2 style-2">
+                            <form id="contact-us-form" class="form-style-2 style-2" method="POST" action="{{url('/www/contact-us')}}">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control form-control-custom" placeholder="Name *" required />
+                                            <input type="text" id="name" name="name" class="form-control form-control-custom" placeholder="Name *" value="{{old('name')}}" required />
+                                            @if ($errors->has('name'))
+                                                <label class="error" for="name">{{ $errors->first('name') }}</label>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control form-control-custom" placeholder="Email *" required />
+                                            <input type="email" id="email" name="email" class="form-control form-control-custom" placeholder="Email *" value="{{old('email')}}" required />
+                                            @if ($errors->has('email'))
+                                                <label class="error" for="email">{{ $errors->first('email') }}</label>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="number" name="phone" class="form-control form-control-custom" placeholder="Phone No." />
+                                            <input type="number" name="phone" class="form-control form-control-custom" placeholder="Phone No. *" value="{{old('phone')}}" required />
+                                            @if ($errors->has('phone'))
+                                                <label class="error" for="phone">{{ $errors->first('phone') }}</label>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" name="subject" class="form-control form-control-custom" placeholder="Subject" />
+                                            <input type="text" name="subject" class="form-control form-control-custom" placeholder="Subject *" value="{{old('subject')}}" required />
+                                            @if ($errors->has('subject'))
+                                                <label class="error" for="subject">{{ $errors->first('subject') }}</label>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <textarea name="description" class="form-control form-control-custom" placeholder="Message" rows="5"></textarea>
+                                            <textarea name="message" class="form-control form-control-custom" placeholder="Message *" rows="5" required >{{old('message')}}</textarea>
+                                            @if ($errors->has('message'))
+                                                <label class="error" for="message">{{ $errors->first('message') }}</label>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-right">
-                                        <button type="button" class="theme-btn btn-style-3" onClick={this.submit}><span class="btn-text">Submit</span></button>
+                                        <button type="submit" class="theme-btn btn-style-3"><span class="btn-text">Submit</span></button>
                                     </div>
                                 </div>
                             </form>
@@ -117,6 +133,65 @@
 @endsection
 @push('js')
     <script>
+        window.addEventListener('load', function() {
+            $.validator.addMethod("alpha", function(value, element) {
+                return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
+            }, 'Should only contain letters and spaces');
+
+            $('#contact-us-form').validate({
+                onfocusout: function(element) {
+                    this.element(element);
+                },
+                rules: {
+                    "name": {
+                        required: true,
+                        alpha: true,
+                    },
+                    "email": {
+                        required: true,
+                        email: true
+                    },
+                    "phone": {
+                        required: true,
+                        digits: true,
+                        minlength: 10,
+                        maxlength: 15
+                    },
+                    "subject": {
+                        required: true,
+                    },
+                    "message": {
+                        required: true,
+                    },
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("type") == "checkbox" || element.attr("type") == "radio")
+                    {
+                        if (element.parent().siblings().length > 0)
+                        {
+                            error.insertAfter(element.parent().siblings().last());
+                        }
+                        else
+                        {
+                            error.insertAfter(element.parent());
+                        }
+                    }
+                    else
+                    {
+                        error.insertAfter(element);
+                    }
+                },
+                submitHandler: function(form, event) {
+                    form.submit();
+                }
+            });
+
+            if ('{{session()->has('message')}}' == 1)
+            {
+                console.log('{{session()->get('message')}}');
+                Swal.fire({icon: 'success', text: '{{session()->get('message')}}'});
+            }
+        });
 
     </script>
 @endpush
