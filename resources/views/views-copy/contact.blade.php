@@ -7,13 +7,13 @@
                 <div class="col-xl-7 col-lg-6 align-self-center p-relative">
                     <div class="subheader-text">
                         <div class="page-title">
-                            <h1 class="text-custom-white fw-600 text-left">@lang('contact.Contact Us')</h1>
+                            <h1 class="text-custom-white fw-600 text-left">Contact Us</h1>
                             <ul class="custom-flex breadcrumb">
                                 <li>
-                                    <a href="{{url('/')}}" class="td-none text-custom-white">@lang('contact.Home')<</a>
+                                    <a href="{{url('/')}}" class="td-none text-custom-white">Home</a>
                                 </li>
                                 <li class="text-custom-white active">
-                                @lang('contact.Contact Us')
+                                    Contact Us
                                 </li>
                             </ul>
                         </div>
@@ -28,8 +28,8 @@
                 <div class="col-xl-12">
                     <div class="section-header">
                         <div class="section-heading">
-                            <h3 class="text-brown fw-700"><span class="fw-100 text-purple"> @lang('contact.Contact Us')</h3>
-                            <p class="fs-16">@lang('contact.Don’t hesitate to contact us if you have any questions or comments. Any feedback is a plus for us')!</p>
+                            <h3 class="text-brown fw-700"><span class="fw-100 text-purple">Contact</span> Us</h3>
+                            <p class="fs-16">Don’t hesitate to contact us if you have any questions or comments. Any feedback is a plus for us!</p>
                         </div>
                     </div>
                     <div class="contact-info-wrap section-padding">
@@ -73,7 +73,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" id="name" name="name" class="form-control form-control-custom" placeholder="@lang('contact.Name') *" value="{{old('name')}}" required />
+                                            <input type="text" id="name" name="name" class="form-control form-control-custom" placeholder="Name *" value="{{old('name')}}" required />
                                             @if ($errors->has('name'))
                                                 <label class="error" for="name">{{ $errors->first('name') }}</label>
                                             @endif
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="number" name="phone" class="form-control form-control-custom" placeholder="@lang('contact.Phone') *" value="{{old('phone')}}" required />
+                                            <input type="number" name="phone" class="form-control form-control-custom" placeholder="Phone No. *" value="{{old('phone')}}" required />
                                             @if ($errors->has('phone'))
                                                 <label class="error" for="phone">{{ $errors->first('phone') }}</label>
                                             @endif
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" name="subject" class="form-control form-control-custom" placeholder="@lang('contact.Subject') *" value="{{old('subject')}}" required />
+                                            <input type="text" name="subject" class="form-control form-control-custom" placeholder="Subject *" value="{{old('subject')}}" required />
                                             @if ($errors->has('subject'))
                                                 <label class="error" for="subject">{{ $errors->first('subject') }}</label>
                                             @endif
@@ -105,14 +105,14 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <textarea name="message" class="form-control form-control-custom" placeholder="@lang('contact.Message') *" rows="5" required >{{old('message')}}</textarea>
+                                            <textarea name="message" class="form-control form-control-custom" placeholder="Message *" rows="5" required >{{old('message')}}</textarea>
                                             @if ($errors->has('message'))
                                                 <label class="error" for="message">{{ $errors->first('message') }}</label>
                                             @endif
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-right">
-                                        <button type="submit" class="theme-btn btn-style-3"><span class="btn-text">@lang('contact.Submit')</span></button>
+                                        <button type="submit" class="theme-btn btn-style-3"><span class="btn-text">Submit</span></button>
                                     </div>
                                 </div>
                             </form>

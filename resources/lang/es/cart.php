@@ -62,7 +62,7 @@
    "My billing address is the same as the my shipping address" => "Mi dirección de facturación es la misma que mi dirección de envío.", 
    "Name on Card" => "Nombre en la tarjeta", 
    "Notes" => "Notas", 
-   "ORDER" => "Orden", 
+   "ORDER" => "Orden",
    "ORDER OPTIONS" => "Opciones de pedido", 
    "ORDER STATUS" => "Estado del pedido", 
    "Order BV" => "Orden BV", 
@@ -124,7 +124,8 @@
    "Usertype" => "Tipo de usuario", 
    "WELCOME" => "Bienvenido", 
    "Your Payments" => "Sus pagos", 
-   "expiry" => "Expiración" 
+   "expiry" => "Expiración",
+     "ZIP Code" => "Código postal"
 ]; 
  
  

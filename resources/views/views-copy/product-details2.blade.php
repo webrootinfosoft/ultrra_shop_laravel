@@ -2,25 +2,6 @@
 
 @section('content')
     <div id="product-details"></div>
-    <section class="section-padding ul-product-text-wrap py-5 text-left">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <div class="row">
-                        <div class="col-sm-6 content-collection">
-                            <div id="country_of_origin"></div>
-                            <div id="collection_method"></div>
-                        </div>
-                        <div class="col-sm-6 content-collection">
-                            <div id="plant_part"></div>
-                            <div id="main_constituents"></div>
-                            <div id="aromatic_description"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <section class="km-product-tabs tf-products-tabs style-2" style="display: none;">
         <div class="container">
             <div class="row">
@@ -44,10 +25,7 @@
         <br>
     </section>
     <style>
-        h3
-        {
-            font-size: 1.75rem !important;
-        }
+
     </style>
 @endsection
 @push('js')
@@ -63,9 +41,9 @@
                 secondary_image = response.data.data.secondary_image ? '<a class="pl-2 pr-2" href="javascript:void(0)" onclick="getImage(\'secondary\')"><img src="https://admin.ultrra.com/product_images/' + response.data.data.secondary_image +'" class="image-fit" alt="img" style="width: 64px" /></a>' : '<a></a>';
                 let product_categories = '';
                 response.data.data.product_categories.map((product_category) => {
-                    product_categories += (getName(product_category) + ' ');
+                    product_categories += product_category.name;
                 });
-
+                
                 let product_tag_images = '';
                 response.data.data.product_tag_images.map((product_tag_image) => {
                     product_tag_images += '<span class="pr-tag p-0 my-2"><img src="https://admin.ultrra.com/ultrra-aromatically/'+product_tag_image+'.png" style="width: 40px"/></span>';
@@ -79,16 +57,6 @@
                 let html = '<div class="ul-product-detail section-padding">\n' +
                     '                            <div class="container">\n' +
                     '                                <div class="row row-reverse-991">\n' +
-                    '                                    <div class="col-xl-5 col-lg-6">\n' +
-                    '                                        <div class="pr-image-wrap mb-md-80">\n' +
-                    '                                            <img id="main-image" src="https://admin.ultrra.com/product_images/' + image + '" class="image-fit" alt="img" />\n' +
-                    '                                            <br/>\n' +
-                    '                                            <nav class="text-center">\n' +
-                    '                                                <a class="pl-2 pr-2" href="javascript:void(0)" onclick="getImage(\'primary\')"><img src="https://admin.ultrra.com/product_images/' + image + '" class="image-fit" alt="img" style="width: 64px" /></a>\n' +
-                    '                                                ' + secondary_image + '\n' +
-                    '                                            </nav>\n' +
-                    '                                        </div>\n' +
-                    '                                    </div>\n' +
                     '                                    <div class="col-xl-7 col-lg-6 text-left">\n' +
                     '                                        <div class="pr-detail-wrap">\n' +
                     '                                            <div style="font-size: 25px; font-weight: 500; color: #333333">\n' + product_categories + '</div>\n' +
@@ -97,8 +65,18 @@
                     '                                            <span class="fs-18 text-brown fw-600 mr-3">\n' + product_tag_images + '</span>\n' +
                     '                                            <h6 class="text-custom-black fw-600">$' + getPrice(response.data.data) + ' <span class="fw-500" style="font-size: 14px">(QV ' + response.data.data.qv + ')</span></h6>\n' +
                     '                                            <p>' + getDescription(response.data.data) + '</p>\n' +
-                    '                                            <ul class="tick-points">' + tick_points + '</ul>\n' +
-                    '                                            <button onclick="addToCart('+response.data.data.id+')" class="theme-btn"><span class="btn-text">@lang("cart.Add to cart")</span></button>\n' +
+                    '                                            <ul>' + tick_points + '</ul>\n' +
+                    '                                            <button onclick="addToCart('+response.data.data.id+')" class="theme-btn"><span class="btn-text">Add to Cart</span></button>\n' +
+                    '                                        </div>\n' +
+                    '                                    </div>\n' +
+                    '                                    <div class="col-xl-5 col-lg-6">\n' +
+                    '                                        <div class="pr-image-wrap mb-md-80">\n' +
+                    '                                            <img id="main-image" src="https://admin.ultrra.com/product_images/' + image + '" class="image-fit" alt="img" />\n' +
+                    '                                            <br/>\n' +
+                    '                                            <nav class="text-center">\n' +
+                    '                                                <a class="pl-2 pr-2" href="javascript:void(0)" onclick="getImage(\'primary\')"><img src="https://admin.ultrra.com/product_images/' + image + '" class="image-fit" alt="img" style="width: 64px" /></a>\n' +
+                    '                                                ' + secondary_image + '\n' +
+                    '                                            </nav>\n' +
                     '                                        </div>\n' +
                     '                                    </div>\n' +
                     '                                </div>\n' +
@@ -133,37 +111,6 @@
                 $('.tf-products-tabs').show();
 
                 $('#disclaimer').html(getDisclaimer(product));
-
-                if (product.country_of_origin !== null && product.country_of_origin !== '')
-                {
-                    $('#country_of_origin').html('<p class="text-dark feature-origin fs-16 fw-700">\n' +
-                        '                                Origin: <span class="country-origin fw-100">'+getCountryOfOrigin(product)+'</span>\n' +
-                        '                            </p>');
-                }
-                if (product.collection_method !== null && product.collection_method !== '')
-                {
-                    $('#collection_method').html('<p class="text-dark feature-origin fs-16 fw-700">\n' +
-                        '                                Collection Method: <span class="country-origin fw-100">'+getCollectionMethod(product)+'</span>\n' +
-                        '                            </p>');
-                }
-                if (product.plant_part !== null && product.plant_part !== '')
-                {
-                    $('#plant_part').html('<p class="text-dark feature-origin fs-16 fw-700">\n' +
-                        '                                Plant Part: <span class="country-origin fw-100">'+getPlantPart(product)+'</span>\n' +
-                        '                            </p>');
-                }
-                if (product.main_constituents !== null && product.main_constituents !== '')
-                {
-                    $('#main_constituents').html('<p class="text-dark feature-origin fs-16 fw-700">\n' +
-                        '                                Main Constituents: <span class="country-origin fw-100">'+getMainConstituents(product)+'</span>\n' +
-                        '                            </p>');
-                }
-                if (product.aromatic_description !== null && product.aromatic_description !== '')
-                {
-                    $('#aromatic_description').html('<p class="text-dark feature-origin fs-16 fw-700">\n' +
-                        '                                Aromatic Description: <span class="country-origin fw-100">'+getAromaticDescription(product)+'</span>\n' +
-                        '                            </p>');
-                }
             });
         });
 
@@ -284,141 +231,6 @@
             else
             {
                 return product.tick_points;
-            }
-        }
-
-        function getCountryOfOrigin(product)
-        {
-            if (language != 'en')
-            {
-                if (language == 'es' && product.country_of_origin_spanish !== null && product.country_of_origin_spanish !== '')
-                {
-                    return product.country_of_origin_spanish;
-                }
-                else if (language == 'ja' && product.country_of_origin_japanese !== null && product.country_of_origin_japanese !== '')
-                {
-                    return product.country_of_origin_japanese;
-                }
-                else if (language == 'zh' && product.country_of_origin_chinese !== null && product.country_of_origin_spanish !== '')
-                {
-                    return product.country_of_origin_chinese;
-                }
-                else
-                {
-                    return product.country_of_origin;
-                }
-            }
-            else
-            {
-                return product.country_of_origin;
-            }
-        }
-
-        function getCollectionMethod(product)
-        {
-            if (language != 'en')
-            {
-                if (language == 'es' && product.collection_method_spanish !== null && product.collection_method_spanish !== '')
-                {
-                    return product.collection_method_spanish;
-                }
-                else if (language == 'ja' && product.collection_method_japanese !== null && product.collection_method_japanese !== '')
-                {
-                    return product.collection_method_japanese;
-                }
-                else if (language == 'zh' && product.collection_method_chinese !== null && product.collection_method_spanish !== '')
-                {
-                    return product.collection_method_chinese;
-                }
-                else
-                {
-                    return product.collection_method;
-                }
-            }
-            else
-            {
-                return product.collection_method;
-            }
-        }
-
-        function getPlantPart(product)
-        {
-            if (language != 'en')
-            {
-                if (language == 'es' && product.plant_part_spanish !== null && product.plant_part_spanish !== '')
-                {
-                    return product.plant_part_spanish;
-                }
-                else if (language == 'ja' && product.plant_part_japanese !== null && product.plant_part_japanese !== '')
-                {
-                    return product.plant_part_japanese;
-                }
-                else if (language == 'zh' && product.plant_part_chinese !== null && product.plant_part_spanish !== '')
-                {
-                    return product.plant_part_chinese;
-                }
-                else
-                {
-                    return product.plant_part;
-                }
-            }
-            else
-            {
-                return product.plant_part;
-            }
-        }
-
-        function getMainConstituents(product)
-        {
-            if (language != 'en')
-            {
-                if (language == 'es' && product.main_constituents_spanish !== null && product.main_constituents_spanish !== '')
-                {
-                    return product.main_constituents_spanish;
-                }
-                else if (language == 'ja' && product.main_constituents_japanese !== null && product.main_constituents_japanese !== '')
-                {
-                    return product.main_constituents_japanese;
-                }
-                else if (language == 'zh' && product.main_constituents_chinese !== null && product.main_constituents_spanish !== '')
-                {
-                    return product.main_constituents_chinese;
-                }
-                else
-                {
-                    return product.main_constituents;
-                }
-            }
-            else
-            {
-                return product.main_constituents;
-            }
-        }
-
-        function getAromaticDescription(product)
-        {
-            if (language != 'en')
-            {
-                if (language == 'es' && product.aromatic_description_spanish !== null && product.aromatic_description_spanish !== '')
-                {
-                    return product.aromatic_description_spanish;
-                }
-                else if (language == 'ja' && product.aromatic_description_japanese !== null && product.aromatic_description_japanese !== '')
-                {
-                    return product.aromatic_description_japanese;
-                }
-                else if (language == 'zh' && product.aromatic_description_chinese !== null && product.aromatic_description_spanish !== '')
-                {
-                    return product.aromatic_description_chinese;
-                }
-                else
-                {
-                    return product.aromatic_description;
-                }
-            }
-            else
-            {
-                return product.aromatic_description;
             }
         }
 
@@ -551,7 +363,7 @@
                 $('#main-image').attr('src', 'https://admin.ultrra.com/product_images/'+product.secondary_image);
             }
         }
-
+        
         function tabClick(tab)
         {
             document.getElementById(tab+'-a').parentNode.parentNode.childNodes.forEach(element => {

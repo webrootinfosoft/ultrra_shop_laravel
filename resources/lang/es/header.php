@@ -10,7 +10,7 @@
    "Contact" => "Contacto", 
    "Disclosure" => "Divulgar", 
    "East Meets West" => "LA CURACIÓN DEL ESTE SE ENCUENTRA CON LA CIENCIA OCCIDENTAL", 
-   "Elements" => "Elements", 
+   "Elements" => "Elementos",
    "Enroll" => "Inscríbete", 
    "Home" => "Inicio", 
    "Login" => "Iniciar Sesión", 
