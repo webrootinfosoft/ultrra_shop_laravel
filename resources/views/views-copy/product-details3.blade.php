@@ -44,10 +44,7 @@
         <br>
     </section>
     <style>
-        h3
-        {
-            font-size: 1.75rem !important;
-        }
+
     </style>
 @endsection
 @push('js')
@@ -63,7 +60,7 @@
                 secondary_image = response.data.data.secondary_image ? '<a class="pl-2 pr-2" href="javascript:void(0)" onclick="getImage(\'secondary\')"><img src="https://admin.ultrra.com/product_images/' + response.data.data.secondary_image +'" class="image-fit" alt="img" style="width: 64px" /></a>' : '<a></a>';
                 let product_categories = '';
                 response.data.data.product_categories.map((product_category) => {
-                    product_categories += (getName(product_category) + ' ');
+                    product_categories += product_category.name;
                 });
 
                 let product_tag_images = '';
@@ -97,8 +94,8 @@
                     '                                            <span class="fs-18 text-brown fw-600 mr-3">\n' + product_tag_images + '</span>\n' +
                     '                                            <h6 class="text-custom-black fw-600">$' + getPrice(response.data.data) + ' <span class="fw-500" style="font-size: 14px">(QV ' + response.data.data.qv + ')</span></h6>\n' +
                     '                                            <p>' + getDescription(response.data.data) + '</p>\n' +
-                    '                                            <ul class="tick-points">' + tick_points + '</ul>\n' +
-                    '                                            <button onclick="addToCart('+response.data.data.id+')" class="theme-btn"><span class="btn-text">@lang("cart.Add to cart")</span></button>\n' +
+                    '                                            <ul>' + tick_points + '</ul>\n' +
+                    '                                            <button onclick="addToCart('+response.data.data.id+')" class="theme-btn"><span class="btn-text">Add to Cart</span></button>\n' +
                     '                                        </div>\n' +
                     '                                    </div>\n' +
                     '                                </div>\n' +

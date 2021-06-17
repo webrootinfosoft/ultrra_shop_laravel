@@ -16,8 +16,7 @@ return [
    "Story About" => "Nuestra Historia", 
    "Tibetan" => "Tibetano", 
    "To grow human potential, and advance society to achieve great things through scientifically documented products produced through the power of nature" => "Crecer el potencial humano y progresar en la sociedad para alcanzar grandes logros a través de productos documentados científicamente producidos a través del poder de la naturaleza.", 
-   "To inspire humanity is to conitnously give back and build a world in which we discover how great of a difference one person can make" => "Inspirar a la humanidad a retribuir y construir un mundo en el que descubramos cuan grandiosa es la diferencia que una persona puede hacer
-", 
+   "To inspire humanity is to conitnously give back and build a world in which we discover how great of a difference one person can make" => "Inspirar a la humanidad a retribuir y construir un mundo en el que descubramos cuan grandiosa es la diferencia que una persona puede hacer",
    "Ultrra searches the world and researches traditional health-care systems for life-giving ingredients in the form of plants, herbs and minerals that support the body’s natural cleansing and rejuvenating functions" => "Ultrra busca en el mundo e investiga en los sistemas tradicionales de atención de la salud los ingredientes que dan vida en forma de plantas, hierbas y minerales que apoyan las funciones naturales de limpieza y rejuvenecimiento del cuerpo.", 
    "Video" => "Vídeo", 
    "Video Testimonial" => "Video Testimonial", 

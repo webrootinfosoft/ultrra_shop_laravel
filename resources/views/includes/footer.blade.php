@@ -184,7 +184,7 @@
                             <div class="form-newsletter">
                                 <form class="form-style-2">
                                     <div class="row">
-                                        <div class="col-12">
+                                        <div class="col-12 text-center">
                                             <div class="form-group">
                                                 <input type="email" name="#" class="form-control form-control-custom" placeholder="Enter your Email" />
                                             </div>

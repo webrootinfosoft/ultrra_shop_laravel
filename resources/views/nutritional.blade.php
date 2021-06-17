@@ -7,16 +7,16 @@
                 <div class="col-xl-7 col-lg-6 align-self-center p-relative">
                     <div class="subheader-text">
                         <div class="page-title">
-                            <h1 class="text-custom-white fw-600 text-left">Nutritionals</h1>
+                            <h1 class="text-custom-white fw-600 text-left">@lang('nutritional.Nutritionals')</h1>
                             <ul class="custom-flex breadcrumb">
                                 <li>
-                                    <a href="{{url('/')}}" class="td-none text-custom-white">Home</a>
+                                    <a href="{{url('/')}}" class="td-none text-custom-white">@lang('nutritional.Home')</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)" class="td-none text-custom-white">Products</a>
+                                    <a href="javascript:void(0)" class="td-none text-custom-white">@lang('nutritional.Products')</a>
                                 </li>
                                 <li class="text-custom-white active">
-                                    Nutritionals
+                                @lang('nutritional.Nutritionals')
                                 </li>
                             </ul>
                         </div>
@@ -53,6 +53,7 @@
 @endsection
 @push('js')
     <script>
+        let language = '{{app()->getLocale()}}';
         window.addEventListener('load', function(){
             axios.get('/all-products', {params: {product_category_id: 8}}).then((response) => {
                 let html = '';
@@ -63,7 +64,7 @@
                     });
 
                     let tick_points = '';
-                    product.tick_points.map((tick_point) => {
+                    getTickPoints(product).map((tick_point) => {
                         tick_points += ('<li>'+tick_point+'</li>')
                     });
 
@@ -74,14 +75,14 @@
                         "                <div class=\"category-text-box p-relative categories-right\">\n" +
                         "                    <h4>\n" +
                         "                        <a href=\"javascript:void(0)\" class=\"text-pink\">\n" +
-                        "                            <span class=\"text-custom-black fw-700\">"+product.name+" </span>\n" +
+                        "                            <span class=\"text-custom-black fw-700\">"+getName(product)+" </span>\n" +
                         "                        </a>\n" +
                         "                    </h4>\n" +
                         "                    <ul class=\"custom-flex pr-tags\">"+tag_images+"</ul>\n" +
                         "                    <h6 class=\"fw-600 text-green\">$"+parseFloat(product.retail_customer_price).toFixed(2)+" <span class=\"fs-18 fw-500 text-custom-black \">(QV "+product.qv+")</span></h6>\n" +
-                        "                    <p class=\"text-custom-black product-list fs-18\">"+product.description+"</p>\n" +
+                        "                    <p class=\"text-custom-black product-list fs-18\">"+getDescription(product)+"</p>\n" +
                         "                    <ul class=\"tick-points\">"+tick_points+"</ul>\n" +
-                        "                    <a href='{{url('www/supplements/')}}/"+product.id+"' class=\"theme-btn text-brown\"><div class=\"btn-text\">Learn More</div></a>\n" +
+                        "                    <a href='{{url('www/supplements/')}}/"+product.id+"' class=\"theme-btn text-brown\"><div class=\"btn-text\">@lang("nutritional.Learn More")</div></a>\n" +
                         "                </div>\n" +
                         "            </div>\n" +
                         "            <div class=\"col-md-6\">\n" +
@@ -100,5 +101,86 @@
                 $('#product-listing').html(html);
             });
         });
+
+        function getName(product)
+        {
+            if (language != 'en')
+            {
+                if (language == 'es' && product.name_spanish !== null && product.name_spanish !== '')
+                {
+                    return product.name_spanish;
+                }
+                else if (language == 'ja' && product.name_japanese !== null && product.name_japanese !== '')
+                {
+                    return product.name_japanese;
+                }
+                else if (language == 'zh' && product.name_chinese !== null && product.name_spanish !== '')
+                {
+                    return product.name_chinese;
+                }
+                else
+                {
+                    return product.name;
+                }
+            }
+            else
+            {
+                return product.name;
+            }
+        }
+
+        function getDescription(product)
+        {
+            if (language != 'en')
+            {
+                if (language == 'es' && product.description_spanish !== null && product.description_spanish !== '')
+                {
+                    return product.description_spanish;
+                }
+                else if (language == 'ja' && product.description_japanese !== null && product.description_japanese !== '')
+                {
+                    return product.description_japanese;
+                }
+                else if (language == 'zh' && product.description_chinese !== null && product.description_spanish !== '')
+                {
+                    return product.description_chinese;
+                }
+                else
+                {
+                    return product.description;
+                }
+            }
+            else
+            {
+                return product.description;
+            }
+        }
+
+        function getTickPoints(product)
+        {
+            if (language != 'en')
+            {
+                if (language == 'es' && product.tick_points_spanish !== null && product.tick_points_spanish !== '')
+                {
+                    return product.tick_points_spanish;
+                }
+                else if (language == 'ja' && product.tick_points_japanese !== null && product.tick_points_japanese !== '')
+                {
+                    return product.tick_points_japanese;
+                }
+                else if (language == 'zh' && product.tick_points_chinese !== null && product.tick_points_spanish !== '')
+                {
+                    return product.tick_points_chinese;
+                }
+                else
+                {
+                    return product.tick_points;
+                }
+            }
+            else
+            {
+                return product.tick_points;
+            }
+        }
     </script>
 @endpush

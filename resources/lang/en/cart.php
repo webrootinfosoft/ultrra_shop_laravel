@@ -121,10 +121,12 @@ return [
    "Total" => "Total", 
    "Unit Price" => "Unit Price", 
    "Username" => "Username", 
-   "Usertype" => "Usertype", 
+   "Usertype" => "Usertype",
+   "Verification Code" => "Código de verificación",
    "WELCOME" => "WELCOME", 
    "Your Payments" => "Your Payments", 
-   "expiry" => "expiry" 
+   "expiry" => "expiry",
+   "ZIP Code" => "ZIP Code"
 ]; 
  
  

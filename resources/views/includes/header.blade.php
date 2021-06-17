@@ -163,7 +163,7 @@
                     </li>
                     <li>
                         @if(!auth()->user())
-                            <a href="{{url('/www/signup?usertype=rc')}}" class="text-brown">
+                            <a href="{{url('/www/enrollment')}}" class="text-brown">
                                 <span class="text-first text-left">@lang('header.Shop')</span>
                                 <span class="text-second text-left">@lang('header.Try Ultrra Products')</span>
                             </a>

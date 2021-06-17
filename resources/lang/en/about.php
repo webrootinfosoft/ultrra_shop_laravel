@@ -15,10 +15,8 @@
    "Product" => "Product", 
    "Story About" => "Our Story", 
    "Tibetan" => "Tibetan", 
-   "To grow human potential, and advance society to achieve great things through scientifically documented products produced through the power of nature" => "To grow human potential, and advance society to achieve great things through scientifically documented products produced through the power of nature.
-", 
-   "To inspire humanity is to conitnously give back and build a world in which we discover how great of a difference one person can make" => "To inspire humanity to give back and build a world in which we discover how great of a difference one person can make.
-", 
+   "To grow human potential, and advance society to achieve great things through scientifically documented products produced through the power of nature" => "To grow human potential, and advance society to achieve great things through scientifically documented products produced through the power of nature.",
+   "To inspire humanity is to conitnously give back and build a world in which we discover how great of a difference one person can make" => "To inspire humanity to give back and build a world in which we discover how great of a difference one person can make.",
    "Ultrra searches the world and researches traditional health-care systems for life-giving ingredients in the form of plants, herbs and minerals that support the body’s natural cleansing and rejuvenating functions" => "Ultrra searches the world and researches traditional health-care systems for life-giving ingredients in the form of plants, herbs and minerals that support the body’s natural cleansing and rejuvenating functions", 
    "Video" => "Video", 
    "Video Testimonial" => "Video Testimonial", 

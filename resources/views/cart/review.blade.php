@@ -241,15 +241,15 @@
                                                 </div>
                                                 <div class="form-group mb-2">
                                                     <input type="hidden" id="user_id" name="user_id"/>
-                                                    <input type="text" class="form-control" id="card_name" name="card_name" placeholder="Name on Card"/>
+                                                    <input type="text" class="form-control" id="card_name" name="card_name" placeholder="@lang('cart.Name on Card')"/>
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                                 <div class="form-group mb-2">
-                                                    <input type="text" class="form-control" id="card_number" name="card_number" placeholder="Credit Card #"/>
+                                                    <input type="text" class="form-control" id="card_number" name="card_number" placeholder="@lang('cart.Credit Card') #"/>
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                                 <div class="form-group mb-2">
-                                                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Verification Code"/>
+                                                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="@lang('cart.Verification Code')"/>
                                                     <div class="invalid-feedback"></div>
                                                 </div>
                                                 <div class="form-group mb-2">
@@ -286,29 +286,29 @@
                                             </div>
                                             <div class="form-group mb-2">
                                                 <input class="form-control" type="hidden" name="billing_contact_name"/>
-                                                <input class="form-control" type="text" name="billing_firstname" placeholder="First Name"/>
+                                                <input class="form-control" type="text" name="billing_firstname" placeholder="@lang('cart.First Name')"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="form-group mb-2">
-                                                <input class="form-control" type="text" name="billing_lastname" placeholder="Last Name"/>
+                                                <input class="form-control" type="text" name="billing_lastname" placeholder="@lang('cart.Last Name')"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="form-group mb-2">
                                                 <input type="hidden" name="billing_contact_name"/>
                                                 <input type="hidden" name="billing_contact_number"/>
-                                                <input class="form-control" type="text" name="billing_address_1" placeholder="Address 1"/>
+                                                <input class="form-control" type="text" name="billing_address_1" placeholder="@lang('cart.Address') 1"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="form-group mb-2">
-                                                <input class="form-control" type="text" name="billing_address_2" placeholder="Address 2"/>
+                                                <input class="form-control" type="text" name="billing_address_2" placeholder="@lang('cart.Address') 2"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="form-group mb-2">
-                                                <input class="form-control" type="text" name="billing_city" placeholder="City"/>
+                                                <input class="form-control" type="text" name="billing_city" placeholder="@lang('cart.City')"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="form-group mb-2">
-                                                <input class="form-control" type="text" name="billing_postcode" placeholder="ZIP Code"/>
+                                                <input class="form-control" type="text" name="billing_postcode" placeholder="@lang('cart.ZIP Code')"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="form-group mb-2">
