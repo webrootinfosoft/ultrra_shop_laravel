@@ -12,19 +12,21 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12">
-                            <h3>@lang('cart.Products')</h3>
+                            <h3 class="text-center text-capitalize">@lang('cart.Products')</h3>
                         </div>
                         <div class="col-8"></div>
                         <div class="col-md-4">
-                            <select class="form-control" id="products_country_id" onchange="onCountryChange()">
+                            <div>
+                                <select class="form-control" id="products_country_id" onchange="onCountryChange()">
 
-                            </select>
-                            <br class="d-sm-block d-none"/>
-                            <br class="d-sm-block d-none"/>
-                            <br class="d-sm-block d-none"/>
-                            <select class="form-control" id="category_id" onchange="onCategoryChange()">
+                                </select>
+                            </div>
 
-                            </select>
+                            <div class="category-id-margin-top">
+                                <select class="form-control" id="category_id" onchange="onCategoryChange()">
+
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,14 +69,14 @@
                         </div>
                         <div class="cart-sidebar-button-section">
                             <div class="cart-sidebar-button-inner text-center">
-                                <a id="continue-button" href="javascript:void(0)" class="btn btn-dark btn-block btn-round" disabled onclick="nextPage(this);" style="margin: 20px 0px;">@lang('cart.CHECKOUT')</a>
+                                <a id="continue-button" href="javascript:void(0)" class="btn btn-dark btn-block btn-round" disabled onclick="nextPage(this);" style="margin: 20px 0px; font-weight: 900;">@lang('cart.CHECKOUT')</a>
                                 <button onclick="$('#cart-sidebar').hide()" class="btn btn-outline-dark btn-block btn-round" style="margin: 20px 0px;">@lang('cart.CONTINUE SHOPPING')</button>
                             </div>
                         </div>
                         <div class="row" style="margin: 0;">
                             <div class="mastercard pull-left col-6 col-sm-6 col-md-6 col-lg-6 text-center" style="display: grid; text-align: center;">
                                 <i class="fa fa-credit-card" style="color: grey"></i>
-                                <small class="gray block" style="margin-top: -85px"><b>@lang('cart.Mastercard and Visa Credit Cards accepted')</b></small>
+                                <small class="gray block" style="margin-top: -30px"><b>@lang('cart.Mastercard and Visa Credit Cards accepted')</b></small>
                             </div>
                             <div class="orders pull-left col-6 col-sm-6 col-md-6 col-lg-6 text-center" style="display: grid; text-align: center">
                                 <i class="fa fa-truck" style="color: grey"></i>
@@ -97,8 +99,15 @@
         <br/>
         <br/>
         <div class="row">
-            <div class="col-md-2 offset-md-5 text-center">
-                <button type="button" id="submit-button" onclick="nextPage(this)" class="btn btn-dark btn-block" disabled><b>@lang('cart.CONTINUE')</b></button>
+            <div class="col-md-4 offset-md-4 text-center">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-outline-dark btn-block text-uppercase" onclick="previousPage();"><b>@lang('cart.BACK')</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" id="submit-button" onclick="nextPage(this)" class="btn btn-dark btn-block text-uppercase" disabled><b>@lang('cart.CONTINUE')</b></button>
+                    </div>
+                </div>
             </div>
         </div>
         <br/>
@@ -116,6 +125,43 @@
         p
         {
             margin-bottom: 0 !important;
+        }
+        .product-listing-box-title p
+        {
+            font-size: 18px !important;
+        }
+        .h3, h3
+        {
+            font-size: 1.75rem !important;
+        }
+        .btn
+        {
+            font-size: 1rem !important;
+        }
+        .product-listing-box-add-cart a
+        {
+            text-transform: uppercase;
+        }
+        small, .small
+        {
+            font-size: 65%;
+            font-weight: 400;
+        }
+        .form-control
+        {
+            height: calc(1.5em + 0.75rem + 2px);
+            font-size: 1rem;
+        }
+        .category-id-margin-top
+        {
+            margin-top: 55px;
+        }
+        @media (max-width: 767px)
+        {
+            .category-id-margin-top
+            {
+                margin-top: 0;
+            }
         }
     </style>
 @endsection
@@ -165,13 +211,11 @@
             axios.get('/all-products', {params: params}).then((response) => {
                 let products = response.data.data;
                 productsDiv(products);
-
             });
 
             $('#cart-loader').show();
 
             $('.removecartitem').on('click', function () {
-
                 let id = $(this).attr('id');
                 let product_id = id.split('-')[1];
                 updateCartProduct(product_id, 0);
@@ -185,9 +229,9 @@
                 updateCartProduct(product_id, quantity);
             });
 
-            if (localStorage.getItem('user') === null && localStorage.getItem('cart') === null)
+            if ('{{auth()->check()}}' != 1 && (localStorage.getItem('cart') === null || JSON.parse(localStorage.getItem('cart')) === null))
             {
-                axios.post('/cart', {new_cart: true}).then(response => {
+                axios.post('/cart', {new_cart: true, usertype: localStorage.getItem('usertype')}).then(response => {
                     localStorage.setItem('cart', JSON.stringify(response.data.data));
                     getCartProducts();
                 }).catch((error) => {
@@ -210,6 +254,11 @@
                 getCartProducts();
             }
 
+            if (localStorage.getItem('cart') === null || JSON.parse(localStorage.getItem('cart')) === null || (localStorage.getItem('cart') && JSON.parse(localStorage.getItem('cart')).products.length === 0))
+            {
+                $('#create-account-cart-navigator').attr('href', 'javascript:void(0)');
+                $('#shipping-address-cart-navigator').attr('href', 'javascript:void(0)');
+            }
         });
 
         function productsDiv(products)
@@ -217,25 +266,25 @@
             let html = '';
 
             products.map(product => {
-                let product_details_href = product.product_layout === 'oil' ? "/www/oils/"+product.id : "/www/supplements/"+product.id;
+                let product_details_href = product.product_layout === 'oil' ? "/www/oils/"+product.id+window.location.search : "/www/supplements/"+product.id+window.location.search;
                 let product_stock = product.product_layout === 'out_of_stock' ? 'Out of Stock' : '<a href="javascript:void(0)" class="addtocart btn-round" id="add-to-cart'+product.id+'" onclick="addToCart('+product.id+')">@lang("cart.Add to cart")</button>';
                 let product_price = 0;
                 let product_qv = 0;
-                if (product.product_countries.length > 0 && typeof product.product_countries.find(product_country => product_country.country_id == $('#product_country_div').val()) !== 'undefined')
+                if (product.product_countries.length > 0 && typeof product.product_countries.find(product_country => product_country.country_id == $('#products_country_id').val()) !== 'undefined')
                 {
                     if (usertype === 'rc')
                     {
-                        product_price = product.product_countries.find(product_country => product_country.country_id == $('#product_country_id').val()).retail_customer_price;
+                        product_price = product.product_countries.find(product_country => product_country.country_id == $('#products_country_id').val()).retail_customer_price;
                     }
                     else if (usertype === 'pc')
                     {
-                        product_price = product.product_countries.find(product_country => product_country.country_id == $('#product_country_id').val()).preferred_customer_price;
+                        product_price = product.product_countries.find(product_country => product_country.country_id == $('#products_country_id').val()).preferred_customer_price;
                     }
                     else
                     {
-                        product_price = product.product_countries.find(product_country => product_country.country_id == $('#product_country_id').val()).distributor_price;
+                        product_price = product.product_countries.find(product_country => product_country.country_id == $('#products_country_id').val()).distributor_price;
                     }
-                    product_qv = product.product_countries.find(product_country => product_country.country_id == $('#product_country_id').val()).qv;
+                    product_qv = product.product_countries.find(product_country => product_country.country_id == $('#products_country_id').val()).qv;
                 }
                 else
                 {
@@ -302,14 +351,15 @@
             let quantity = 0;
             let html = '';
             axios.get('/cart/' + cart.id).then((response) => {
+                localStorage.setItem('cart', JSON.stringify(response.data.data));
                 cartProducts = response.data.data.products;
                 response.data.data.products.forEach((product) => {
                     let price = usertype === 'rc' ? product.product.retail_customer_price : usertype === 'pc' ? product.product.preferred_customer_price : product.product.distributor_price;
                     let single_qv = product.product.qv;
 
-                    if (product.product.product_countries.length > 0 && typeof product.product.product_countries.find(product_country => product_country.country_id == $('#product_country_div').val()) !== 'undefined')
+                    if (product.product.product_countries.length > 0 && typeof product.product.product_countries.find(product_country => product_country.country_id == $('#products_country_id').val()) !== 'undefined')
                     {
-                        let product_country = product.product.product_countries.find(product_country => product_country.country_id == $('#product_country_div').val());
+                        let product_country = product.product.product_countries.find(product_country => product_country.country_id == $('#products_country_id').val());
                         price = usertype === 'rc' ? product_country.retail_customer_price : usertype === 'pc' ? product_country.preferred_customer_price : product_country.distributor_price;
                         single_qv = product_country.qv;
                     }
@@ -335,7 +385,7 @@
                         '                        $' + price +
                         '                    </p><br/>\n' +
                         '                    <p class="sidebar-box-price sidebar-box-qv float-right text-right" style="color: #888888 !important; width: 50%, margin-bottom: 0 !important;">\n' +
-                        '                        QV' + qv +
+                        '                        QV' + (single_qv * product.quantity) +
                         '                    </p>\n' +
                         '                </div>\n' +
                         '                <div class="notranslate float-left">\n' +
@@ -376,7 +426,7 @@
 
                 });
 
-                $('#subTotal').text('$ '+total);
+                $('#subTotal').text('$ '+total.toFixed(2));
                 $('#totalQuantity').text(quantity);
                 $('#totalQV').text(qv);
 
@@ -400,6 +450,12 @@
                 {
                     $('#continue-button').attr('disabled', true);
                     $('#submit-button').attr('disabled', true);
+                }
+
+                if (localStorage.getItem('cart') === null || (localStorage.getItem('cart') && JSON.parse(localStorage.getItem('cart')).products.length === 0))
+                {
+                    $('#create-account-cart-navigator').attr('href', 'javascript:void(0)');
+                    $('#shipping-address-cart-navigator').attr('href', 'javascript:void(0)');
                 }
             });
         }
@@ -549,6 +605,11 @@
                     window.location.href = '/www/create-account' + window.location.search;
                 }
             }
+        }
+
+        function previousPage()
+        {
+            window.history.back();
         }
     </script>
 @endpush

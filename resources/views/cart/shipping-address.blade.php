@@ -107,10 +107,10 @@
                     <div class="text-center col-md-4 offset-md-4">
                         <div class="row">
                             <div class="col-md-6">
-                                <button class="btn btn-outline-dark btn-block" onclick="previousPage()"><b>@lang('cart.BACK')</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-outline-dark btn-block text-uppercase" onclick="previousPage()"><b>@lang('cart.BACK')</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                             <div class="col-md-6">
-                                <button id="submit-button" class="btn btn-dark btn-block" type="submit" disabled><b>@lang('cart.CONTINUE')</b></button>
+                                <button id="submit-button" class="btn btn-dark btn-block text-uppercase" type="submit" disabled><b>@lang('cart.CONTINUE')</b></button>
                             </div>
                         </div>
                     </div>
@@ -143,6 +143,11 @@
         label.error
         {
             color: red !important;
+        }
+        .form-control
+        {
+            height: calc(1.5em + 0.75rem + 2px);
+            font-size: 1rem;
         }
     </style>
 @endsection
@@ -227,7 +232,8 @@
                     console.log(formObject);
                     $('#submit-button').attr('disabled', 'disabled');
                     $('#submit-button').append('<i class="fa fa-spinner fa-spin"></i>');
-                    if (isNaN(parseInt($('[name="user_shipping_address_id"]').val())))
+
+                    if (isNaN(parseInt($('[name="user_shipping_address_id"]:checked').val())))
                     {
                         axios.post('/address', address).then((response) => {
                             if (response.data.status == 200)
