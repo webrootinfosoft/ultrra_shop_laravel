@@ -82,7 +82,7 @@
                         "                    <h6 class=\"fw-600 text-green\">$"+parseFloat(product.retail_customer_price).toFixed(2)+" <span class=\"fs-18 fw-500 text-custom-black \">(QV "+product.qv+")</span></h6>\n" +
                         "                    <p class=\"text-custom-black product-list fs-18\">"+getDescription(product)+"</p>\n" +
                         "                    <ul class=\"tick-points\">"+tick_points+"</ul>\n" +
-                        "                    <a href='{{url('www/supplements/')}}/"+product.id+"' class=\"theme-btn text-brown\"><div class=\"btn-text\">@lang("beverage.Learn More")</div></a>\n" +
+                        "                    <a href='{{url('www/supplements/')}}/"+product.id+window.location.search+"' class=\"theme-btn text-brown\"><div class=\"btn-text\">@lang("beverage.Learn More")</div></a>\n" +
                         "                </div>\n" +
                         "            </div>\n" +
                         "            <div class=\"col-md-6\">\n" +

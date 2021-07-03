@@ -165,7 +165,7 @@
                                     <a href="{{url('/contact')}}" class="text-custom-white fs-16 mb-xl-10 td-none">@lang('footer.Contact Us')</a>
                                 </li>
                                 <li>
-                                    <a href="https://office.ultrra.com/" target="_blank" class="text-custom-white fs-16 mb-xl-10 td-none">Ultrra Office</a>
+                                    <a href="https://office.ultrra.com" target="_blank" class="text-custom-white fs-16 mb-xl-10 td-none">Ultrra Office</a>
                                 </li>
                                 <li>
                                     <a href="{{asset('/files/terms.pdf')}}" target="_blank" class="text-custom-white fs-16 mb-xl-10 td-none">@lang('footer.Terms')</a>
@@ -263,6 +263,17 @@
             {
                 suffix = '?username=' + username;
                 axios.get('/check-sponsor/' + username).then(response => {
+                    let sponsor_user = response.data.data;
+                    $('.img-1').attr('src', 'https://admin.ultrra.com/user_images/' + sponsor_user.image);
+                    $('.img-2').attr('src', 'https://admin.ultrra.com/user_images/' + sponsor_user.image);
+                    $('#recommended-by').text(sponsor_user.name);
+                    $('#sponsor-phone').text(sponsor_user.phone);
+                    $('#sponsor-email').text(sponsor_user.email);
+                });
+            }
+            else if (params.has('sponsor_id') && params.has('placement_user_id') && params.has('business_center_id') && params.has('leg'))
+            {
+                axios.get('/check-sponsor/' + params.get('sponsor_id')).then(response => {
                     let sponsor_user = response.data.data;
                     $('.img-1').attr('src', 'https://admin.ultrra.com/user_images/' + sponsor_user.image);
                     $('.img-2').attr('src', 'https://admin.ultrra.com/user_images/' + sponsor_user.image);

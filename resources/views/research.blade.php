@@ -236,7 +236,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <a class="card-link collapsed" data-toggle="collapse" href="javascript:void(0)" id="ingredients-1-a" onclick="toggleAccordian('ingredients-1')">
-                                            Phyllanthus amarus (Detox 1)
+                                            Phyllanthus amarus (@lang('research.Detox') 1)
                                         </a>
                                     </div>
                                     <div id="ingredients-1" class="collapse" data-parent="#accordion1">
@@ -248,7 +248,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <a class="collapsed card-link" data-toggle="collapse" href="javascript:void(0)" id="ingredients-2-a" onclick="toggleAccordian('ingredients-2')">
-                                            Multi-enzyme complex (Detox 1)
+                                            Multi-enzyme complex (@lang('research.Detox') 1)
                                         </a>
                                     </div>
                                     <div id="ingredients-2" class="collapse" data-parent="#accordion1">
@@ -261,7 +261,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <a class="collapsed card-link" data-toggle="collapse" href="javascript:void(0)" id="ingredients-3-a" onclick="toggleAccordian('ingredients-3')">
-                                            Triphala (Detox 1)
+                                            Triphala (@lang('research.Detox') 1)
                                         </a>
                                     </div>
                                     <div id="ingredients-3" class="collapse" data-parent="#accordion1">
@@ -280,21 +280,17 @@
                                     </div>
                                     <div id="ingredients-4" class="collapse" data-parent="#accordion1">
                                         <div class="card-body">
-                                            <p class="text-brown fs-16 no-margin pb-16">@lang('research.Hesperidin, a citrus bioflavonoid, inhibits bone loss and decreases serum and hepatic lipids in ovariectomized mice. J Nutr. 2003').
-                                            </p>
-                                            <p class="text-brown fs-16 no-margin pb-16">@lang('research.The purpose of this study was to examine whether hesperidin inhibits bone loss in ovariectomized mice (OVX), an animal model of postmenopausal osteoporosis. Hesperidin administration did not affect the uterine weight. These results suggest a possible role for citrus bioflavonoids in the prevention of lifestyle-related diseases because of their beneficial effects on bone and lipids').
-                                            </p>
-                                            <p class="text-brown fs-16 no-margin pb-16">@lang('research.Biological properties of citrus bioflavonoids pertaining to cancer and inflammation. Curr Med Chem. 2001. US Citrus and Subtropical Products Laboratory, USDA, ARS, SAA, Winter Haven, FL').
-                                            </p>
-                                            <p class="text-brown fs-16 no-margin">@lang('research.Antiproliferative activities of citrus bioflavonoids against six human cancer cell lines. J Agric Food Chem. 2002. U.S. Citrus and Subtropical Products Laboratory, South Atlantic Area, Agricultural Research Service, U.S. Department of Agriculture, Winter Haven, Florida Study conducted for the quantitative assessment of carotenoid antioxidants in human skin in vivo. Study was published in the December 2010 issue of the journal Archives of Biochemistry and BioPhysics').
-                                            </p>
+                                            <p class="text-brown fs-16 no-margin pb-16">@lang('research.Hesperidin, a citrus bioflavonoid, inhibits bone loss and decreases serum and hepatic lipids in ovariectomized mice. J Nutr. 2003').</p>
+                                            <p class="text-brown fs-16 no-margin pb-16">@lang('research.The purpose of this study was to examine whether hesperidin inhibits bone loss in ovariectomized mice (OVX), an animal model of postmenopausal osteoporosis. Hesperidin administration did not affect the uterine weight. These results suggest a possible role for citrus bioflavonoids in the prevention of lifestyle-related diseases because of their beneficial effects on bone and lipids').</p>
+                                            <p class="text-brown fs-16 no-margin pb-16">@lang('research.Biological properties of citrus bioflavonoids pertaining to cancer and inflammation. Curr Med Chem. 2001. US Citrus and Subtropical Products Laboratory, USDA, ARS, SAA, Winter Haven, FL').</p>
+                                            <p class="text-brown fs-16 no-margin">@lang('research.Antiproliferative activities of citrus bioflavonoids against six human cancer cell lines. J Agric Food Chem. 2002. U.S. Citrus and Subtropical Products Laboratory, South Atlantic Area, Agricultural Research Service, U.S. Department of Agriculture, Winter Haven, Florida Study conducted for the quantitative assessment of carotenoid antioxidants in human skin in vivo. Study was published in the December 2010 issue of the journal Archives of Biochemistry and BioPhysics').</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-header">
                                         <a class="collapsed card-link" data-toggle="collapse" href="javascript:void(0)" id="ingredients-5-a" onclick="toggleAccordian('ingredients-5')">
-                                        @lang('research.Slim')
+                                            @lang('research.Slim')
                                         </a>
                                     </div>
                                     <div id="ingredients-5" class="collapse" data-parent="#accordion1">
@@ -308,13 +304,13 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <a class="collapsed card-link" data-toggle="collapse" href="javascript:void(0)" id="ingredients-6-a" onclick="toggleAccordian('ingredients-6')">
-                                            Pikroliv (Detox 1)
+                                            Pikroliv (@lang('research.Detox') 1)
                                         </a>
                                     </div>
                                     <div id="ingredients-6" class="collapse" data-parent="#accordion1">
                                         <div class="card-body">
                                             <p class="text-brown fs-16 no-margin">@lang('research.Picroliv prevents the biochemical changes triggered by aflatoxin B1. Rastogi et al. Pharmacol Toxicol. 2001; 88(2)')}:53-8').<br/>
-                                            @lang('research.Picroliv possesses activity against E. hystolica induced hepatic damage. Singh M et al. Indian J Med Res. 2005; 121(5)')}:676-82').
+                                                @lang('research.Picroliv possesses activity against E. hystolica induced hepatic damage. Singh M et al. Indian J Med Res. 2005; 121(5)')}:676-82').
                                             </p>
                                         </div>
                                     </div>

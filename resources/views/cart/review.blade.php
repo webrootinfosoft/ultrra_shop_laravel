@@ -20,7 +20,7 @@
                                 @lang('cart.SPONSOR') <span class="details" style="font-weight: lighter">@lang('cart.Details')</span>
                             </h3>
                             <span class="editdetails">
-                            <a href="{{url('/www/create-account').str_replace(request()->url(), '', request()->fullUrl())}}">
+                            <a href="{{url('/www/create-account')}}">
                                 <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
                                 <span>@lang('cart.Edit Details')</span>
                             </a>
@@ -49,10 +49,10 @@
 
                         <div id="order-details-div" class="detailsfull text-left">
                             <h3>
-                                @lang('cart.ACTIVATION') <span class="details" style="font-weight: lighter">@lang('cart.Details')</span>
+                                @lang('cart.ORDER') <span class="details" style="font-weight: lighter">@lang('cart.Details')</span>
                             </h3>
                             <span class="editdetails">
-                                <a href="{{url('/www/products').str_replace(request()->url(), '', request()->fullUrl())}}">
+                                <a href="{{url('/www/products')}}">
                                     <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
                                     <span>@lang('cart.Edit Details')</span>
                                 </a>
@@ -61,11 +61,11 @@
                             <div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <h6>@lang('cart.ORDER OPTIONS')</h6>
+                                        {{--<h6>@lang('cart.ORDER OPTIONS')</h6>--}}
                                         <table id="order-details-table" class="table table-responsive-sm radio outline orderDetails-table">
-                                            <thead class="gray">
+                                            <thead class="gray text-capitalize">
                                             <tr>
-                                                <th width="50%">@lang('cart.Description')</th>
+                                                <th width="40%">@lang('cart.Description')</th>
                                                 <th>QV</th>
                                                 <th>Qty</th>
                                                 <th>@lang('cart.Price')</th>
@@ -82,7 +82,7 @@
                                                 <th style="background-color:#dfdfdf; color:black;">
                                                     <div class="totals-value" id="cart-qvTotal"></div>
                                                 </th>
-                                                <th colspan="2" style="background-color:#dfdfdf; color:black;">@lang('cart.Subtotal')</th>
+                                                <th colspan="2" style="background-color:#dfdfdf; color: black; text-transform: capitalize;">@lang('cart.Subtotal')</th>
                                                 <th style="background-color:#dfdfdf; color:black;">
                                                     <div class="totals-value" id="cart-subtotal"></div>
                                                 </th>
@@ -93,7 +93,7 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <br><br>
+                                        {{--<br><br>--}}
                                         <table class="table table-responsive-sm radio outline orderDetails-table">
                                             <thead class="gray">
                                             <tr>
@@ -120,9 +120,9 @@
                                                     <div class="totals-value" id="cart-handling"></div>
                                                 </td>
                                             </tr>
-                                            <thead class="gray">
+                                            <thead class="gray text-capitalize">
                                             <tr>
-                                                <th style="text-align:left">@lang('cart.Tax')</th>
+                                                <th style="text-align:left">@lang('cart.Tax')&nbsp;&nbsp;<span id="cart-tax-percentage"></span></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -131,7 +131,7 @@
                                                     <div class="totals-value" id="cart-tax"></div>
                                                 </td>
                                             </tr>
-                                            <thead class="gray">
+                                            <thead class="gray text-capitalize">
                                             <tr>
                                                 <th style="text-align:left">@lang('cart.ORDER') @lang('cart.Total')</th>
                                             </tr>
@@ -186,7 +186,7 @@
                                 @lang('cart.Shipping') <span class="details" style="font-weight: lighter">@lang('cart.Details')</span>
                             </h3>
                             <span class="editdetails">
-                                <a href="{{auth()->check() ? url('/www/shipping-address').str_replace(request()->url(), '', request()->fullUrl()) : url('/www/create-account').str_replace(request()->url(), '', request()->fullUrl())}}">
+                                <a href="{{auth()->check() ? url('/www/shipping-address') : url('/www/create-account')}}">
                                     <i class="fa fa-pencil-alt" style="color: #0090cd; font-size: 18px"></i>&nbsp;
                                     <span>@lang('cart.Edit Details')</span>
                                 </a>
@@ -201,6 +201,12 @@
                                         </div>
                                     </address>
                                 </div>
+                                <div class="col-md-9">
+                                    <div class="form-group mb-2">
+                                        <textarea class="form-control" id="notes" name="notes" rows="8" maxlength="500" placeholder="@lang('cart.Notes')" onkeyup="wordsCheck(this)"></textarea>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
                                 {{--<div class="col-md-4">--}}
                                 {{--<h6>SHIPPING METHOD</h6>--}}
                                 {{--<div id="shipping-methods-div">--}}
@@ -213,7 +219,7 @@
                                 {{--</div>--}}
                             </div>
                             <div style="margin-left: -25px">
-                                <div id="shipping-loader" class="text-center" style="display: none; position: absolute; background: #ffffff91; padding-top: 30px">
+                                <div id="shipping-loader" class="text-center" style="display: none; position: absolute; background: #ffffff91; padding-top: 120px">
                                     <i class="fa fa-spinner fa-spin fa-3x"></i>
                                 </div>
                             </div>
@@ -308,7 +314,13 @@
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="form-group mb-2">
-                                                <input class="form-control" type="text" name="billing_postcode" placeholder="@lang('cart.ZIP Code')"/>
+                                                <select class="form-control" name="billing_state_id">
+
+                                                </select>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <input class="form-control" type="text" name="billing_postcode" placeholder="@lang('cart.Postal Code')"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="form-group mb-2">
@@ -317,23 +329,13 @@
                                                 </select>
                                                 <div class="invalid-feedback"></div>
                                             </div>
-                                            <div class="form-group">
-                                                <select class="form-control" name="billing_state_id">
-
-                                                </select>
-                                                <div class="invalid-feedback"></div>
-                                            </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-4 col-12">
-                                            <div class="form-group mb-2">
-                                                <textarea class="form-control" id="notes" name="notes" rows="4" maxlength="500" onkeyup="wordsCheck(this)"></textarea>
-                                                <div class="invalid-feedback"></div>
-                                            </div>
                                             <div class="col-12">
-                                                <p style="color: #939391; line-height: 1.42857143; font-family: 'Montserrat-Regular'">
+                                                <label class="form-check-label" style="font-size: 14px; font-weight: 100;">
                                                     Your IP address has been logged as <span id="ip-address"></span> for confirmation and security purposes. You are now authorized to place this order using this payment method.
-                                                </p>
+                                                </label>
                                             </div>
                                             <div class="form-group form-check">
                                                 <input type="checkbox" class="form-check-input" id="termsCheck" onchange="termsChecked(this)"/>
@@ -355,9 +357,14 @@
             <br/>
             <br/>
             <div class="row">
-                <div class="text-center col-md-2 offset-md-5">
-                    <div class="col-md-12">
-                        <button id="submit-button" class="btn btn-dark btn-block" type="submit" disabled><b>@lang('cart.PAY NOW')</b></button>
+                <div class="col-md-4 offset-md-4 text-center">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-outline-dark btn-block text-uppercase" onclick="previousPage();"><b>@lang('cart.BACK')</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="col-md-6">
+                            <button id="submit-button" class="btn btn-dark btn-block text-uppercase" type="submit" disabled><b>@lang('cart.PAY NOW')</b></button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -389,6 +396,15 @@
         label.error {
             color: red !important;
         }
+        .form-control
+        {
+            height: calc(1.5em + 0.75rem + 2px);
+            font-size: 1rem;
+        }
+        .btn
+        {
+            font-size: 1rem !important;
+        }
     </style>
 @endsection
 @push('js')
@@ -414,6 +430,7 @@
         let totalQV = 0;
         let shippingTotal = 0;
         let taxTotal = 0;
+        let taxPercentage = 0;
         let handlingCharges = 0;
         let subTotal = 0;
         let taxFreeSubTotal = 0;
@@ -430,8 +447,8 @@
             $(window).scroll(function (event) {
                 $('#shipping-loader').css({
                     'width': $('#shipping-details-div').parent().width(),
-                    'height': '140px',
-                    'top': (window_width > 768 ? '780' : window_width === 768 ? '760' : ($('#shipping-details-div').offset().top - 190)) + 'px'
+                    'height': '340px',
+                    'top': (window_width > 768 ? ($('#shipping-details-div').offset().top - 190) : window_width === 768 ? '760' : ($('#shipping-details-div').offset().top - 170)) + 'px'
                 });
             });
 
@@ -443,7 +460,7 @@
                 'top': '40px'
             });
 
-            Payment.formatCardNumber($('[name="card_number"]'));
+            Payment.formatCardNumber($('[name="card_number"]'), 16);
             Payment.formatCardCVC($('[name="cvv"]'));
             $('#card_expiration').val($('#expiry_month').val() + ' / ' + $('#expiry_year').val());
 
@@ -471,7 +488,6 @@
                     "card_number": {
                         required: true,
                         digit_space: true,
-                        maxlength: 19
                     },
                     "cvv": {
                         required: true,
@@ -609,24 +625,35 @@
                 },
             });
 
+            axios.get('get-ip').then((response) => {
+                $('#ip-address').html(response.data);
+            });
+
             $('#shipping-loader').parent().css('margin-left', window_width > 768 ? '-25px': '-10px');
             $('#shipping-loader').show();
             $('#shipping-loader').css({
                 'width': $('#shipping-details-div').parent().width(),
-                'height': '140px',
-                'top': (window_width > 768 ? '780' : window_width === 768 ? '760' : ($('#shipping-details-div').offset().top - 190)) + 'px'
+                'height': '307px',
+                'top': (window_width > 768 ? ($('#shipping-details-div').offset().top - 290) : window_width === 768 ? '760' : ($('#shipping-details-div').offset().top - 190)) + 'px'
             });
-            console.log($('#shipping-details-div').offset());
+
             axios.get('all-countries').then((response) => {
                 let country_options = '';
                 countries = response.data.data;
                 response.data.data.map((country) => {
-                    country_options += '<option value="' + country.id + '">' + country.name + '</option>';
+                    if (country.id == address.country_id)
+                    {
+                        country_options += '<option value="' + country.id + '" selected>' + country.name + '</option>';
+                    }
+                    else
+                    {
+                        country_options += '<option value="' + country.id + '">' + country.name + '</option>';
+                    }
                 });
                 $('[name="billing_country_id"]').html(country_options);
                 let shipping_country = response.data.data.find(country => country.id == shipping_address.country_id);
 
-                axios.get('states-by-country/' + countries[0].id).then((response) => {
+                axios.get('states-by-country/' + address.country_id).then((response) => {
                     let state_options = '';
                     response.data.data.map((state) => {
                         state_options += '<option value="' + state.id + '">' + state.name + '</option>';
@@ -636,10 +663,11 @@
 
                 axios.get('states-by-country/' + shipping_address.country_id).then((response) => {
                     let shipping_state = response.data.data.find(state => state.id == shipping_address.state_id);
-                    let shipping_address_html = shipping_address.address_1 + '<br/>' +
-                        shipping_address.address_2 + '<br/>' +
+                    let shipping_address_html = shipping_address.contact_name + '<br/>' +
+                        shipping_address.address_1 + '<br/>' +
+                        (shipping_address.address_2 ? shipping_address.address_2 + '<br/>' : '') +
                         shipping_address.city + '<br/>' +
-                        shipping_address.postcode + ', ' + shipping_state.name + '<br/>' +
+                        shipping_state.name + ', ' + shipping_address.postcode + '<br/>' +
                         shipping_country.name;
 
                     $('#shipping-loader').hide();
@@ -654,8 +682,8 @@
 
             if ('{{auth()->check()}}' != 1)
             {
-                axios.get('/get-placement/' + user.placement_search_id).then((response) => {
-                    let placement = response.data.data.find(item => item.id == user.placement_id);
+                axios.get('/get-placement/' + user.placement_search_id, {params: {sponsor_id: user.sponsor_id}}).then((response) => {
+                    let placement = user.hasOwnProperty('placement_id') ? response.data.data.find(item => item.id == user.placement_id) : response.data.data[0];
                     $('#placement-information').text(placement.business_center);
                     $('#placement-leg').text(user.leg);
                     $('#sponsor-loader').hide();
@@ -674,13 +702,13 @@
                 }
                 else
                 {
-                    axios.get('/get-placement/' + user.sponsor_id).then((response) => {
+                    axios.get('/get-placement/' + user.sponsor_id, {params: {sponsor_id: user.sponsor_id}}).then((response) => {
                         let placement = response.data.data[0];
                         placement_info = {placement_id: placement.id, leg: user.leg == 'default' ? 'auto' : user.leg};
                         localStorage.setItem('placement_info', JSON.stringify(placement_info));
                         $('#placement-information').text(placement.business_center);
                         $('#placement-leg').text(user.leg);
-                        $('#sponsor-loader').hide();
+                        // $('#sponsor-loader').hide();
                     });
                 }
 
@@ -694,12 +722,22 @@
                             'height': (parseFloat($('#order-details-div').height()) + 50) + 'px',
                             'top': order_loader_top_offset + 'px'
                         });
+                        $('#shipping-loader').css({
+                            'width': $('#shipping-details-div').parent().width(),
+                            'height': '340px',
+                            'top': ($('#shipping-details-div').offset().top - (157 + 40)) + 'px'
+                        });
                     }
                 });
             }
 
             getCart();
         });
+
+        if (cart === null || cart.products.length === 0)
+        {
+            window.location.href = '/www/products' + window.location.search;
+        }
 
         function getCart()
         {
@@ -783,13 +821,13 @@
                         single_qv = product_country.qv;
                     }
 
-                    let buttons = ![80, 83, 84].includes(product.product_id) ? '<button type="button" onclick="editCartProduct('+product.id+')"><i class="fas fa-pencil-alt"></i></button>&nbsp;&nbsp;<button type="button" onclick="deleteCartProduct('+product.id+')"><i class="fas fa-trash-alt"></i></button>' : '';
+                    let buttons = ![80, 83, 84].includes(product.product_id) ? '<button type="button" onclick="editCartProduct('+product.id+')"><i class="fas fa-pencil-alt"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="deleteCartProduct('+product.id+')"><i class="fas fa-trash-alt"></i></button>' : '';
                     cart_tbody += '<tr>' +
                         '<td><span>' + product.product.name + '</span>' + components_div + '</td>' +
                         '<td>' + single_qv + '</td>' +
                         '<td id="cart-product-quantity-'+product.id+'">' + product.quantity + '</td>' +
-                        '<td>' + price + '</td>' +
-                        '<td>' + (price * product.quantity) + '</td>' +
+                        '<td>$' + price + '</td>' +
+                        '<td>$' + (price * product.quantity).toFixed(2) + '</td>' +
                         '<td>' + buttons + '</td>' +
                         '</tr>';
                 });
@@ -831,7 +869,7 @@
                     let data = [{
                         id: 0,
                         shipping_service_setting: {
-                            service_name: 'Unshippable Product'
+                            service_name: 'No Shipping'
                         },
                         range_amount: 0
                     }];
@@ -934,7 +972,7 @@
                 {
                     $('#submit-button').attr('disabled', true);
                 }
-                axios.get('states-by-country/' + countries[0].id).then((response) => {
+                axios.get('states-by-country/' + address.country_id).then((response) => {
                     let state_options = '';
                     response.data.data.map((state) => {
                         state_options += '<option value="' + state.id + '">' + state.name + '</option>';
@@ -965,7 +1003,14 @@
                 });
 
                 $('[name="billing_country_id"] option').map((index, option) => {
-                    $(option).removeAttr('selected');
+                    if ($(option).attr('value') == address.country_id)
+                    {
+                        $(option).attr('selected', true);
+                    }
+                    else
+                    {
+                        $(option).removeAttr('selected');
+                    }
                 });
 
                 $('[name="billing_state_id"]').removeAttr('disabled');
@@ -1000,6 +1045,7 @@
             };
             axios.get('/tax-and-charges', {params: params}).then((response) => {
                 taxTotal = response.data.data.total_tax_amount;
+                taxPercentage = response.data.data.total_tax_percentage;
                 handlingCharges = response.data.data.total_handling_charges;
                 let shippingRate = parseFloat($('#shipping_method').val());
                 let shippingMethod = $('#shipping_method option:selected').text().split('($')[0];
@@ -1014,10 +1060,11 @@
                 cart['subTotal'] = subTotal;
                 cart['grandTotal'] = grandTotal.toFixed(2);
                 $('#cart-qvTotal').html(cart.totalQV);
-                $('#cart-subtotal').html('$' + cart.subTotal);
+                $('#cart-subtotal').html('$' + cart.subTotal.toFixed(2));
                 $('#cart-tax').html('$' + cart.taxTotal);
-                $('#cart-shipping').html('$' + cart.shippingTotal);
-                $('#cart-handling').html('$' + cart.handlingCharges);
+                $('#cart-tax-percentage').html('('+taxPercentage.toFixed(2)+'%)');
+                $('#cart-shipping').html('$' + cart.shippingTotal.toFixed(2));
+                $('#cart-handling').html('$' + cart.handlingCharges.toFixed(2));
                 $('#cart-total').html('$' + cart.grandTotal);
 
                 $('#order-loader').css({
@@ -1049,6 +1096,17 @@
                 $('.hide-on-cod input').removeAttr('disabled');
                 $('.hide-on-cod select').removeAttr('disabled');
             }
+        }
+
+        function changeCountry(event, type)
+        {
+            axios.get('states-by-country/' + event.target.value).then((response) => {
+                let state_options = '';
+                response.data.data.map((state) => {
+                    state_options += '<option value="' + state.id + '">' + state.name + '</option>';
+                });
+                $('[name="billing_state_id"]').html(state_options);
+            });
         }
 
         function wordsCheck(event)
@@ -1103,6 +1161,11 @@
             axios.put('/cart/' + product_id, {quantity: quantity}).then((response) => {
                 getCart();
             });
+        }
+
+        function previousPage()
+        {
+            window.location.href = '/www/create-account' + window.location.search;
         }
     </script>
 @endpush

@@ -69,7 +69,8 @@
                     '                                            <h6 class="text-custom-black fw-600">$' + getPrice(response.data.data) + ' <span class="fw-500" style="font-size: 14px">(QV ' + response.data.data.qv + ')</span></h6>\n' +
                     '                                            <p>' + getDescription(response.data.data) + '</p>\n' +
                     '                                            <ul class="tick-points">' + tick_points + '</ul>\n' +
-                    '                                            <button onclick="addToCart('+response.data.data.id+')" class="theme-btn"><span class="btn-text">@lang("cart.Add to cart")</span></button>\n' +
+                    '                                            <button onclick="addToCart('+response.data.data.id+')" class="theme-btn"><span class="btn-text">@lang("cart.Add to cart")</span></button>&nbsp;&nbsp;&nbsp;&nbsp;\n' +
+                    '                                            <button onclick="window.history.back();" class="theme-btn bg-dark text-white" style="border: 1px solid #000000;"><span class="btn-text">@lang("cart.BACK")</span></button>\n' +
                     '                                        </div>\n' +
                     '                                    </div>\n' +
                     '                                    <div class="col-xl-5 col-lg-6">\n' +
@@ -316,7 +317,7 @@
             }
             else
             {
-                window.location.href = '/www/enrollment';
+                window.location.href = '/www/enrollment' + window.location.search;
             }
         }
 

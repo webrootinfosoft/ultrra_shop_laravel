@@ -28,20 +28,20 @@
 
         /*@media print*/
         /*{*/
-            /*body,html{max-width:181mm;height:297mm;margin-bottom:0}*/
-            /*.table>tbody>tr>td,.table>tbody>tr>th,.table>tfoot>tr>td,.table>tfoot>tr>th,.table>thead>tr>td,.table>thead>tr>th{padding:4px;line-height:1.42857143;vertical-align:top;border-top:1px solid #ddd}*/
-            /*.default-page{width:1170px;margin:auto}*/
-            /*.print-invoice-row{display:none}*/
-            /*.table>tbody>tr>td{padding:3px;vertical-align:top;border-top:1px solid #ddd}*/
-            /*table{margin-bottom:-25px}*/
-            /*.table.table.table-bordered-no{margin-bottom:0;padding:0}*/
-            /*address{margin-bottom:0;font-style:normal;line-height:1.42857143}*/
-            /*table.table.table-bordered{margin-top:0;margin-bottom:0}*/
-            /*img{width:258px!important}td{font-size:10px;padding-top:0}*/
-            /*.row.invoice_footer{margin-top:0}*/
-            /*.row.invoice_footer{margin-top:0!important}*/
-            /*.table.table-bordered-inner>tbody>tr>td{border:0;border-top:1px solid #9e9e9e}*/
-            /*a[href]:after{content:none!important}*/
+        /*body,html{max-width:181mm;height:297mm;margin-bottom:0}*/
+        /*.table>tbody>tr>td,.table>tbody>tr>th,.table>tfoot>tr>td,.table>tfoot>tr>th,.table>thead>tr>td,.table>thead>tr>th{padding:4px;line-height:1.42857143;vertical-align:top;border-top:1px solid #ddd}*/
+        /*.default-page{width:1170px;margin:auto}*/
+        /*.print-invoice-row{display:none}*/
+        /*.table>tbody>tr>td{padding:3px;vertical-align:top;border-top:1px solid #ddd}*/
+        /*table{margin-bottom:-25px}*/
+        /*.table.table.table-bordered-no{margin-bottom:0;padding:0}*/
+        /*address{margin-bottom:0;font-style:normal;line-height:1.42857143}*/
+        /*table.table.table-bordered{margin-top:0;margin-bottom:0}*/
+        /*img{width:258px!important}td{font-size:10px;padding-top:0}*/
+        /*.row.invoice_footer{margin-top:0}*/
+        /*.row.invoice_footer{margin-top:0!important}*/
+        /*.table.table-bordered-inner>tbody>tr>td{border:0;border-top:1px solid #9e9e9e}*/
+        /*a[href]:after{content:none!important}*/
         /*}*/
 
         /*.row.invoice_footer{margin-top:0!important}*/
@@ -270,274 +270,274 @@
     </style>
 </head>
 <body style="overflow-y: scroll">
-<div id="dt-root">
+<div id="dt-root" class="main-div">
     <!-- Grid -->
 
 
-    {{--<div class="invoice-section">--}}
-        {{--<div class="container">--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-12">--}}
+{{--<div class="invoice-section">--}}
+{{--<div class="container">--}}
+{{--<div class="row">--}}
+{{--<div class="col-12">--}}
 
-                    {{--<div class="invoice-top">--}}
+{{--<div class="invoice-top">--}}
 
-                        {{--<div class="row">--}}
-                            {{--<div class="col-lg-3">--}}
-                                {{--<div class="header-top-left-main">--}}
-                                    {{--<div class="header-top-logo">--}}
-                                        {{--<img src="{{asset('images/logo.png')}}" alt="Ultrra">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-lg-9">--}}
-                                {{--<div class="header-top-right-main">--}}
-                                    {{--<div class="row">--}}
-                                        {{--<div class="col-6">--}}
-                                            {{--<div class="header-top-left">--}}
-                                                {{--<p><b>Sponsor Username: {{$order->sponsor->username}}</b></p>--}}
-                                                {{--<p>Sponsor Name: {{$order->sponsor->name}}</p>--}}
-                                                {{--<p>Sponsor Phone: {{$order->sponsor->phone}}</p>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="col-6">--}}
-                                            {{--<div class="header-top-right text-right">--}}
-                                                {{--<p><b>Order Type: {{$order->user->usertype}}</b></p>--}}
-                                                {{--<p><b>Order #: {{$order->id}}</b></p>--}}
-                                                {{--<p>Order Date: {{date('m/d/Y H:i:s', strtotime($order->created_at))}}</p>--}}
-                                                {{--<p>Preferred Language: English</p>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+{{--<div class="row">--}}
+{{--<div class="col-lg-3">--}}
+{{--<div class="header-top-left-main">--}}
+{{--<div class="header-top-logo">--}}
+{{--<img src="{{asset('images/logo.png')}}" alt="Ultrra">--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--<div class="col-lg-9">--}}
+{{--<div class="header-top-right-main">--}}
+{{--<div class="row">--}}
+{{--<div class="col-6">--}}
+{{--<div class="header-top-left">--}}
+{{--<p><b>Sponsor Username: {{$order->sponsor->username}}</b></p>--}}
+{{--<p>Sponsor Name: {{$order->sponsor->name}}</p>--}}
+{{--<p>Sponsor Phone: {{$order->sponsor->phone}}</p>--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--<div class="col-6">--}}
+{{--<div class="header-top-right text-right">--}}
+{{--<p><b>Order Type: {{$order->user->usertype}}</b></p>--}}
+{{--<p><b>Order #: {{$order->id}}</b></p>--}}
+{{--<p>Order Date: {{date('m/d/Y H:i:s', strtotime($order->created_at))}}</p>--}}
+{{--<p>Preferred Language: English</p>--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--</div>--}}
 
-                    {{--</div>--}}
-
-
-                    {{--<div class="invoice-p-info">--}}
-                        {{--<table class="table" style="margin-bottom: 0 !important;">--}}
-                            {{--<thead>--}}
-                            {{--<tr>--}}
-                                {{--<th width="10%">Account Info</th>--}}
-                                {{--<th style="padding-bottom: 0 !important;">{{$order->billing_firstname}}</th>--}}
-                                {{--<th width="10%">Ship To</th>--}}
-                                {{--<th style="padding-bottom: 0 !important;">{{$order->shipping_firstname}}</th>--}}
-                            {{--</tr>--}}
-                            {{--</thead>--}}
-                            {{--<tbody>--}}
-                            {{--<tr>--}}
-                                {{--<td></td>--}}
-                                {{--<td style="padding-top: 0 !important;">--}}
-                                    {{--{{$order->billing_address_1}}<br/>--}}
-                                    {{--{{$order->billing_address_2}}<br/>--}}
-                                    {{--{{$order->billing_city}}, {{$order->billingState->name}}, {{$order->billing_postcode}}<br/>--}}
-                                    {{--{{$order->billingCountry->name}}<br/>--}}
-                                    {{--{{$order->mobile}}<br/>--}}
-                                    {{--{{$order->email}}<br/>--}}
-                                {{--</td>--}}
-                                {{--<td></td>--}}
-                                {{--<td style="padding-top: 0 !important;">--}}
-                                    {{--{{$order->shipping_address_1}}<br/>--}}
-                                    {{--{{$order->shipping_address_2}}<br/>--}}
-                                    {{--{{$order->shipping_city}}, {{$order->shippingState->name}}, {{$order->shipping_postcode}}<br/>--}}
-                                    {{--{{$order->shippingCountry->name}}<br/>--}}
-                                    {{--{{$order->shipping_mobile}}<br/>--}}
-                                    {{--{{$order->shipping_email}}<br/>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                            {{--</tbody>--}}
-                        {{--</table>--}}
-                    {{--</div>--}}
+{{--</div>--}}
 
 
-                    {{--<div class="invoice-info">--}}
-                        {{--<table class="table" style="margin-bottom: 0 !important;">--}}
-                            {{--<tbody>--}}
-                            {{--<tr>--}}
-                                {{--<td style="margin-bottom: 0 !important;"><b>Username:</b> {{$order->user->username}}</td>--}}
-                                {{--<td style="margin-bottom: 0 !important;"><b>QV:</b> {{$order->total_qv}}</td>--}}
-                                {{--<td class="text-right" style="margin-bottom: 0 !important;"><b>Shipping Method:</b> {{$order->shipping_method}}</td>--}}
-                            {{--</tr>--}}
-                            {{--<tr>--}}
-                                {{--<td><b>First Order:</b> {{$order->is_first_order == 1 ? 'Yes' : 'No'}}</td>--}}
-                                {{--<td><b>BV:</b> {{$order->orderProducts->sum('bv')}}</td>--}}
-                                {{--<td class="text-right"><b>Order Status:</b> {{$order->orderStatus->name}}</td>--}}
-                            {{--</tr>--}}
-                            {{--</tbody>--}}
-                        {{--</table>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="invoice-details">--}}
-                        {{--<table class="table">--}}
-                            {{--<thead>--}}
-                            {{--<tr>--}}
-                                {{--<td width="40%" class="text-left">Description</td>--}}
-                                {{--<td width="15%" class="text-center">Qty</td>--}}
-                                {{--<td width="15%" class="text-center">QV</td>--}}
-                                {{--<td width="15%" class="text-center">Unit Price</td>--}}
-                                {{--<td width="15%" class="text-center">Total</td>--}}
-                            {{--</tr>--}}
-                            {{--</thead>--}}
-                            {{--<tbody style="border-bottom: 1px solid lightgray">--}}
-                            {{--@foreach($order->orderProducts as $order_product)--}}
-                                {{--<tr>--}}
-                                    {{--<td>--}}
-                                        {{--<b>{{$order_product->name}}</b>--}}
-                                        {{--<br/>--}}
-                                        {{--<small>--}}
-                                            {{--@if($order_product->orderProductComponents->count() > 0)--}}
-                                                {{--@foreach($order_product->orderProductComponents as $order_product_component)--}}
-                                                    {{--{{ $order_product_component->quantity.' '.$order_product_component->name }} <br>--}}
-                                                {{--@endforeach--}}
-                                            {{--@endif--}}
-                                        {{--</small>--}}
-                                    {{--</td>--}}
-                                    {{--<td class="text-center">{{$order_product->quantity}}</td>--}}
-                                    {{--<td class="text-center">{{$order_product->qv}}</td>--}}
-                                    {{--<td class="text-center">${{$order_product->price}}</td>--}}
-                                    {{--<td class="text-center">${{$order_product->total}}</td>--}}
-                                {{--</tr>--}}
-                            {{--@endforeach--}}
-                            {{--</tbody>--}}
-                        {{--<!-- <tfoot>--}}
-                        {{--<tr>--}}
-                            {{--<th colspan="2"><b>Notes:</b>{{$order->note}}</th>--}}
-                            {{--<td colspan="2" class="text-right">Subtotal</td>--}}
-                            {{--<td class="text-right">${{$order->sub_total}} USD</td>--}}
-                        {{--</tr>--}}
-                        {{--<tr>--}}
-                            {{--<th colspan="2">&nbsp;</th>--}}
-                            {{--<td colspan="2" class="text-right">Shipping</td>--}}
-                            {{--<td class="text-right">${{$order->shipping_price}} USD</td>--}}
-                        {{--</tr>--}}
-                        {{--<tr>--}}
-                            {{--<th colspan="2">&nbsp;</th>--}}
-                            {{--<td colspan="2" class="text-right">Handling</td>--}}
-                            {{--<td class="text-right">${{$order->handling_charges}} USD</td>--}}
-                        {{--</tr>--}}
-                        {{--<tr>--}}
-                            {{--<th colspan="2">&nbsp;</th>--}}
-                            {{--<td colspan="2" class="text-right">Tax (X.XX%)</td>--}}
-                            {{--<td class="text-right">${{$order->tax}} USD</td>--}}
-                        {{--</tr>--}}
-                        {{--<tr>--}}
-                            {{--<th colspan="2">--}}
-                                {{--<b>--}}
-                                    {{--Payment Method:--}}
-                                    {{--@foreach($order->paymentMethods as $payment_method)--}}
-                            {{--{{implode(' ', explode('_', $payment_method->payment_method))}} @if (!is_null($payment_method->card_number) && !empty($payment_method->card_number)) ({{$payment_method->card_number}}) @endif--}}
-                        {{--@endforeach--}}
-                                {{--</b>--}}
-                            {{--</th>--}}
-                            {{--<td colspan="2" class="text-right">Total</td>--}}
-                            {{--<td class="text-right">${{$order->total}} USD</td>--}}
-                        {{--</tr>--}}
-                        {{--</tfoot> -->--}}
-                        {{--</table>--}}
-                        {{--<table class="table" style="border-bottom: 1px solid #e8e8e8;">--}}
-                            {{--<tr>--}}
-                                {{--<td width="70%">--}}
-                                    {{--<table class="table">--}}
-                                        {{--<tr>--}}
-                                            {{--<td style="border: none;"><b>Notes: </b>{{$order->note}}</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td style="border: none;">&nbsp;</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td style="border: none;">&nbsp;</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td style="border: none;">&nbsp;</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td style="border: none;">--}}
-                                                {{--<b>--}}
-                                                    {{--Payment Method:--}}
-                                                    {{--@foreach($order->paymentMethods as $payment_method)--}}
-                                                        {{--{{implode(' ', explode('_', $payment_method->payment_method))}} @if (!is_null($payment_method->card_number) && !empty($payment_method->card_number)) ({{$payment_method->card_number}}) @endif--}}
-                                                    {{--@endforeach--}}
-                                                {{--</b>--}}
-                                            {{--</td>--}}
-                                        {{--</tr>--}}
-                                    {{--</table>--}}
-                                {{--</td>--}}
-                                {{--<td width="30%">--}}
-                                    {{--<table class="table table-bordered table-bordered-inner text-right">--}}
-                                        {{--<tr>--}}
-                                            {{--<td><b>Subtotal</b></td>--}}
-                                            {{--<td>${{$order->sub_total}}</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td><b>Shipping</b></td>--}}
-                                            {{--<td>${{number_format((float)$order->shipping_price, 2, '.', '')}}</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td><b>Handling</b></td>--}}
-                                            {{--<td>${{$order->handling_charges}}</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td>--}}
-                                                {{--<b>--}}
-                                                    {{--@if($order->sub_total == 0)--}}
-                                                        {{--Tax ({{round(($order->tax)*100, 2)}}%)--}}
-                                                    {{--@else--}}
-                                                        {{--Tax ({{round(($order->tax/$order->sub_total)*100, 2)}}%)--}}
-                                                    {{--@endif--}}
-                                                {{--</b></td>--}}
-                                            {{--<td>${{$order->tax}}</td>--}}
-                                        {{--</tr>--}}
-                                        {{--<tr>--}}
-                                            {{--<td><b>Total</b></td>--}}
-                                            {{--<td>${{$order->total}}</td>--}}
-                                        {{--</tr>--}}
-                                    {{--</table>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                        {{--</table>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="invoice-detail-bottom text-right">--}}
-                        {{--<p>Order packed by: _________</p>--}}
-                        {{--<p>Contents verified by: _________</p>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="invoice-thankyou text-center">--}}
-                        {{--<p>Thank you for your order!</p>--}}
-                        {{--<p>Visit us on facebook and share your experience with us!</p>--}}
-                        {{--<p><a href="https://www.facebook.com/ultrraofficial" target="_blank">www.facebook.com/ultrraofficial</a></p>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="invoice-bottom">--}}
-                        {{--<ul>--}}
-                            {{--<li><a href="https://ultrra.com/">www.ultrra.com</a></li>--}}
-                            {{--<li><a href="mailto:cc@ultrra.com">cc@ultrra.com</a></li>--}}
-                            {{--<li><a href="tel:888.981.1711">888.981.1711</a></li>--}}
-                        {{--</ul>--}}
-                    {{--</div>--}}
-
-                    {{--<div class="row print-invoice-row">--}}
-                        {{--<div class="col-md-6">--}}
-                            {{--<a href="http://office.ultrra.com" class="btn btn-primary" style="float: left; margin-bottom: 20px;"><i class="fa fa-sign-in"></i>Click to login</a>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-md-6">--}}
-                            {{--<button class="btn btn-primary" style="float: right; margin-bottom: 20px;" onclick="printInvoice()"><i class="fa fa-print"></i> Print Invoice</button>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
+{{--<div class="invoice-p-info">--}}
+{{--<table class="table" style="margin-bottom: 0 !important;">--}}
+{{--<thead>--}}
+{{--<tr>--}}
+{{--<th width="10%">Account Info</th>--}}
+{{--<th style="padding-bottom: 0 !important;">{{$order->billing_firstname}}</th>--}}
+{{--<th width="10%">Ship To</th>--}}
+{{--<th style="padding-bottom: 0 !important;">{{$order->shipping_firstname}}</th>--}}
+{{--</tr>--}}
+{{--</thead>--}}
+{{--<tbody>--}}
+{{--<tr>--}}
+{{--<td></td>--}}
+{{--<td style="padding-top: 0 !important;">--}}
+{{--{{$order->billing_address_1}}<br/>--}}
+{{--{{$order->billing_address_2}}<br/>--}}
+{{--{{$order->billing_city}}, {{$order->billingState->name}}, {{$order->billing_postcode}}<br/>--}}
+{{--{{$order->billingCountry->name}}<br/>--}}
+{{--{{$order->mobile}}<br/>--}}
+{{--{{$order->email}}<br/>--}}
+{{--</td>--}}
+{{--<td></td>--}}
+{{--<td style="padding-top: 0 !important;">--}}
+{{--{{$order->shipping_address_1}}<br/>--}}
+{{--{{$order->shipping_address_2}}<br/>--}}
+{{--{{$order->shipping_city}}, {{$order->shippingState->name}}, {{$order->shipping_postcode}}<br/>--}}
+{{--{{$order->shippingCountry->name}}<br/>--}}
+{{--{{$order->shipping_mobile}}<br/>--}}
+{{--{{$order->shipping_email}}<br/>--}}
+{{--</td>--}}
+{{--</tr>--}}
+{{--</tbody>--}}
+{{--</table>--}}
+{{--</div>--}}
 
 
+{{--<div class="invoice-info">--}}
+{{--<table class="table" style="margin-bottom: 0 !important;">--}}
+{{--<tbody>--}}
+{{--<tr>--}}
+{{--<td style="margin-bottom: 0 !important;"><b>Username:</b> {{$order->user->username}}</td>--}}
+{{--<td style="margin-bottom: 0 !important;"><b>QV:</b> {{$order->total_qv}}</td>--}}
+{{--<td class="text-right" style="margin-bottom: 0 !important;"><b>Shipping Method:</b> {{$order->shipping_method}}</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<td><b>First Order:</b> {{$order->is_first_order == 1 ? 'Yes' : 'No'}}</td>--}}
+{{--<td><b>BV:</b> {{$order->orderProducts->sum('bv')}}</td>--}}
+{{--<td class="text-right"><b>Order Status:</b> {{$order->orderStatus->name}}</td>--}}
+{{--</tr>--}}
+{{--</tbody>--}}
+{{--</table>--}}
+{{--</div>--}}
+
+{{--<div class="invoice-details">--}}
+{{--<table class="table">--}}
+{{--<thead>--}}
+{{--<tr>--}}
+{{--<td width="40%" class="text-left">Description</td>--}}
+{{--<td width="15%" class="text-center">Qty</td>--}}
+{{--<td width="15%" class="text-center">QV</td>--}}
+{{--<td width="15%" class="text-center">Unit Price</td>--}}
+{{--<td width="15%" class="text-center">Total</td>--}}
+{{--</tr>--}}
+{{--</thead>--}}
+{{--<tbody style="border-bottom: 1px solid lightgray">--}}
+{{--@foreach($order->orderProducts as $order_product)--}}
+{{--<tr>--}}
+{{--<td>--}}
+{{--<b>{{$order_product->name}}</b>--}}
+{{--<br/>--}}
+{{--<small>--}}
+{{--@if($order_product->orderProductComponents->count() > 0)--}}
+{{--@foreach($order_product->orderProductComponents as $order_product_component)--}}
+{{--{{ $order_product_component->quantity.' '.$order_product_component->name }} <br>--}}
+{{--@endforeach--}}
+{{--@endif--}}
+{{--</small>--}}
+{{--</td>--}}
+{{--<td class="text-center">{{$order_product->quantity}}</td>--}}
+{{--<td class="text-center">{{$order_product->qv}}</td>--}}
+{{--<td class="text-center">${{$order_product->price}}</td>--}}
+{{--<td class="text-center">${{$order_product->total}}</td>--}}
+{{--</tr>--}}
+{{--@endforeach--}}
+{{--</tbody>--}}
+{{--<!-- <tfoot>--}}
+{{--<tr>--}}
+{{--<th colspan="2"><b>Notes:</b>{{$order->note}}</th>--}}
+{{--<td colspan="2" class="text-right">Subtotal</td>--}}
+{{--<td class="text-right">${{$order->sub_total}} USD</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<th colspan="2">&nbsp;</th>--}}
+{{--<td colspan="2" class="text-right">Shipping</td>--}}
+{{--<td class="text-right">${{$order->shipping_price}} USD</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<th colspan="2">&nbsp;</th>--}}
+{{--<td colspan="2" class="text-right">Handling</td>--}}
+{{--<td class="text-right">${{$order->handling_charges}} USD</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<th colspan="2">&nbsp;</th>--}}
+{{--<td colspan="2" class="text-right">Tax (X.XX%)</td>--}}
+{{--<td class="text-right">${{$order->tax}} USD</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<th colspan="2">--}}
+{{--<b>--}}
+{{--Payment Method:--}}
+{{--@foreach($order->paymentMethods as $payment_method)--}}
+{{--{{implode(' ', explode('_', $payment_method->payment_method))}} @if (!is_null($payment_method->card_number) && !empty($payment_method->card_number)) ({{$payment_method->card_number}}) @endif--}}
+{{--@endforeach--}}
+{{--</b>--}}
+{{--</th>--}}
+{{--<td colspan="2" class="text-right">Total</td>--}}
+{{--<td class="text-right">${{$order->total}} USD</td>--}}
+{{--</tr>--}}
+{{--</tfoot> -->--}}
+{{--</table>--}}
+{{--<table class="table" style="border-bottom: 1px solid #e8e8e8;">--}}
+{{--<tr>--}}
+{{--<td width="70%">--}}
+{{--<table class="table">--}}
+{{--<tr>--}}
+{{--<td style="border: none;"><b>Notes: </b>{{$order->note}}</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<td style="border: none;">&nbsp;</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<td style="border: none;">&nbsp;</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<td style="border: none;">&nbsp;</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<td style="border: none;">--}}
+{{--<b>--}}
+{{--Payment Method:--}}
+{{--@foreach($order->paymentMethods as $payment_method)--}}
+{{--{{implode(' ', explode('_', $payment_method->payment_method))}} @if (!is_null($payment_method->card_number) && !empty($payment_method->card_number)) ({{$payment_method->card_number}}) @endif--}}
+{{--@endforeach--}}
+{{--</b>--}}
+{{--</td>--}}
+{{--</tr>--}}
+{{--</table>--}}
+{{--</td>--}}
+{{--<td width="30%">--}}
+{{--<table class="table table-bordered table-bordered-inner text-right">--}}
+{{--<tr>--}}
+{{--<td><b>Subtotal</b></td>--}}
+{{--<td>${{$order->sub_total}}</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<td><b>Shipping</b></td>--}}
+{{--<td>${{number_format((float)$order->shipping_price, 2, '.', '')}}</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<td><b>Handling</b></td>--}}
+{{--<td>${{$order->handling_charges}}</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<td>--}}
+{{--<b>--}}
+{{--@if($order->sub_total == 0)--}}
+{{--Tax ({{round(($order->tax)*100, 2)}}%)--}}
+{{--@else--}}
+{{--Tax ({{round(($order->tax/$order->sub_total)*100, 2)}}%)--}}
+{{--@endif--}}
+{{--</b></td>--}}
+{{--<td>${{$order->tax}}</td>--}}
+{{--</tr>--}}
+{{--<tr>--}}
+{{--<td><b>Total</b></td>--}}
+{{--<td>${{$order->total}}</td>--}}
+{{--</tr>--}}
+{{--</table>--}}
+{{--</td>--}}
+{{--</tr>--}}
+{{--</table>--}}
+{{--</div>--}}
+
+{{--<div class="invoice-detail-bottom text-right">--}}
+{{--<p>Order packed by: _________</p>--}}
+{{--<p>Contents verified by: _________</p>--}}
+{{--</div>--}}
+
+{{--<div class="invoice-thankyou text-center">--}}
+{{--<p>Thank you for your order!</p>--}}
+{{--<p>Visit us on facebook and share your experience with us!</p>--}}
+{{--<p><a href="https://www.facebook.com/ultrraofficial" target="_blank">www.facebook.com/ultrraofficial</a></p>--}}
+{{--</div>--}}
+
+{{--<div class="invoice-bottom">--}}
+{{--<ul>--}}
+{{--<li><a href="https://ultrra.com/">www.ultrra.com</a></li>--}}
+{{--<li><a href="mailto:cc@ultrra.com">cc@ultrra.com</a></li>--}}
+{{--<li><a href="tel:888.981.1711">888.981.1711</a></li>--}}
+{{--</ul>--}}
+{{--</div>--}}
+
+{{--<div class="row print-invoice-row">--}}
+{{--<div class="col-md-6">--}}
+{{--<a href="http://office.ultrra.com" class="btn btn-primary" style="float: left; margin-bottom: 20px;"><i class="fa fa-sign-in"></i>Click to login</a>--}}
+{{--</div>--}}
+{{--<div class="col-md-6">--}}
+{{--<button class="btn btn-primary" style="float: right; margin-bottom: 20px;" onclick="printInvoice()"><i class="fa fa-print"></i> Print Invoice</button>--}}
+{{--</div>--}}
+{{--</div>--}}
+
+{{--</div>--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--</div>--}}
 
 
 
 
 
-    <!--------------------------------------------------------------------------------------------------------------------------->
+
+
+<!--------------------------------------------------------------------------------------------------------------------------->
     <!--OLD Invoice Template Starts-->
     <!--------------------------------------------------------------------------------------------------------------------------->
 
@@ -630,16 +630,13 @@
                     <tr>
                         <td class="text-left"><b>Username : {{ $order->user ? $order->user->username : ($order->meta->user ? $order->meta->user->username : '')}}</b></td>
                         <td class="text-left"><b>Order QV : </b> {{ $order->total_qv }} </td>
-                        <td class="text-left"><b>Shipping Method : </b> <span></span>{{ $order->shipping_method }}
-                        </td>
-                        <td class="text-left"><b>Sponsor Username : </b> {{ $order->sponsor ? $order->sponsor->username : '' }}
-                        </td>
+                        <td class="text-left"><b>Shipping Method : </b> <span></span>{{ $order->shipping_method }}</td>
+                        <td class="text-left"><b>Sponsor Username : </b> {{ $order->sponsor ? $order->sponsor->username : '' }}</td>
                     </tr>
 
                     <tr>
                         <td class="text-left"><b>First Order : </b> @if($order->is_first_order == 1) Yes @else No @endif</td>
-                        <td class="text-left"><b>Order BV
-                                : </b> @if($order->is_first_order == 1) {{ $order->total_qv/2 }} @else {{ $order->total_qv }} @endif
+                        <td class="text-left"><b>Order BV : </b> @if($order->is_first_order == 1) {{ $order->total_qv/2 }} @else {{ $order->total_qv }} @endif
                         </td>
                         <td class="text-left"><b>Sponsor Name : </b> {{ $order->sponsor ? $order->sponsor->name : '' }}</td>
                         <td class="text-left"><b>Sponsor Phone : </b> {{ $order->sponsor ? $order->sponsor->phone : '' }}</td>
@@ -648,7 +645,7 @@
                     </tbody>
 
                 </table>
-                <table class="table table-striped" style="border:1px solid lightgrey; word-break: break-all;">
+                <table class="table" style="border:1px solid lightgrey; word-break: break-all;">
                     <thead>
                     <tr>
                         <td class="text-left"><b>Product</b></td>
@@ -732,7 +729,8 @@
                                 </tr>
                                 <tr>
                                     <td class="text-right" colspan="5"><b>Tax</b></td>
-                                    <td class="text-right">$ {{ number_format((float)$order->tax, 2, '.', '') }}USD
+                                    <td class="text-right">
+                                        $ {{ number_format((float)$order->tax, 2, '.', '') }} USD
                                     </td>
                                 </tr>
                                 <tr>
@@ -749,13 +747,10 @@
 
                 <div class="row print-invoice-row">
                     <div class="col-md-6">
-                        <a href="http://office.ultrra.com" class="btn btn-primary"
-                           style="float: left; margin-bottom: 20px;"><i class="fa fa-sign-in"></i>Click to login</a>
+                        <a href="http://office.ultrra.com" class="btn btn-primary" style="float: left; margin-bottom: 20px;"><i class="fa fa-sign-in"></i> Click to login</a>
                     </div>
                     <div class="col-md-6">
-                        <button class="btn btn-primary" style="float: right; margin-bottom: 20px;"
-                                onclick="printInvoice()"><i class="fa fa-print"></i> Print Invoice
-                        </button>
+                        <button class="btn btn-primary" style="float: right; margin-bottom: 20px;" onclick="printInvoice()"><i class="fa fa-print"></i> Print Invoice</button>
                     </div>
                 </div>
 
@@ -763,8 +758,7 @@
                     <div class="col-md-12 text-center bottom-text">
                         <p>Thank you for your order!</p>
                         <p>Be sure to visit us on facebook and share your experience with us!</p>
-                        <p><a target="_blank"
-                              href="https://facebook.com/ultrraofficial">www.facebook.com/ultrraofficial</a></p>
+                        <p><a target="_blank" href="https://facebook.com/ultrraofficial">www.facebook.com/ultrraofficial</a></p>
                         <p>
                             <a target="_blank" href="https://ultrra.com">www.ultrra.com</a> |
                             <a target="_blank" href="cc@ultrra.com">cc@ultrra.com</a> |
@@ -779,12 +773,16 @@
         </div>
     </div>
 
-<!-- /grid -->
+    <!-- /grid -->
 </div>
 </body>
 <script>
     function printInvoice() {
         window.print();
     }
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = () => {
+        window.history.pushState(null, "", window.location.href);
+    };
 </script>
 </html>

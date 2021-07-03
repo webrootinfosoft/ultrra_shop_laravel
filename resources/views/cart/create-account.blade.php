@@ -3,14 +3,16 @@
 @section('content')
     <form id="create-account-form" method="post" onkeydown="return event.key != 'Enter';">
         <div class="container-fluid text-center">
-            <div class="col-md-10 offset-md-1">
-                <div class="stepwizard text-center">
-                    <div class="stepwizard-row">
-                        @include('includes.cart-stepper')
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="stepwizard text-center">
+                        <div class="stepwizard-row">
+                            @include('includes.cart-stepper')
+                        </div>
                     </div>
+                    <br/>
+                    <br/>
                 </div>
-                <br/>
-                <br/>
             </div>
             <div class="row">
                 <div class="col-md-6 offset-md-3">
@@ -33,7 +35,7 @@
                                         <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">Country*</label>
                                         <div class="col-md-8">
                                             <select class="form-control" id="country" onchange="changeCountry(this)">
-                                                
+
                                             </select>
                                         </div>
                                     </div>
@@ -53,28 +55,30 @@
                     <div class="row">
                         <div class="col">
                             <div id="account-type" class="text-left">
-                                <h2 class="subpage text-center">@lang('cart.SELECT AN ACCOUNT TYPE')</h2>
-                                <div class="text-center">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="inlineCheckbox1" value="rc" name="user[usertype]" />
-                                        <label class="form-check-label" for="inlineCheckbox1">Retail Customer</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="inlineCheckbox2" value="pc" name="user[usertype]" />
-                                        <label class="form-check-label" for="inlineCheckbox2">Preferred Customer</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="inlineCheckbox3" value="dc" name="user[usertype]" />
-                                        <label class="form-check-label" for="inlineCheckbox3">Distributor</label>
-                                    </div>
-                                </div>
+                                {{--<h2 class="subpage text-center">@lang('cart.SELECT AN ACCOUNT TYPE')</h2>--}}
+                                {{--<div class="text-center">--}}
+                                {{--<div class="form-check form-check-inline">--}}
+                                {{--<input class="form-check-input" type="radio" id="inlineCheckbox1" value="rc" name="user[usertype]" />--}}
+                                {{--<label class="form-check-label" for="inlineCheckbox1">Retail Customer</label>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-check form-check-inline">--}}
+                                {{--<input class="form-check-input" type="radio" id="inlineCheckbox2" value="pc" name="user[usertype]" />--}}
+                                {{--<label class="form-check-label" for="inlineCheckbox2">Preferred Customer</label>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-check form-check-inline">--}}
+                                {{--<input class="form-check-input" type="radio" id="inlineCheckbox3" value="dc" name="user[usertype]" />--}}
+                                {{--<label class="form-check-label" for="inlineCheckbox3">Distributor</label>--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                                <h2 class="subpage text-center">SELECTED ENROLLMENT TYPE: <span id="enrollment-usertype"></span></h2>
+                                <input type="hidden" name="user[usertype]">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <div id="sponsor-select" class="text-left">
-                                <h2 class="subpage text-center"><b>@lang('cart.PERSONAL SPONSOR INFORMATION')</b></h2>
+                                <h2 class="subpage text-center" style="margin-top: 0 !important;"><b>@lang('cart.PERSONAL SPONSOR INFORMATION')</b></h2>
                                 <div>
                                     <div class="row form-group">
                                         <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Sponsor Username')</label>
@@ -82,18 +86,18 @@
                                             <input class="form-control" type="text" name="user[sponsor_id]" onkeyup="sponsorIdKeyUp(this)" onkeydown="verifySponsor1(event)"/>
                                         </div>
                                         <div class="col-md-2 col-3">
-                                            <button id="sponsor-search-button" type="button" class="btn btn-primary float-right float-md-none" disabled onclick="verifySponsor()"><i class="fa fa-search"></i></button>
+                                            <button id="sponsor-search-button" type="button" class="btn btn-primary float-right float-md-none" disabled onclick="verifySponsor('clicked')"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-center">
                                     <b><i>@lang('cart.Don\'t Have a Sponsor?')</i></b>
                                     <br/>
-                                    <p>@lang('cart.Please contact the person who referred you to Ultrra for this information')?.</p>
+                                    <p>@lang('cart.Please contact the person who referred you to Ultrra for this information')</p>
                                 </div>
                                 <div id="selected-sponsor" style="display: none;">
                                     <div class="text-center">
-                                        <h5><img src="" alt="user-image" style="width: 100px"/><br class="d-md-none"/><span></span></h5>
+                                        <h5><img src="" alt="user-image" style="width: 100px"/>&nbsp;&nbsp;&nbsp;&nbsp;<br class="d-md-none"/><span></span></h5>
                                     </div>
                                 </div>
                             </div>
@@ -120,9 +124,9 @@
                                     <br/>
                                     <div id="placement-details" style="display: none;">
                                         <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Placement ID')#</label>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Placement Username')#</label>
                                             <div class="col-md-5 col-8">
-                                                <input type="text" name="user[placement_search_id]" class="form-control" onkeyup="placementSearchKeyUp()"/>
+                                                <input type="text" name="user[placement_search_id]" class="form-control" onkeyup="placementSearchKeyUp(event)"/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="col-md-2 col-4">
@@ -223,18 +227,32 @@
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                        <label class="text-md-right text-sm-left col-md-4 form-label">Preferred Language*</label>
-                                        <div class="col-md-8">
-                                            <select class="form-control" id="language">
-                                                <option value="en">English (en)</option>
-                                                <option value="es">Espanol (es)</option>
-                                            </select>
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Preferred Language*</label>
+                                            <div class="col-md-8">
+                                                <select class="form-control" id="language">
+                                                    <option value="en">English (en)</option>
+                                                    <option value="es">Espanol (es)</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
                                         <div class="row form-group">
                                             <label class="text-md-right text-sm-left col-md-4 form-label">Email *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="user[email]" required/>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Password *</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="password" name="user[password]" id="password" required/>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">Password Confirmation *</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="password" name="user[password_confirmation]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
@@ -290,7 +308,7 @@
                                             <label class="text-md-right text-sm-left col-md-4 form-label" style="color: #3c763d">@lang('cart.Country') *</label>
                                             <div class="col-md-8">
                                                 <select class="form-control" name="address[country_id]" disabled>
-                                                     
+
                                                 </select>
                                                 <div class="invalid-feedback"></div>
                                             </div>
@@ -303,7 +321,7 @@
                             <div class="col">
                                 <div id="shipping-address-information" class="text-left">
                                     <h2 class="subpage text-center"><b>@lang('cart.SHIPPING ADDRESS')</b></h2>
-                                    <div class="text-center">
+                                    <div class="text-center col-12">
                                         <input class="form-check-input" type="checkbox" id="shipping_same" onchange="shippingSame(this)"/>
                                         <label class="form-check-label" for="shipping_same">
                                             @lang('cart.Shipping address is the same as the main address').
@@ -311,7 +329,7 @@
                                     </div>
                                     <br/>
                                     <div id="shipping-address-fields">
-                                    <div class="row form-group">
+                                        <div class="row form-group">
                                             <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.First Name') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="hidden" name="shipping_address[contact_name]" required/>
@@ -323,6 +341,13 @@
                                             <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Last Name') *</label>
                                             <div class="col-md-8">
                                                 <input class="form-control" type="text" name="shipping_address[lastname]" required/>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Mobile Phone') #*</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control" type="text" name="shipping_address[phone]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
@@ -353,13 +378,6 @@
                                                 <select class="form-control" name="shipping_address[state_id]">
 
                                                 </select>
-                                                <div class="invalid-feedback"></div>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <label class="text-md-right text-sm-left col-md-4 form-label">@lang('cart.Mobile Phone') #*</label>
-                                            <div class="col-md-8">
-                                                <input class="form-control" type="text" name="shipping_address[phone]" required/>
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                         </div>
@@ -621,10 +639,10 @@
                 <div class="col-md-4 offset-md-4 text-center">
                     <div class="row">
                         <div class="col-md-6">
-                            <button class="btn btn-outline-dark btn-block" onclick="previousPage();"><b>@lang('cart.BACK')</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-outline-dark btn-block text-uppercase" onclick="previousPage();"><b>@lang('cart.BACK')</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
                         <div class="col-md-6">
-                            <button id="submit-button" class="btn btn-dark btn-block" type="submit" disabled><b>@lang('cart.CONTINUE')</b></button>
+                            <button id="submit-button" class="btn btn-dark btn-block text-uppercase" type="submit" disabled><b>@lang('cart.CONTINUE')</b></button>
                         </div>
                     </div>
                 </div>
@@ -642,6 +660,15 @@
         {
             font-size: 2rem !important;
         }
+        .btn
+        {
+            font-size: 1rem !important;
+        }
+        .form-control
+        {
+            height: calc(1.5em + 0.75rem + 2px);
+            font-size: 1rem;
+        }
     </style>
 @endsection
 @push('js')
@@ -649,14 +676,14 @@
         let user = localStorage.getItem('user');
         suffix = window.location.search;
         let enrollParams = new URLSearchParams(window.location.search);
-       // console.log(suffix);
+        // console.log(suffix);
         if (localStorage.getItem('cart') === null)
         {
             window.location.href = '/www/products' + window.location.search;
         }
         window.addEventListener('load', function() {
             $.validator.addMethod("alpha", function(value, element) {
-                return this.optional(element) || value == value.match(/^[a-zA-Z\s]+$/);
+                return this.optional(element) || value != value.match(/^[\p{L}\s]+$/);
             }, 'Should only contain letters and spaces');
             $.validator.addMethod("alpha_numeric", function(value, element) {
                 return this.optional(element) || value == value.match(/^[a-z0-9]*$/);
@@ -695,10 +722,6 @@
                         alpha_numeric: true,
                         remote: '{{url("/www/check-username")}}'
                     },
-                    "user[password]": {
-                        required: true,
-                        minlength: 6
-                    },
                     "user[dateofbirth]": {
                         required: true,
                         date: true
@@ -716,6 +739,15 @@
                         required: true,
                         email: true,
                         remote: '{{url("/www/check-email")}}'
+                    },
+                    "user[password]": {
+                        required: true,
+                        minlength: 6
+                    },
+                    "user[password_confirmation]": {
+                        required: true,
+                        minlength: 6,
+                        equalTo: '#password'
                     },
                     "shipping_address[firstname]": {
                         required: true,
@@ -783,8 +815,10 @@
                     event.preventDefault();
                     let myform = $('#create-account-form');
                     let disabled = myform.find(':disabled').removeAttr('disabled');
+                    // let hidden = myform.find('[type="hidden"]').attr('type', 'text');
                     let formData = myform.serializeArray();
-                    disabled.attr('disabled','disabled');
+                    $("#create-account-form").valid();
+                    // hidden.attr('type', 'hidden');
                     let formObject = {};
                     $.each(formData, function(i, v) {
                         formObject[v.name] = v.value;
@@ -797,6 +831,7 @@
                         let first_obj = {};
                         let key = value.name;
                         value = value.value;
+                        console.log(key+":"+value);
                         if (key.includes('['))
                         {
                             let main_key = key.split('[');
@@ -815,6 +850,7 @@
                     object.shipping_address.contact_number = object.shipping_address.phone;
                     object.user['enrollment_type'] = '';
                     object.user['user'] = 'avatar-big.png';
+                    object.user['enrollment_type'] = $('[name="user[enrollment_type]"]').val();
                     object.user['address1'] = object.address.address_1;
                     object.user['address2'] = object.address.address_2;
                     object.user['city'] = object.address.city;
@@ -825,26 +861,38 @@
                     localStorage.setItem('address', JSON.stringify(object.address));
                     localStorage.setItem('shipping_address', JSON.stringify(object.shipping_address));
                     localStorage.setItem('placement_type', object.placement_type);
-                    window.location.href = '{{url("/www/review")}}' + window.location.search;
+                    if ($("#create-account-form").valid())
+                    {
+                        window.location.href = '{{url("/www/review")}}' + window.location.search;
+                    }
+                    disabled.attr('disabled', 'disabled');
                 },
             });
 
             if (enrollParams.has('sponsor_id') && enrollParams.has('placement_user_id') && enrollParams.has('business_center_id') && enrollParams.has('leg'))
             {
+                $('#sponsor-search-button i').removeClass('fa fa-search');
+                $('#sponsor-search-button i').addClass('fa fa-spinner fa-spin');
                 axios.get('/enroll/' + enrollParams.get('sponsor_id') + '/' + enrollParams.get('placement_user_id') + '/' + enrollParams.get('business_center_id') + '/' + enrollParams.get('leg')).then(response => {
                     $('[name="user[sponsor_id]"]').val(response.data.data.sponsor.username);
                     $('[value="manual"]').attr('checked', true);
                     $('[name="user[placement_search_id]"]').val(response.data.data.placement_info.username);
-                    $('[name="user[leg]"] option').each(function (index, element) {
-                        if ($(element).val() === enrollParams.get('leg'))
+
+                    let leg_options = '';
+                    [{value: 'auto', name: 'Auto'}, {value: 'L', name: 'Left'}, {value: 'R', name: 'Right'}].map((leg) => {
+                        if (leg.value === enrollParams.get('leg'))
                         {
-                            $(element).attr('selected', true);
+                            leg_options += '<option value="'+leg.value+'" selected>'+leg.name+'</option>';
                         }
                         else
                         {
-                            $(element).removeAttr('selected');
+                            leg_options += '<option value="'+leg.value+'">'+leg.name+'</option>';
                         }
                     });
+                    $('[name="user[leg]"]').html(leg_options);
+
+                    $('#sponsor-search-button i').removeClass('fa fa-spinner fa-spin');
+                    $('#sponsor-search-button i').addClass('fa fa-search');
                     $('#selected-sponsor img').attr('src', 'https://admin.ultrra.com/user_images/' + (response.data.data.sponsor.image !== null ? response.data.data.sponsor.image : 'avatar-big.png'));
                     $('#selected-sponsor span').text(response.data.data.sponsor.username + ', ' + response.data.data.sponsor.name);
                     $('#placement-info-business-center-leg b').text(response.data.data.business_center + ' - ' + enrollParams.get('leg'));
@@ -854,7 +902,7 @@
                     $('[name="placement_type"]').attr('disabled', true);
                     $('[name="user[placement_search_id]"]').attr('disabled', true);
                     getPlacement();
-                    $('[name="user[enrollment_type]"]').val('replicated');
+                    $('[name="user[enrollment_type]"]').val('bingo_tree');
                     $('#selected-sponsor').show();
                     $('#main-form').show();
                     $('#terms').show();
@@ -864,7 +912,7 @@
             if (localStorage.getItem('sponsor_input_value'))
             {
                 $('[name="user[sponsor_id]"]').val(localStorage.getItem('sponsor_input_value'));
-                verifySponsor();
+                verifySponsor('not-clicked');
             }
 
             if (enrollParams.has('username'))
@@ -873,13 +921,16 @@
                 $('[name="user[sponsor_id]"]').attr('disabled', true);
                 console.log('gsd');
                 $('[name="user[enrollment_type]"]').val('replicated');
-                verifySponsor();
+                verifySponsor('not-clicked');
             }
 
             if (enrollParams.has('usertype'))
             {
-                $('[value="'+enrollParams.get('usertype')+'"]').prop('checked', true);
-                $('[name="user[usertype]"]').attr('disabled', true);
+                let usertype = enrollParams.get('usertype') == 'dc' ? 'DISTRIBUTOR' : enrollParams.get('usertype') == 'pc' ? 'PREFERRED CUSTOMER' : 'RETAIL CUSTOMER';
+                $('#enrollment-usertype').text(usertype);
+                $('[name="user[usertype]"]').val(enrollParams.get('usertype'));
+                // $('[value="'+enrollParams.get('usertype')+'"]').prop('checked', true);
+                // $('[name="user[usertype]"]').attr('disabled', true);
             }
 
             axios.get('/all-countries').then(response => {
@@ -897,27 +948,51 @@
                 $('#country').html(options);
                 $('[name="address[country_id]"]').html(options);
                 $('[name="shipping_address[country_id]"]').html(options);
+
                 axios.get('/states-by-country/' + localStorage.getItem('products_country')).then(response => {
-                    let options = '';
+                    let address_options = '';
+                    let shipping_address_options = '';
                     response.data.data.map((state) => {
-                        options += '<option value="'+state.id+'">'+state.name+'</option>';
+                        if (localStorage.getItem('address') !== null && JSON.parse(localStorage.getItem('address')).state_id == state.id)
+                        {
+                            address_options += '<option value="'+state.id+'" selected>'+state.name+'</option>';
+                        }
+                        else
+                        {
+                            address_options += '<option value="'+state.id+'">'+state.name+'</option>';
+                        }
                     });
-                    $('[name="address[state_id]"]').html(options);
-                    $('[name="shipping_address[state_id]"]').html(options);
+
+                    response.data.data.map((state) => {
+                        if (localStorage.getItem('shipping_address') !== null && JSON.parse(localStorage.getItem('shipping_address')).state_id == state.id)
+                        {
+                            shipping_address_options += '<option value="'+state.id+'" selected>'+state.name+'</option>';
+                        }
+                        else
+                        {
+                            shipping_address_options += '<option value="'+state.id+'">'+state.name+'</option>';
+                        }
+                    });
+
+                    $('[name="address[state_id]"]').html(address_options);
+                    $('[name="shipping_address[state_id]"]').html(shipping_address_options);
                 });
             });
 
 
             if (localStorage.getItem('usertype') !== null)
             {
-                $('[name="user[usertype]"]').each(function (index, element) {
-                    if ($(element).attr('value') == localStorage.getItem('usertype'))
-                    {
-                        $(element).prop('checked', true);
-                    }
-                });
-
-                $('[name="user[usertype]"]').attr('disabled', true);
+                let usertype = localStorage.getItem('usertype') == 'dc' ? 'DISTRIBUTOR' : localStorage.getItem('usertype') == 'pc' ? 'PREFERRED CUSTOMER' : 'RETAIL CUSTOMER';
+                $('#enrollment-usertype').text(usertype);
+                $('[name="user[usertype]"]').val(localStorage.getItem('usertype'));
+                // $('[name="user[usertype]"]').each(function (index, element) {
+                //     if ($(element).attr('value') == localStorage.getItem('usertype'))
+                //     {
+                //         $(element).prop('checked', true);
+                //     }
+                // });
+                //
+                // $('[name="user[usertype]"]').attr('disabled', true);
 
                 if (localStorage.getItem('usertype') == 'rc')
                 {
@@ -943,10 +1018,22 @@
                 Object.keys(JSON.parse(localStorage.getItem('shipping_address'))).forEach(function (value) {
                     $('[name="shipping_address['+value+']"]').val(JSON.parse(localStorage.getItem('shipping_address'))[value]);
                 });
+                $('[name="shipping_address[state_id]"]').find('option [value="'+JSON.parse(localStorage.getItem('shipping_address')).state_id+'"]').attr('selected', true);
             }
             if (localStorage.getItem('placement_type') !== null)
             {
-                $('[value="'+localStorage.getItem('placement_type')+'"]').prop('checked', true);
+                $('[name="placement_type"]').each(function (index, item) {
+                    if ($(item).attr('value') == localStorage.getItem('placement_type'))
+                    {
+                        $(item).attr('checked', true);
+                        $(item).prop('checked', true).trigger('change');
+                    }
+                    else
+                    {
+                        $(item).removeAttr('checked');
+                        $(item).prop('checked', false);
+                    }
+                });
             }
 
             if (localStorage.getItem('shipping_same') == 'true')
@@ -970,6 +1057,11 @@
             else
             {
                 $('#submit-button').attr('disabled', true);
+            }
+
+            if (localStorage.getItem('user') === null || localStorage.getItem('address') === null || localStorage.getItem('shipping_address') === null)
+            {
+                $('#review-cart-navigator').attr('href', 'javascript:void(0)');
             }
         });
 
@@ -1018,9 +1110,8 @@
             }
         }
 
-        function verifySponsor()
+        function verifySponsor(type)
         {
-
             localStorage.setItem('sponsor_input_value', $('[name="user[sponsor_id]"]').val());
             $('#sponsor-search-button').attr('disabled', true);
             $('#sponsor-search-button i').removeClass('fa fa-search');
@@ -1045,19 +1136,48 @@
                     $('#sponsor-search-button i').addClass('fa fa-search');
                     $('#sponsor-search-button').removeAttr('disabled');
                     $('[name="user[placement_search_id]"]').val(response.data.data.username);
-                    axios.get('/get-placement/' + $('[name="user[sponsor_id]"]').val()).then((response) => {
+                    axios.get('/get-placement/' + $('[name="user[sponsor_id]"]').val(), {params: {sponsor_id: $('[name="user[sponsor_id]"]').val()}}).then((response) => {
                         let options = '';
                         response.data.data.map((placement) => {
-                            options += '<option value="'+placement.id+'">'+placement.business_center+'</option>';
+                            if ((localStorage.getItem('user') !== null && JSON.parse(localStorage.getItem('user')).placement_id == placement.id) || (enrollParams.has('business_center_id') && enrollParams.get('business_center_id') == placement.id))
+                            {
+                                options += '<option value="'+placement.id+'" selected>'+placement.business_center+'</option>';
+                            }
+                            else
+                            {
+                                options += '<option value="'+placement.id+'">'+placement.business_center+'</option>';
+                            }
                         });
                         $('[name="user[placement_id]"]').html(options);
                         $('[name="user[placement_id]"]').removeAttr('disabled');
                         $('[name="user[leg]"]').removeAttr('disabled');
+                        if (localStorage.getItem('user') !== null && JSON.parse(localStorage.getItem('user')).sponsor_id == $('[name="user[sponsor_id]"]').val())
+                        {
+                            let leg_options = '';
+                            [{value: 'auto', name: 'Auto'}, {value: 'L', name: 'Left'}, {value: 'R', name: 'Right'}].map((leg) => {
+                                if (leg.value === JSON.parse(localStorage.getItem('user')).leg)
+                                {
+                                    leg_options += '<option value="'+leg.value+'" selected>'+leg.name+'</option>';
+                                }
+                                else
+                                {
+                                    leg_options += '<option value="'+leg.value+'">'+leg.name+'</option>';
+                                }
+                            });
+                            $('[name="user[leg]"]').html(leg_options);
+
+                        }
                         $('#placement-search-button').removeAttr('disabled');
                         if (enrollParams.has('sponsor_id') && enrollParams.has('placement_user_id') && enrollParams.has('business_center_id') && enrollParams.has('leg'))
                         {
                             $('[name="user[placement_id]"]').attr('disabled', true);
                             $('[name="user[leg]"]').attr('disabled', true);
+                        }
+                        $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
+                        if (localStorage.getItem('user') !== null && JSON.parse(localStorage.getItem('user')).sponsor_id == $('[name="user[sponsor_id]"]').val() && type == 'not-clicked')
+                        {
+                            $('[name="user[placement_search_id]"]').val(JSON.parse(localStorage.getItem('user')).placement_search_id);
+                            getPlacement();
                         }
                     });
                 }
@@ -1068,6 +1188,7 @@
                     $('#terms').hide();
                     $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').removeClass('is-valid');
                     $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').addClass('is-invalid');
+                    $('#sponsor-search-button').parent().siblings('.col-md-6').children('.invalid-feedback').remove();
                     $('#sponsor-search-button').parent().siblings('.col-md-6').append('<div class="invalid-feedback">Sponsor not found</div>');
                     $('#sponsor-search-button i').removeClass('fa fa-spinner fa-spin');
                     $('#sponsor-search-button i').addClass('fa fa-search');
@@ -1103,9 +1224,6 @@
             console.log(event.keyCode);
             if (event.keyCode  == 13)
             {
-                // $('#create-account-form').on('submit', function(event1){
-                //     event1.preventDefault();
-                // });
                 localStorage.setItem('sponsor_input_value', $('[name="user[sponsor_id]"]').val());
                 $('#sponsor-search-button').attr('disabled', true);
                 $('#sponsor-search-button i').removeClass('fa fa-search');
@@ -1130,20 +1248,43 @@
                         $('#sponsor-search-button i').addClass('fa fa-search');
                         $('#sponsor-search-button').removeAttr('disabled');
                         $('[name="user[placement_search_id]"]').val(response.data.data.username);
-                        axios.get('/get-placement/' + $('[name="user[sponsor_id]"]').val()).then((response) => {
+                        axios.get('/get-placement/' + $('[name="user[sponsor_id]"]').val(), {params: {sponsor_id: $('[name="user[sponsor_id]"]').val()}}).then((response) => {
                             let options = '';
                             response.data.data.map((placement) => {
-                                options += '<option value="'+placement.id+'">'+placement.business_center+'</option>';
+                                if ((localStorage.getItem('user') !== null && JSON.parse(localStorage.getItem('user')).placement_id == placement.id) || (enrollParams.has('business_center_id') && enrollParams.get('business_center_id') == placement.id))
+                                {
+                                    options += '<option value="'+placement.id+'" selected>'+placement.business_center+'</option>';
+                                }
+                                else
+                                {
+                                    options += '<option value="'+placement.id+'">'+placement.business_center+'</option>';
+                                }
                             });
                             $('[name="user[placement_id]"]').html(options);
                             $('[name="user[placement_id]"]').removeAttr('disabled');
                             $('[name="user[leg]"]').removeAttr('disabled');
+                            if (localStorage.getItem('user') !== null && JSON.parse(localStorage.getItem('user')).sponsor_id == $('[name="user[sponsor_id]"]').val())
+                            {
+                                let leg_options = '';
+                                [{value: 'auto', name: 'Auto'}, {value: 'L', name: 'Left'}, {value: 'R', name: 'Right'}].map((leg) => {
+                                    if (leg.value === JSON.parse(localStorage.getItem('user')).leg)
+                                    {
+                                        leg_options += '<option value="'+leg.value+'" selected>'+leg.name+'</option>';
+                                    }
+                                    else
+                                    {
+                                        leg_options += '<option value="'+leg.value+'">'+leg.name+'</option>';
+                                    }
+                                });
+                                $('[name="user[leg]"]').html(leg_options);
+                            }
                             $('#placement-search-button').removeAttr('disabled');
                             if (enrollParams.has('sponsor_id') && enrollParams.has('placement_user_id') && enrollParams.has('business_center_id') && enrollParams.has('leg'))
                             {
                                 $('[name="user[placement_id]"]').attr('disabled', true);
                                 $('[name="user[leg]"]').attr('disabled', true);
                             }
+                            $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
                         });
                     }
                     else
@@ -1153,6 +1294,7 @@
                         $('#terms').hide();
                         $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').removeClass('is-valid');
                         $('#sponsor-search-button').parent().siblings('.col-md-6').find('input').addClass('is-invalid');
+                        $('#sponsor-search-button').parent().siblings('.col-md-6').children('.invalid-feedback').remove();
                         $('#sponsor-search-button').parent().siblings('.col-md-6').append('<div class="invalid-feedback">Sponsor not found</div>');
                         $('#sponsor-search-button i').removeClass('fa fa-spinner fa-spin');
                         $('#sponsor-search-button i').addClass('fa fa-search');
@@ -1186,30 +1328,37 @@
 
         function handleOptionChange2(element)
         {
-
             if ($('[name="placement_type"]:checked').val() == 'manual')
             {
 
                 $('#placement-details').show();
-                $('#placement-info-business-center-leg').hide();
-                $('#placement-info-business-center-leg1').show();
+                $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
+                $('#placement-info-business-center-leg1 b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
+                // $('#placement-info-business-center-leg').hide();
+                // $('#placement-info-business-center-leg1').show();
 
             }
             else if ($('[name="placement_type"]:checked').val() == 'automatic')
             {
 
+                $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:first-child').text() + ' - ' + $('[name="user[leg]"] option:first-child').val());
+                $('#placement-info-business-center-leg1 b').html($('[name="user[placement_id]"] option:first-child').text() + ' - ' + $('[name="user[leg]"] option:first-child').val());
                 $('#placement-details').hide();
-                $('#placement-info-business-center-leg1').hide();
-                $('#placement-info-business-center-leg').show();
+                // $('#placement-info-business-center-leg1').hide();
+                // $('#placement-info-business-center-leg').show();
 
             }
         }
 
-        function placementSearchKeyUp()
+        function placementSearchKeyUp(event)
         {
             if ($('[name="user[placement_search_id]"]').val() != '')
             {
                 $('#placement-search-button').removeAttr('disabled');
+                if (event.keyCode == 13)
+                {
+                    getPlacement();
+                }
             }
             else
             {
@@ -1222,23 +1371,61 @@
             $('#placement-search-button').attr('disabled', true);
             $('#placement-search-button i').removeClass('fa fa-search');
             $('#placement-search-button i').addClass('fa fa-spinner fa-spin');
-            axios.get('/get-placement/' + $('[name="user[placement_search_id]"]').val()).then((response) => {
-                let options = '';
-                response.data.data.map((placement) => {
-                    options += '<option value="'+placement.id+'">'+placement.business_center+'</option>';
-                });
-                $('[name="user[placement_id]"]').html(options);
-                $('[name="user[placement_id]"]').removeAttr('disabled');
-                $('[name="user[leg]"]').removeAttr('disabled');
-                $('#placement-search-button i').removeClass('fa fa-spinner fa-spin');
-                $('#placement-search-button i').addClass('fa fa-search');
-                $('#placement-search-button').removeAttr('disabled');
-                $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
-                $('#placement-info-business-center-leg1 b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
-                if (enrollParams.has('sponsor_id') && enrollParams.has('placement_user_id') && enrollParams.has('business_center_id') && enrollParams.has('leg'))
+            axios.get('/get-placement/' + $('[name="user[placement_search_id]"]').val(), {params: {sponsor_id: $('[name="user[sponsor_id]"]').val()}}).then((response) => {
+                if (response.data.data.length > 0)
                 {
-                    $('[name="user[placement_id]"]').attr('disabled', true);
-                    $('[name="user[leg]"]').attr('disabled', true);
+                    let options = '';
+                    response.data.data.map((placement) => {
+                        if ((localStorage.getItem('user') !== null && JSON.parse(localStorage.getItem('user')).placement_id == placement.id) || (enrollParams.has('business_center_id') && enrollParams.get('business_center_id') == placement.id))
+                        {
+                            options += '<option value="'+placement.id+'" selected>'+placement.business_center+'</option>';
+                        }
+                        else
+                        {
+                            options += '<option value="'+placement.id+'">'+placement.business_center+'</option>';
+                        }
+                    });
+                    $('[name="user[placement_id]"]').html(options);
+                    $('[name="user[placement_id]"]').removeAttr('disabled');
+                    $('[name="user[leg]"]').removeAttr('disabled');
+                    if (localStorage.getItem('user') !== null)
+                    {
+                        let leg_options = '';
+                        [{value: 'auto', name: 'Auto'}, {value: 'L', name: 'Left'}, {value: 'R', name: 'Right'}].map((leg) => {
+                            if (leg.value === JSON.parse(localStorage.getItem('user')).leg)
+                            {
+                                leg_options += '<option value="'+leg.value+'" selected>'+leg.name+'</option>';
+                            }
+                            else
+                            {
+                                leg_options += '<option value="'+leg.value+'">'+leg.name+'</option>';
+                            }
+                        });
+                        $('[name="user[leg]"]').html(leg_options);
+
+                    }
+                    $('#placement-search-button i').removeClass('fa fa-spinner fa-spin');
+                    $('#placement-search-button i').addClass('fa fa-search');
+                    if (!(enrollParams.has('sponsor_id') && enrollParams.has('placement_user_id') && enrollParams.has('business_center_id') && enrollParams.has('leg')))
+                    {
+                        $('#placement-search-button').removeAttr('disabled');
+                    }
+                    $('#placement-info-business-center-leg b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
+                    $('#placement-info-business-center-leg1 b').html($('[name="user[placement_id]"] option:selected').text() + ' - ' + $('[name="user[leg]"]').val());
+                    if (enrollParams.has('sponsor_id') && enrollParams.has('placement_user_id') && enrollParams.has('business_center_id') && enrollParams.has('leg'))
+                    {
+                        $('[name="user[placement_id]"]').attr('disabled', true);
+                        $('[name="user[leg]"]').attr('disabled', true);
+                    }
+                }
+                else
+                {
+                    $('[name="user[placement_search_id]"]').parent().find('label.error').remove();
+                    $('[name="user[placement_search_id]"]').parent().append('<label id="user[placement_search_id]-error" class="error" for="user[placement_search_id]">This member is not found in Sponsor organization.</label>');
+                    $('[name="user[placement_id]"]').html('');
+                    $('#placement-search-button i').removeClass('fa fa-spinner fa-spin');
+                    $('#placement-search-button i').addClass('fa fa-search');
+                    $('#placement-search-button').removeAttr('disabled');
                 }
             });
         }
@@ -1293,6 +1480,7 @@
                 $('[name="shipping_address[lastname]"]').val($('[name="user[lastname]"]').val());
                 $('#shipping-address-fields').addClass('d-none');
                 $('[name="shipping_address[contact_name]"]').val($('[name="shipping_address[firstname]"]').val() + ' ' + $('[name="shipping_address[lastname]"]').val());
+                $('[name="shipping_address[phone]"]').val($('[name="user[phone]"]').val());
                 localStorage.setItem('shipping_same', true);
             }
             else
@@ -1301,6 +1489,7 @@
                 $('[name="shipping_address[lastname]"]').val('');
                 $('#shipping-address-fields').removeClass('d-none');
                 $('[name="shipping_address[contact_name]"]').val('');
+                $('[name="shipping_address[phone]"]').val('');
                 localStorage.setItem('shipping_same', false);
             }
         }

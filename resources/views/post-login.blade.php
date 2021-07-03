@@ -26,7 +26,7 @@
     localStorage.setItem('access_token', token);
     localStorage.setItem('login', true);
     window.addEventListener('load', function() {
-        axios.defaults.headers.common['authorization'] = "Bearer " + localStorage.getItem('access_token');
+        axios.defaults.headers.common['authorization'] = "Bearer " + JSON.parse(localStorage.getItem('access_token'));
         axios.post('/auth/me').then(response => {
             if (response.data.status_code === 200 && response.data.user !== null)
             {

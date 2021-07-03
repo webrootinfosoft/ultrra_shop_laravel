@@ -66,7 +66,7 @@
                     <div class="right-side">
                         <div class="section-header left-side pb-0">
                             <div class="section-heading">
-                                <h3 class="text-brown fw-700"><span class="text-purple fw-100">@lang('oppurtunity.A Rewarding Lifestyle')</span> Perks</h3>
+                                <h3 class="text-brown fw-700"><span class="text-purple fw-100">@lang('oppurtunity.A Rewarding Lifestyle')</span> @lang('oppurtunity.Perks')</h3>
                             </div>
                         </div>
                         <p class="fs-16">@lang('oppurtunity.I deserve more, and will have more if you have ever felt an inner desire to do more, then you\'re in the right place At Ultrra, the lifestyle goes beyond just monetary perks, experience more lifestyle by partnering with our team!')</p>

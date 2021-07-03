@@ -76,7 +76,7 @@
                             <li class="menu-item">
                                 <a href="https://zoom.us/j/398309238" target="_blank" class="text-brown">Webinars</a>
                             </li>
-                            <li class="menu-item">
+                            <li class="menu-item shop-li">
                                 @if(!auth()->user())
                                     <a href="{{url('/www/enrollment')}}" class="text-brown">@lang('header.Shop')</a>
                                 @else
@@ -161,14 +161,14 @@
                             <span class="text-second text-left" style="white-space: normal">@lang('header.East Meets West')</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="shop-li">
                         @if(!auth()->user())
                             <a href="{{url('/www/enrollment')}}" class="text-brown">
                                 <span class="text-first text-left">@lang('header.Shop')</span>
                                 <span class="text-second text-left">@lang('header.Try Ultrra Products')</span>
                             </a>
                         @else
-                            <a href="{{url('/www/cart')}}" class="text-brown">
+                            <a href="{{url('/www/products')}}" class="text-brown">
                                 <span class="text-first text-left">@lang('header.Shop')</span>
                                 <span class="text-second text-left">@lang('header.Try Ultrra Products')</span>
                             </a>
@@ -310,7 +310,28 @@
         window.addEventListener('load', function() {
             $('a').each(function (index, element) {
                 let href = $(element).attr('href');
-                $(element).attr('href', href + suffix);
+                let excluded_links = [
+                    'javascript:void(0)',
+                    '#',
+                    'https://office.ultrra.com/signin',
+                    'https://zoom.us/j/398309238',
+                    'tel:', 'mailto:cc@ultrra.com',
+                    'http://www.dsa.org/consumerprotection/Code',
+                    'https://office.ultrra.com',
+                    'https://phplaravel-370200-1945145.cloudwaysapps.com/files/terms.pdf',
+                    'https://www.facebook.com/ultrraofficial',
+                    'https://twitter.com/ultrraofficial',
+                    'https://www.instagram.com/ultrraofficial',
+                    'https://www.instagram.com/ultrraofficial/',
+                    'https://www.youtube.com/ultrra',
+                    'https://www.youtube.com/channel/UCB2RTpsT8zQCTVRrXXdMa7Q'
+                ];
+
+                if (!excluded_links.includes(href))
+                {
+                    href = href.replace(window.location.search, '');
+                    $(element).attr('href', href + window.location.search);
+                }
             });
 
             if (cart !== null)
@@ -385,6 +406,11 @@
                         });
                     }
                 });
+            }
+
+            if (localStorage.getItem('user') !== null && localStorage.getItem('address') !== null && localStorage.getItem('shipping_address'))
+            {
+                $('.shop-li a').attr('href', '/www/products' + search);
             }
         });
 
@@ -479,6 +505,6 @@
                 window.location.href = '/www/products' + search;
             }
         }
-        console.log('{{str_replace(request()->url(), '', request()->fullUrl())}}')
+
     </script>
 @endpush
