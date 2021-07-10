@@ -1136,6 +1136,22 @@
                     $('#sponsor-search-button i').addClass('fa fa-search');
                     $('#sponsor-search-button').removeAttr('disabled');
                     $('[name="user[placement_search_id]"]').val(response.data.data.username);
+
+                    axios.get('/user-business-centers/'+response.data.data.id).then((response) => {
+                        let options = '';
+                        response.data.data.map((placement) => {
+                            if ((localStorage.getItem('user') !== null && JSON.parse(localStorage.getItem('user')).placement_id == placement.id) || (enrollParams.has('business_center_id') && enrollParams.get('business_center_id') == placement.id))
+                            {
+                                options += '<option value="'+placement.id+'" selected>'+placement.business_center+'</option>';
+                            }
+                            else
+                            {
+                                options += '<option value="'+placement.id+'">'+placement.business_center+'</option>';
+                            }
+                        });
+                        $('[name="user[placement_id]"]').html(options);
+                    });
+
                     axios.get('/get-placement/' + $('[name="user[sponsor_id]"]').val(), {params: {sponsor_id: $('[name="user[sponsor_id]"]').val()}}).then((response) => {
                         let options = '';
                         response.data.data.map((placement) => {
@@ -1248,6 +1264,22 @@
                         $('#sponsor-search-button i').addClass('fa fa-search');
                         $('#sponsor-search-button').removeAttr('disabled');
                         $('[name="user[placement_search_id]"]').val(response.data.data.username);
+
+                        axios.get('/user-business-centers/'+response.data.data.id).then((response) => {
+                            let options = '';
+                            response.data.data.map((placement) => {
+                                if ((localStorage.getItem('user') !== null && JSON.parse(localStorage.getItem('user')).placement_id == placement.id) || (enrollParams.has('business_center_id') && enrollParams.get('business_center_id') == placement.id))
+                                {
+                                    options += '<option value="'+placement.id+'" selected>'+placement.business_center+'</option>';
+                                }
+                                else
+                                {
+                                    options += '<option value="'+placement.id+'">'+placement.business_center+'</option>';
+                                }
+                            });
+                            $('[name="user[placement_id]"]').html(options);
+                        });
+
                         axios.get('/get-placement/' + $('[name="user[sponsor_id]"]').val(), {params: {sponsor_id: $('[name="user[sponsor_id]"]').val()}}).then((response) => {
                             let options = '';
                             response.data.data.map((placement) => {

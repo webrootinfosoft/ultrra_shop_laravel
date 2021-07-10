@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Country extends Model
 {
+    //
     use SoftDeletes;
 
     protected $fillable = ['name', 'iso2', 'iso3', 'phonecode', 'capital', 'currency', 'status'];

@@ -10,6 +10,14 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
+      <webServer id="7cbc1333-5258-4042-b13d-997eeba56123" name="Ultrra Shop Staging" url="http://45.79.35.127">
+        <fileTransfer host="45.79.35.127" port="22" rootFolder="/applications/staging_ultrra_shop_laravel/public_html" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

@@ -584,6 +584,7 @@
                     $('#submit-button small').remove();
                     $('#submit-button').attr('disabled', true);
                     $('#submit-button').append('&nbsp;<i class="fa fa-spinner fa-spin"></i>');
+                    console.log(data);
                     axios.post('/place-order-new', data).then((response) => {
                         if (response.data.status === 300)
                         {
